@@ -211,8 +211,10 @@
         message: created.message,
         createdAt: created.createdAt || new Date().toISOString()
       };
-      savePosts([item].concat(posts));
-      renderPosts();
+  savePosts([item].concat(posts));
+  renderPosts();
+  // Pull fresh list from server to include items created from other devices and normalize order
+  fetchServerPosts();
     } catch (_) {
       // Fallback local if API fails
       const now = new Date().toISOString();
@@ -298,7 +300,9 @@
   function init() {
     // Inicial UI
     updateCharCount();
-    fetchServerPosts();
+  fetchServerPosts();
+  // Periodic refresh to keep list in sync across devices
+  setInterval(fetchServerPosts, 30000);
 
     // Formulario
     dom.newPostBtn && dom.newPostBtn.addEventListener('click', () => toggleForm(true));

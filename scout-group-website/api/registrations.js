@@ -19,6 +19,7 @@ export default async function handler(req, res) {
   }
 
   try {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
     const supabase = getSupabase();
     let regs;
     if (supabase) {

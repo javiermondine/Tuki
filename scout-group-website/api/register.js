@@ -66,10 +66,27 @@ export default async function handler(req, res) {
     const supabase = getSupabase();
     if (supabase) {
       try {
-        // Store only the public projection in Supabase for simplicity
+        // Store full registration in Supabase; respond with public projection
+        const insertPayload = {
+          child_name: childName,
+          child_surname: childSurname,
+          child_birthdate: childBirthdate || null,
+          child_gender: childGender || null,
+          section,
+          health_info: healthInfo || null,
+          guardian_name: guardianName || null,
+          guardian_relation: guardianRelation || null,
+          guardian_email: guardianEmail || null,
+          guardian_phone: guardianPhone || null,
+          guardian_address: guardianAddress || null,
+          additional_info: additionalInfo || null,
+          privacy_policy: privacyPolicy,
+          image_consent: imageConsent,
+          created_at: createdAt,
+        };
         const { data, error } = await supabase
           .from('registrations')
-          .insert({ child_name: childName, section })
+          .insert(insertPayload)
           .select('child_name, section, created_at')
           .single();
         if (error) throw error;
