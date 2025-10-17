@@ -7,10 +7,5 @@
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1" },
     { "src": "/(.*)", "dest": "/src/$1" }
-  ],
-  "env": {
-    "MONGODB_URI": "@mongodb-uri",
-    "SUPABASE_URL": "@supabase-url",
-    "SUPABASE_SERVICE_ROLE_KEY": "@supabase-service-role-key"
-  }
+  ]
 }
