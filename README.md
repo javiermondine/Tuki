@@ -1,77 +1,48 @@
 # Scout Group Website
 
-Sitio web del Grupo Scout Myotragus 684 (HTML/CSS/JS + PWA + API serverless). Incluye foro público y formulario de inscripciones con listado público básico.
+Sitio web del Grupo Scout Myotragus 684. Incluye foro público, inscripciones y contenido institucional.
 
-## Estructura
+## Stack
 
-```
-scout-group-website
-├── api/                     # Endpoints serverless (Vercel)
-│   ├── _supabase.js         # Cliente Supabase (server)
-│   ├── posts.js             # GET/POST mensajes del foro (Supabase/Mongo fallback)
-│   ├── register.js          # POST inscripciones (Supabase/Mongo fallback)
-│   └── registrations.js     # GET inscripciones públicas (Supabase/Mongo fallback)
-├── src/
-│   ├── index.html           # Home (secciones, actividades, voluntariado)
-│   ├── forum.html           # Foro público (API + fallback local)
-│   ├── signup.html          # Inscripciones (envío a API + modal éxito)
-│   ├── activities.html      # Actividades
-│   ├── teachings.html       # Metodología
-│   ├── offline.html         # Página offline
-│   ├── scripts/
-│   │   ├── main.js
-│   │   ├── i18n.js          # ES/CA/EN via data-i18n
-│   │   └── forum.js         # Cliente del foro (API + localStorage)
-│   ├── styles/
-│   │   ├── main.css
-│   │   └── forum.css
-│   ├── manifest.json
-│   └── sw.js                # Service Worker (cache v1.1.6)
-├── vercel.json              # Configuración de build en Vercel
-├── .env.example             # Variables de entorno (MONGODB_URI)
-├── package.json
-└── README.md
-```
-
-## Requisitos
-
-- Node.js 18+
-- Cuenta de MongoDB Atlas (o instancia MongoDB accesible)
+- Frontend: HTML/CSS/JS + PWA (service worker)
+- Backend: Vercel Serverless Functions
+- Base de datos: Supabase (Postgres) con fallback MongoDB
+- i18n: ES/CA/EN
 
 ## Variables de entorno
 
-Copiar `.env.example` a `.env` y rellenar `MONGODB_URI`:
-
+```env
+MONGODB_URI=mongodb+srv://user:pass@host/database?retryWrites=true&w=majority
+SUPABASE_URL=https://xxx.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=eyJhbG...
 ```
-MONGODB_URI=mongodb+srv://USERNAME:PASSWORD@HOST/DATABASE_NAME?retryWrites=true&w=majority
-```
 
-En Vercel, define los Secrets y enlázalos (ver `vercel.json`):
-- `mongodb-uri` (opcional si solo usarás Supabase)
-- `supabase-url`
-- `supabase-service-role-key`
+## Desarrollo local
 
-## Ejecutar en local
-
-Opción recomendada con Vercel CLI (sirve estático + API):
-
-```
+```bash
 npm install
 npx vercel dev
+# http://localhost:3000
 ```
 
-Visita http://localhost:3000
+## API
 
-## Endpoints
+- `GET /api/posts` - Listar mensajes del foro
+- `POST /api/posts` - Crear mensaje (name, category, message)
+- `GET /api/registrations` - Listar inscripciones públicas
+- `POST /api/register` - Crear inscripción
 
-- `GET /api/posts` → lista mensajes del foro (público)
-- `POST /api/posts` { name, category, message } → crea mensaje
-- `POST /api/register` → guarda inscripción (campos del formulario)
-- `GET /api/registrations` → devuelve inscripciones públicas (nombre, sección, fecha)
+Datos en Supabase (Postgres) con fallback a MongoDB si falla.
 
-Notas:
-- Los mensajes del foro son públicos. El borrado del cliente sólo elimina en el dispositivo (fallback local). Para moderación real, ver “Siguientes pasos”.
-- Las inscripciones públicas solo muestran datos básicos; los datos sensibles NO se exponen.
+## Deploy
+
+1. Conecta el repo a Vercel
+2. Configura Environment Variables: `MONGODB_URI`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
+3. Deploy automático desde main
+
+## Licencia
+
+MIT
 
 ## Internacionalización (i18n)
 
