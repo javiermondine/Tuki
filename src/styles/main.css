@@ -1536,6 +1536,31 @@ footer {
         padding: 0.85rem 1.75rem;
         font-size: 1rem;
     }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    /* Previene zoom automático en inputs en iOS */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="search"],
+    textarea,
+    select {
+        font-size: 16px;
+    }
+
+    /* Mejora el espaciado en móviles */
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 }
 
 /* ========================================

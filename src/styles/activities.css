@@ -268,3 +268,26 @@
         padding: 1.5rem;
     }
 }
+
+@media (max-width: 480px) {
+    .calendar-grid,
+    .sampler-grid,
+    .activities-highlight-grid {
+        gap: 1rem;
+    }
+
+    .highlight-card,
+    .sampler-card {
+        padding: 1.25rem;
+    }
+
+    .calendar-actions {
+        gap: 0.75rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        font-size: 16px; /* Previene zoom en iOS */
+    }
+}
