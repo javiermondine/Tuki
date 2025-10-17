@@ -19,7 +19,7 @@ async function connectToDatabase() {
 export default async function handler(req, res) {
     if (req.method === 'GET') {
         try {
-            // Avoid any caching at CDN/browser level for forum listing
+            // Sin caché para que siempre muestre lo más reciente
             res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
             const supabase = getSupabase();
             let posts = [];
@@ -40,11 +40,11 @@ export default async function handler(req, res) {
                         createdAt: p.created_at,
                     }));
                 } catch (e) {
-                    console.error('[GET /api/posts] Supabase error, falling back to Mongo:', e);
+                    console.error('[GET /api/posts] Error en Supabase, usando MongoDB:', e);
                 }
             }
 
-            // Fallback or if Supabase returned no data
+            // Si no hay datos de Supabase, usar MongoDB
             if (!posts || posts.length === 0) {
                 const client = await connectToDatabase();
                 const db = client.db(MONGODB_DB);
@@ -72,7 +72,7 @@ export default async function handler(req, res) {
 
     if (req.method === 'POST') {
         try {
-            // Prevent caching of mutation response
+            // Sin caché para respuestas de creación
             res.setHeader('Cache-Control', 'no-store');
             const body = req.body || {};
             const name = (body.name || 'Anónimo').toString().slice(0, 60);
@@ -100,11 +100,11 @@ export default async function handler(req, res) {
                     };
                     return res.status(201).json(post);
                 } catch (e) {
-                    console.error('[POST /api/posts] Supabase error, falling back to Mongo:', e);
+                    console.error('[POST /api/posts] Error en Supabase, usando MongoDB:', e);
                 }
             }
 
-            // Fallback to Mongo
+            // Si falla Supabase, guardar en MongoDB
             const client = await connectToDatabase();
             const db = client.db(MONGODB_DB);
             const post = { name, category, message, createdAt: new Date() };

@@ -1,66 +1,54 @@
-# Scout Group Website
+# Grupo Scout Myotragus 684
 
-Sitio web del Grupo Scout Myotragus 684. Incluye foro público, inscripciones y contenido institucional.
+Web del grupo scout con foro público, inscripciones y contenido sobre nuestras actividades.
 
-## Stack
+## Tecnologías
 
-- Frontend: HTML/CSS/JS + PWA (service worker)
-- Backend: Vercel Serverless Functions
-- Base de datos: Supabase (Postgres) con fallback MongoDB
-- i18n: ES/CA/EN
+- Frontend estático (HTML/CSS/JS) con PWA
+- Serverless functions en Vercel
+- Datos en Supabase (Postgres), con respaldo en MongoDB si hay problemas
+- Multiidioma: español, catalán e inglés
 
-## Variables de entorno
-
-```env
-MONGODB_URI=mongodb+srv://user:pass@host/database?retryWrites=true&w=majority
-SUPABASE_URL=https://xxx.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=eyJhbG...
-```
-
-## Desarrollo local
+## Setup local
 
 ```bash
 npm install
 npx vercel dev
-# http://localhost:3000
 ```
 
-## API
+Abre http://localhost:3000
 
-- `GET /api/posts` - Listar mensajes del foro
-- `POST /api/posts` - Crear mensaje (name, category, message)
-- `GET /api/registrations` - Listar inscripciones públicas
-- `POST /api/register` - Crear inscripción
+## Variables de entorno
 
-Datos en Supabase (Postgres) con fallback a MongoDB si falla.
+Crea un `.env.local` con:
 
-## Deploy
+```env
+MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/database?retryWrites=true&w=majority
+SUPABASE_URL=https://tuprojecto.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=tu_service_role_key
+```
 
-1. Conecta el repo a Vercel
-2. Configura Environment Variables: `MONGODB_URI`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
+## API endpoints
+
+- `GET /api/posts` - Lista mensajes del foro
+- `POST /api/posts` - Publica mensaje (campos: name, category, message)
+- `DELETE /api/delete-post?id={id}` - Borra un mensaje
+- `GET /api/registrations` - Lista inscripciones públicas
+- `POST /api/register` - Envía inscripción
+
+Todo se guarda en Supabase. Si falla, usa MongoDB como respaldo.
+
+## Deploy en Vercel
+
+1. Conecta el repositorio
+2. Añade las variables de entorno (MONGODB_URI, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 3. Deploy automático desde main
 
-## Licencia
+## Base de datos (Supabase)
 
-MIT
+Crea las tablas en el SQL Editor:
 
-## Internacionalización (i18n)
-
-Los textos se traducen con `data-i18n` (ES/CA/EN) en `scripts/i18n.js`. Si añades contenido nuevo, agrega la clave en los tres idiomas y el atributo `data-i18n` en el HTML.
-
-## PWA
-
-Service Worker con caché `myotragus-v1.1.6`. Si cambias archivos estáticos, incrementa la constante `CACHE_NAME` en `src/sw.js`.
-
-## Supabase (Postgres) – Migración y uso
-
-1) Crea un proyecto en Supabase y obtiene:
-- SUPABASE_URL (Project URL)
-- SUPABASE_SERVICE_ROLE_KEY (service_role)
-
-2) Crea las tablas (ejecuta en SQL Editor):
-
-```
+```sql
 create table if not exists public.posts (
 	id bigint generated always as identity primary key,
 	name text not null default 'Anónimo',
@@ -77,42 +65,35 @@ create table if not exists public.registrations (
 );
 ```
 
-3) Variables locales (.env):
+Si tienes datos antiguos en MongoDB, puedes migrarlos:
 
-```
-MONGODB_URI=...
-SUPABASE_URL=...
-SUPABASE_SERVICE_ROLE_KEY=...
-```
-
-4) Migrar datos desde MongoDB (opcional):
-
-```zsh
-# zsh
-export MONGODB_URI='mongodb+srv://...'
-export SUPABASE_URL='https://YOUR-PROJECT.supabase.co'
-export SUPABASE_SERVICE_ROLE_KEY='service_role_key'
+```bash
+export MONGODB_URI='tu_uri'
+export SUPABASE_URL='tu_url'
+export SUPABASE_SERVICE_ROLE_KEY='tu_key'
 node scripts/migrateToSupabase.js
 ```
 
-5) Despliegue (Vercel): configura los Secrets `supabase-url` y `supabase-service-role-key` (y opcionalmente `mongodb-uri`).
+## Idiomas (i18n)
 
-Seguridad: usa SERVICE_ROLE_KEY solo del lado servidor. Si en el futuro expones lecturas directas desde el cliente, habilita RLS y define policies de solo lectura pública en esas tablas.
+Los textos se traducen automáticamente usando el atributo `data-i18n`. Las traducciones están en `scripts/i18n.js`. Si añades texto nuevo:
 
-## Siguientes pasos sugeridos
+1. Añade la clave en los tres idiomas (es, ca, en)
+2. Pon `data-i18n="tuClave"` en el HTML
 
-1) Moderación del foro (servidor)
-- Añadir DELETE /api/posts/:id con autenticación (token ADMIN) para moderar.
-- Opcional: rate limit por IP y validación adicional del payload.
+## PWA y caché
 
-2) Formulario de voluntariado
-- Añadir sección/formulario dedicado (no solo mailto) con `POST /api/volunteers` y listado público opcional.
+El service worker guarda archivos para usar offline. Si actualizas CSS o JS, cambia el número de versión en `src/sw.js`:
 
-3) Cobertura i18n total
-- Hacer un barrido de textos residuales sin `data-i18n` y completar claves en ES/CA/EN.
+```javascript
+const CACHE_NAME = 'myotragus-v1.1.9';
+```
 
-4) SEO y accesibilidad
-- Añadir metaetiquetas por página (og:title/description), `aria-labels` faltantes y foco gestionado en todos los modales.
+## Próximas mejoras
+
+- Añadir moderación con contraseña para borrar posts
+- Formulario de voluntariado dedicado
+- Mejorar SEO y accesibilidad
 
 ## Licencia
 

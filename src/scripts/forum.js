@@ -1,4 +1,4 @@
-// Foro local (sin backend): creación, listado, búsqueda y borrado de mensajes
+// Sistema del foro: crear, ver, buscar y borrar mensajes
 (function () {
   'use strict';
 
@@ -6,7 +6,7 @@
   const API_URL = '/api/posts';
   const MAX_MESSAGE_LENGTH = 1000;
 
-  // DOM refs
+  // Referencias del DOM
   const dom = {
     newPostBtn: document.getElementById('newPostBtn'),
     postForm: document.getElementById('postForm'),
@@ -26,7 +26,7 @@
     confirmNo: document.getElementById('confirmNo')
   };
 
-  // Si no estamos en la página del foro, no hacer nada
+  // Solo ejecutar si estamos en la página del foro
   if (!dom.postsList) return;
 
   const security = window.MyotragusSecuridad;

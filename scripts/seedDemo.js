@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Seed demo data into Supabase (or Mongo fallback) by calling our API handlers directly
+// Añade datos de prueba a Supabase (o MongoDB si falla)
 import postsHandler from '../api/posts.js';
 import registerHandler from '../api/register.js';
 
@@ -22,9 +22,9 @@ async function callHandler(handler, reqInit, label) {
 }
 
 async function main() {
-  console.log('Seeding demo data...');
+  console.log('Añadiendo datos de prueba...');
 
-  // 1) Create a forum post
+  // 1) Crear un post en el foro
   await callHandler(postsHandler, {
     method: 'POST',
     body: {
@@ -34,7 +34,7 @@ async function main() {
     }
   }, 'POST /api/posts');
 
-  // 2) Create a registration (public projection)
+  // 2) Crear una inscripción de prueba
   await callHandler(registerHandler, {
     method: 'POST',
     body: {
@@ -55,7 +55,7 @@ async function main() {
     }
   }, 'POST /api/register');
 
-  console.log('Seeding complete. Revisa en Supabase las tablas posts y registrations.');
+  console.log('Datos de prueba añadidos. Revisa Supabase para verificar.');
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

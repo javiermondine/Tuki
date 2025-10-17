@@ -1,8 +1,5 @@
 #!/usr/bin/env node
-/*
-  Migration script: MongoDB -> Supabase (Postgres)
-  Copies posts and registrations (public projection) into Supabase tables.
-*/
+// Script de migración: copia datos de MongoDB a Supabase
 import { MongoClient } from 'mongodb';
 import { createClient } from '@supabase/supabase-js';
 
@@ -11,11 +8,11 @@ const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!MONGODB_URI) {
-  console.error('Missing MONGODB_URI');
+  console.error('Falta MONGODB_URI');
   process.exit(1);
 }
 if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
-  console.error('Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY');
+  console.error('Falta SUPABASE_URL o SUPABASE_SERVICE_ROLE_KEY');
   process.exit(1);
 }
 
@@ -26,9 +23,9 @@ async function run() {
     auth: { persistSession: false },
   });
 
-  // Migrate posts
+  // Migrar posts
   const posts = await db.collection('posts').find({}).sort({ createdAt: 1 }).toArray();
-  console.log(`Found ${posts.length} posts`);
+  console.log(`Encontrados ${posts.length} posts`);
   for (const p of posts) {
     const { data, error } = await supabase.from('posts').insert({
       name: p.name || 'Anónimo',
@@ -42,9 +39,9 @@ async function run() {
     }
   }
 
-  // Migrate registrations (public projection)
+  // Migrar inscripciones (solo datos públicos)
   const regs = await db.collection('registrations').find({}).sort({ createdAt: 1 }).toArray();
-  console.log(`Found ${regs.length} registrations`);
+  console.log(`Encontradas ${regs.length} inscripciones`);
   for (const r of regs) {
     const { data, error } = await supabase.from('registrations').insert({
       child_name: r.childName,
@@ -58,7 +55,7 @@ async function run() {
   }
 
   await mongo.close();
-  console.log('Migration complete');
+  console.log('Migración completada');
 }
 
 run().catch((e) => {
