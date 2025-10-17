@@ -1,19 +1,44 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" dir="ltr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Grupo Scout Myotragus — ASDE Balears</title>
-<link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=1760636301">
-<link rel="shortcut icon" href="assets/favicon.svg?v=1760636301">
-<meta name="description" content="Grupo Scout Myotragus — actividades al aire libre, formación en valores y servicio a la comunidad.">
-<link rel="stylesheet" href="styles/main.css">
-  </head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Grupo Scout Myotragus - Actividades y formación scout en Balears">
+    <title>Grupo Scout Myotragus — ASDE Balears</title>
+    
+    <!-- Performance -->
+    <link rel="preconnect" href="https://analytics.example.com">
+    <link rel="dns-prefetch" href="https://analytics.example.com">
+    
+    <!-- SEO -->
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://myotragus-scout.es/">
+    <meta name="author" content="Grupo Scout Myotragus">
+    <meta name="keywords" content="scout, ASDE, Balears, actividades, aire libre, myotragus, educación">
+    
+    <!-- Security -->
+    <meta http-equiv="Content-Security-Policy" 
+          content="default-src 'self'; 
+                   img-src 'self' https://secure.analytics.example.com; 
+                   script-src 'self' 'unsafe-inline' https://secure.analytics.example.com;">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <!-- Preload -->
+    <link rel="preload" href="assets/fonts/scout-font.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/images/hero.webp" as="image">
+    
+    <link rel="stylesheet" href="styles/main.css">
+</head>
 <body>
 <a class="skip-link" href="#main">Saltar al contenido</a>
 <header class="site-header" role="banner">
   <div class="container header-inner">
-    <img src="assets/logo.svg" alt="Myotragus — Grupo Scout" class="logo" width="200">
+    <img src="assets/mytogagus.jpg?v=1760644697" alt="Myotragus — Grupo Scout" class="logo" width="200">
     <img src="assets/stripe.svg" alt="" class="header-stripe" aria-hidden="true" width="200">
     <nav id="mainNav" class="main-nav" role="navigation" aria-label="Menú principal">
       <ul>
@@ -85,7 +110,23 @@
 
   <section id="contact" class="container contact" aria-labelledby="contact-title">
     <h2 id="contact-title">Contacto</h2>
-    <p>Para inscripciones y dudas, usa los datos oficiales del grupo (placeholders).</p>
+    <form id="contactForm" class="contact-form" action="/submit" method="POST">
+        <div class="form-group">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Mensaje:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn primary">Enviar mensaje</button>
+    </form>
+    
+    <!-- Información de contacto existente -->
     <ul class="contact-list">
       <li>Email: <a href="mailto:info@myotragus-scout.es">info@myotragus-scout.es</a></li>
       <li>Teléfono: <a href="tel:+34600000000">+34 600 000 000</a></li>
@@ -96,16 +137,30 @@
 </main>
 
 <footer class="site-footer" role="contentinfo">
-  <div class="container footer-inner">
-    <div>
-      <p>&copy; <span id="year"></span> Grupo Scout Myotragus — ASDE Balears.</p>
-      <small>Colaborador de ASDE España</small>
+    <div class="container footer-inner">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h4>Enlaces rápidos</h4>
+                <ul>
+                    <li><a href="privacy.html">Política de privacidad</a></li>
+                    <li><a href="sitemap.html">Mapa del sitio</a></li>
+                    <li><a href="cookie-policy.html">Política de cookies</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Redes sociales</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">FB</a>
+                    <a href="#" aria-label="Instagram">IG</a>
+                    <a href="#" aria-label="Twitter">TW</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="currentYear"></span> Grupo Scout Myotragus — ASDE Balears.</p>
+            <small>Colaborador de ASDE España</small>
+        </div>
     </div>
-    <div class="credits">
-      <img src="assets/badge.svg" alt="" width="36" height="36" aria-hidden="true">
-      <small>Hecho por Tero</small>
-    </div>
-  </div>
 </footer>
 
 <!-- Modal (visible al cargar) -->
@@ -121,5 +176,19 @@
 </div>
 
 <script src="scripts/main.js" defer></script>
+<script>
+  // Service Worker registration
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+        .then(registration => {
+          console.log('Service Worker registrado con éxito:', registration);
+        })
+        .catch(error => {
+          console.log('Error al registrar el Service Worker:', error);
+        });
+    });
+  }
+</script>
 </body>
 </html>

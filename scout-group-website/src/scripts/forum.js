@@ -14,4 +14,106 @@ document.addEventListener('DOMContentLoaded',function(){
   if(clearBtn) clearBtn.addEventListener('click', clearAll);
   render();
 });
+
+class ForumApp {
+    constructor() {
+        this.form = document.getElementById('postForm');
+        this.postsList = document.getElementById('posts');
+        this.clearButton = document.getElementById('clearAll');
+        this.API_URL = '/api/posts';
+        
+        this.init();
+    }
+    
+    async init() {
+        this.setupEventListeners();
+        await this.loadPosts();
+        this.startPolling();
+    }
+    
+    setupEventListeners() {
+        this.form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await this.handleSubmit(e);
+        });
+        
+        this.clearButton.addEventListener('click', () => {
+            if (confirm('¿Seguro que quieres borrar todos los mensajes?')) {
+                this.clearPosts();
+            }
+        });
+    }
+    
+    async loadPosts() {
+        try {
+            const response = await fetch(this.API_URL);
+            const posts = await response.json();
+            this.renderPosts(posts);
+        } catch (error) {
+            this.showError('Error al cargar los mensajes');
+        }
+    }
+    
+    async handleSubmit(e) {
+        const formData = new FormData(this.form);
+        const data = {
+            name: formData.get('name'),
+            message: formData.get('message')
+        };
+        
+        try {
+            const response = await fetch(this.API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+            
+            if (response.ok) {
+                this.form.reset();
+                await this.loadPosts();
+            } else {
+                this.showError('Error al publicar el mensaje');
+            }
+        } catch (error) {
+            this.showError('Error de conexión');
+        }
+    }
+    
+    renderPosts(posts) {
+        this.postsList.innerHTML = posts.map(post => `
+            <article class="post">
+                <header>
+                    <h3>${this.escapeHtml(post.name)}</h3>
+                    <time>${new Date(post.createdAt).toLocaleString()}</time>
+                </header>
+                <p>${this.escapeHtml(post.message)}</p>
+            </article>
+        `).join('');
+    }
+    
+    escapeHtml(unsafe) {
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+    
+    showError(message) {
+        const alert = document.createElement('div');
+        alert.className = 'alert error';
+        alert.textContent = message;
+        this.form.insertAdjacentElement('beforebegin', alert);
+        setTimeout(() => alert.remove(), 5000);
+    }
+    
+    startPolling() {
+        setInterval(() => this.loadPosts(), 30000); // Actualizar cada 30 segundos
+    }
+}
+
+new ForumApp();
 })();

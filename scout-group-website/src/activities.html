@@ -1,55 +1,184 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" dir="ltr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Actividades — Myotragus</title>
-<link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=1760636301">
-<link rel="shortcut icon" href="assets/favicon.svg?v=1760636301">
-<link rel="stylesheet" href="styles/main.css">
-  </head>
+    <!-- Metadatos básicos -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Actividades — Grupo Scout Myotragus</title>
+    
+    <!-- Performance -->
+    <link rel="preconnect" href="https://analytics.example.com">
+    <link rel="dns-prefetch" href="https://analytics.example.com">
+    
+    <!-- SEO Mejorado -->
+    <meta name="description" content="Descubre todas las actividades, excursiones y eventos del Grupo Scout Myotragus. Campamentos, talleres y actividades semanales para todas las edades.">
+    <meta name="keywords" content="actividades scout, excursiones, talleres, Balears, Myotragus, campamentos, aire libre">
+    <link rel="canonical" href="https://myotragus-scout.es/activities.html">
+    
+    <!-- Open Graph y Twitter Cards -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Actividades - Grupo Scout Myotragus">
+    <meta property="og:description" content="Descubre nuestras actividades scouts">
+    <meta property="og:image" content="https://myotragus-scout.es/assets/activities-hero.jpg">
+    <meta property="og:url" content="https://myotragus-scout.es/activities.html">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Seguridad -->
+    <meta http-equiv="Content-Security-Policy" 
+          content="default-src 'self'; 
+                   img-src 'self' https://secure.analytics.example.com; 
+                   script-src 'self' 'unsafe-inline' https://secure.analytics.example.com;">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <!-- Preload recursos críticos -->
+    <link rel="preload" href="assets/fonts/scout-font.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/mytogagus.jpg" as="image">
+    <link rel="preload" href="styles/main.css" as="style">
+    <link rel="preload" href="scripts/main.js" as="script">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/activities.css">
+</head>
 <body>
 <a class="skip-link" href="#main">Saltar al contenido</a>
 <header class="site-header" role="banner">
   <div class="container header-inner">
-    <img src="assets/logo.svg" alt="Logo" class="logo" width="160">
-    <nav id="mainNav" class="main-nav" aria-label="Menú">
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="activities.html" class="active">Actividades</a></li>
-        <li><a href="teachings.html">Enseñanzas</a></li>
-  <li><a href="forum.html">Foro</a></li>
+    <a href="index.html" class="logo-link">
+      <img src="assets/mytogagus.jpg?v=1760644697" 
+           alt="Grupo Scout Myotragus" 
+           class="logo" 
+           width="160" 
+           height="80"
+           fetchpriority="high">
+    </a>
+    
+    <nav id="mainNav" class="main-nav" aria-label="Navegación principal">
+      <ul role="menubar">
+        <li role="none"><a href="index.html" role="menuitem">Inicio</a></li>
+        <li role="none"><a href="activities.html" role="menuitem" aria-current="page">Actividades</a></li>
+        <li role="none"><a href="teachings.html" role="menuitem">Enseñanzas</a></li>
+        <li role="none"><a href="forum.html" role="menuitem">Foro</a></li>
       </ul>
     </nav>
-    <button id="navToggle" class="nav-toggle" aria-controls="mainNav" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    
+    <button id="navToggle" 
+            class="nav-toggle" 
+            aria-controls="mainNav" 
+            aria-expanded="false" 
+            aria-label="Abrir menú">
+      <span class="sr-only">Menú</span>
+      <span class="hamburger"></span>
+    </button>
   </div>
 </header>
 
-<main id="main" class="container">
-  <h1>Actividades</h1>
-  <p>Calendario y tipos de actividad. Añade aquí el calendario real y fotos.</p>
+<main id="main" class="container activities-page">
+    <h1>Actividades Scout</h1>
+    
+    <!-- Hero Section -->
+    <section class="hero-activities">
+        <img src="assets/activities-hero.webp" alt="Scouts en actividad" width="1200" height="600" loading="eager">
+        <div class="hero-overlay">
+            <p class="lead">Descubre nuestras aventuras y únete a la experiencia scout</p>
+        </div>
+    </section>
 
-  <div class="grid">
-    <article class="card">
-      <img src="assets/photo-1.svg" alt="Reuniones" class="card-photo">
-      <h3>Reuniones semanales</h3>
-      <p>Dinámicas, juegos y talleres adaptados a cada sección.</p>
-    </article>
-    <article class="card">
-      <img src="assets/photo-2.svg" alt="Excursión" class="card-photo">
-      <h3>Rutas y excursiones</h3>
-      <p>Salidas con objetivos educativos y de observación natural.</p>
-    </article>
-  </div>
+    <!-- Calendario -->
+    <section class="calendar-section" aria-labelledby="calendar-title">
+        <h2 id="calendar-title">Próximas Actividades</h2>
+        <div id="calendar" class="calendar-widget"></div>
+        <div class="calendar-controls">
+            <button class="btn primary" 
+                    id="addToCalendar" 
+                    aria-label="Añadir eventos al calendario">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#calendar-plus"></use>
+                </svg>
+                Añadir a mi calendario
+            </button>
+            <div class="subscription-options">
+                <a href="webcal://myotragus-scout.es/calendar.ics" 
+                   class="btn outline"
+                   aria-label="Suscribirse al calendario">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#bell"></use>
+                    </svg>
+                    Suscribirse a eventos
+                </a>
+            </div>
+        </div>
+    </section>
 
-  <p class="note">Puedes añadir un calendario público (Google Calendar) o enlaces a formularios de inscripción.</p>
-</main>
+    <!-- Grid de Actividades -->
+    <section class="activities-grid" aria-labelledby="activities-title">
+        <h2 id="activities-title">Nuestras Actividades</h2>
+        <div class="grid">
+            <article class="card" data-aos="fade-up">
+                <img src="assets/photo-1.webp" 
+                     alt="Reuniones semanales" 
+                     class="card-photo"
+                     width="400"
+                     height="300"
+                     loading="lazy">
+                <div class="card-content">
+                    <h3>Reuniones Semanales</h3>
+                    <p>Dinámicas, juegos y talleres adaptados a cada sección.</p>
+                    <a href="#details" class="btn text">Ver detalles →</a>
+                </div>
+            </article>
+            <!-- Más cards... -->
+        </div>
+    </section>
 
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <p>&copy; <span id="year"></span> Myotragus</p>
-  </div>
-</footer>
-<script src="scripts/main.js" defer></script>
-</body>
-</html>
+    <!-- Formulario de Inscripción -->
+    <section class="signup-section" aria-labelledby="signup-title">
+        <h2 id="signup-title">¿Quieres participar?</h2>
+        <form id="signupForm" 
+          class="signup-form" 
+          action="/api/register" 
+          method="POST"
+          data-netlify="true"
+          autocomplete="on">
+            <div class="form-group">
+                <label for="name">Nombre completo</label>
+                <input type="text" 
+                   id="name" 
+                   name="name" 
+                   required 
+                   minlength="2"
+                   maxlength="100"
+                   pattern="[A-Za-zÀ-ÿ\s]+"
+                   autocomplete="name">
+                <span class="form-error" aria-live="polite"></span>
+            </div>
+            <div class="form-group">
+                <label for="age">Edad</label>
+                <input type="number" 
+                   id="age" 
+                   name="age" 
+                   min="6" 
+                   max="21" 
+                   required
+                   inputmode="numeric">
+                <span class="form-error" aria-live="polite"></span>
+            </div>
+            <div class="form-group">
+                <label for="email">Email de contacto</label>
+                <input type="email" 
+                   id="email" 
+                   name="email" 
+                   required
+                   autocomplete="email">
+            </div>
+            <div class="form-group">
+                <label for="section">Sección</label>
+                <select id="section" name="section" required>
+                    <option value="">Selecciona una sección</option>
+                    <option value="manada">Manada (6-8 años)</option>
+                    <option value="tropa">Tropa (8-11 años)</option>

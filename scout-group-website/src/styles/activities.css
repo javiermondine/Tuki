@@ -1,0 +1,104 @@
+:root {
+    --primary-color: #4CAF50;
+    --error-color: #d32f2f;
+    --success-color: #388e3c;
+    --card-radius: 8px;
+}
+
+.activities-page {
+    --grid-gap: 2rem;
+    --card-radius: 12px;
+}
+
+.hero-activities {
+    position: relative;
+    height: 60vh;
+    min-height: 400px;
+    margin-bottom: var(--grid-gap);
+    border-radius: var(--card-radius);
+    overflow: hidden;
+}
+
+.hero-activities img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    color: white;
+}
+
+.calendar-section {
+    margin: 4rem 0;
+    padding: 2rem;
+    background: var(--bg-light);
+    border-radius: var(--card-radius);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-activities {
+        transition: none;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .calendar-section {
+        background: var(--bg-dark);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-activities {
+        height: 40vh;
+    }
+    
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+.card {
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+    will-change: transform;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #121212;
+        --text-color: #ffffff;
+    }
+}
+
+/* Print styles */
+@media print {
+    .nav-toggle,
+    .calendar-controls,
+    .signup-section {
+        display: none;
+    }
+}

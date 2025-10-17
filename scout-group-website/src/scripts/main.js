@@ -39,3 +39,42 @@ if(location.hash){
   var target=document.getElementById(location.hash.slice(1)); if(target) target.tabIndex=-1;
 }
 })();
+document.addEventListener('DOMContentLoaded', function() {
+    // Actualizar año automáticamente
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    
+    // Manejo del modal
+    const modal = document.getElementById('welcomeModal');
+    const btnScout = document.getElementById('btnScout');
+    const btnMeet = document.getElementById('btnMeet');
+    
+    function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'visible';
+    }
+    
+    // Lazy loading de imágenes
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    observer.unobserve(img);
+                }
+            });
+        });
+        
+        images.forEach(img => imageObserver.observe(img));
+    }
+    
+    // Validación del formulario
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Agregar lógica de validación y envío
+        });
+    }
+});
