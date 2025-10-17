@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb';
+import { getSupabase } from './_supabase.js';
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const MONGODB_DB = 'scout-forum'; // reuse existing DB
@@ -18,15 +19,38 @@ export default async function handler(req, res) {
   }
 
   try {
-    const client = await connectToDatabase();
-    const db = client.db(MONGODB_DB);
-
-    const regs = await db
-      .collection('registrations')
-      .find({}, { projection: { childName: 1, section: 1, createdAt: 1, _id: 0 } })
-      .sort({ createdAt: -1 })
-      .limit(100)
-      .toArray();
+    const supabase = getSupabase();
+    let regs;
+    if (supabase) {
+      try {
+        const { data, error } = await supabase
+          .from('registrations')
+          .select('child_name, section, created_at')
+          .order('created_at', { ascending: false })
+          .limit(100);
+        if (error) throw error;
+        regs = (data || []).map(r => ({ childName: r.child_name, section: r.section, createdAt: r.created_at }));
+      } catch (e) {
+        console.error('[GET /api/registrations] Supabase error, falling back to Mongo:', e);
+        const client = await connectToDatabase();
+        const db = client.db(MONGODB_DB);
+        regs = await db
+          .collection('registrations')
+          .find({}, { projection: { childName: 1, section: 1, createdAt: 1, _id: 0 } })
+          .sort({ createdAt: -1 })
+          .limit(100)
+          .toArray();
+      }
+    } else {
+      const client = await connectToDatabase();
+      const db = client.db(MONGODB_DB);
+      regs = await db
+        .collection('registrations')
+        .find({}, { projection: { childName: 1, section: 1, createdAt: 1, _id: 0 } })
+        .sort({ createdAt: -1 })
+        .limit(100)
+        .toArray();
+    }
 
     res.status(200).json(regs);
   } catch (err) {

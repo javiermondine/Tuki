@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb';
+import { getSupabase } from './_supabase.js';
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const MONGODB_DB = 'scout-forum'; // reuse existing DB
@@ -18,9 +19,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    const client = await connectToDatabase();
-    const db = client.db(MONGODB_DB);
-
     const b = req.body || {};
 
     // Minimal validation
@@ -65,15 +63,32 @@ export default async function handler(req, res) {
       createdAt,
     };
 
-    await db.collection('registrations').insertOne(doc);
-
-    const publicProjection = {
-      childName: childName,
-      section,
-      createdAt,
-    };
-
-    res.status(201).json(publicProjection);
+    const supabase = getSupabase();
+    if (supabase) {
+      try {
+        // Store only the public projection in Supabase for simplicity
+        const { data, error } = await supabase
+          .from('registrations')
+          .insert({ child_name: childName, section })
+          .select('child_name, section, created_at')
+          .single();
+        if (error) throw error;
+        return res.status(201).json({ childName: data.child_name, section: data.section, createdAt: data.created_at });
+      } catch (e) {
+        console.error('[POST /api/register] Supabase error, falling back to Mongo:', e);
+        const client = await connectToDatabase();
+        const db = client.db(MONGODB_DB);
+        await db.collection('registrations').insertOne(doc);
+        const publicProjection = { childName, section, createdAt };
+        return res.status(201).json(publicProjection);
+      }
+    } else {
+      const client = await connectToDatabase();
+      const db = client.db(MONGODB_DB);
+      await db.collection('registrations').insertOne(doc);
+      const publicProjection = { childName, section, createdAt };
+      return res.status(201).json(publicProjection);
+    }
   } catch (err) {
     console.error('Error register', err);
     res.status(500).json({ error: 'Error al registrar' });

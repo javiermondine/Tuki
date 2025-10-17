@@ -1,5 +1,5 @@
 // Service Worker para Myotragus - Capacidades offline
-const CACHE_NAME = 'myotragus-v1.1.5';
+const CACHE_NAME = 'myotragus-v1.1.6';
 
 const CACHE_ASSETS = [
   '/',

@@ -7,9 +7,10 @@ Sitio web del Grupo Scout Myotragus 684 (HTML/CSS/JS + PWA + API serverless). In
 ```
 scout-group-website
 ├── api/                     # Endpoints serverless (Vercel)
-│   ├── posts.js             # GET/POST mensajes del foro (MongoDB)
-│   ├── register.js          # POST inscripciones (MongoDB)
-│   └── registrations.js     # GET inscripciones públicas
+│   ├── _supabase.js         # Cliente Supabase (server)
+│   ├── posts.js             # GET/POST mensajes del foro (Supabase/Mongo fallback)
+│   ├── register.js          # POST inscripciones (Supabase/Mongo fallback)
+│   └── registrations.js     # GET inscripciones públicas (Supabase/Mongo fallback)
 ├── src/
 │   ├── index.html           # Home (secciones, actividades, voluntariado)
 │   ├── forum.html           # Foro público (API + fallback local)
@@ -25,7 +26,7 @@ scout-group-website
 │   │   ├── main.css
 │   │   └── forum.css
 │   ├── manifest.json
-│   └── sw.js                # Service Worker (cache v1.1.3)
+│   └── sw.js                # Service Worker (cache v1.1.6)
 ├── vercel.json              # Configuración de build en Vercel
 ├── .env.example             # Variables de entorno (MONGODB_URI)
 ├── package.json
@@ -45,7 +46,10 @@ Copiar `.env.example` a `.env` y rellenar `MONGODB_URI`:
 MONGODB_URI=mongodb+srv://USERNAME:PASSWORD@HOST/DATABASE_NAME?retryWrites=true&w=majority
 ```
 
-En Vercel, define el Secret `mongodb-uri` y enlázalo (ya referenciado en `vercel.json`).
+En Vercel, define los Secrets y enlázalos (ver `vercel.json`):
+- `mongodb-uri` (opcional si solo usarás Supabase)
+- `supabase-url`
+- `supabase-service-role-key`
 
 ## Ejecutar en local
 
@@ -75,7 +79,54 @@ Los textos se traducen con `data-i18n` (ES/CA/EN) en `scripts/i18n.js`. Si añad
 
 ## PWA
 
-Service Worker con caché `myotragus-v1.1.3`. Si cambias archivos estáticos, incrementa la constante `CACHE_NAME` en `src/sw.js`.
+Service Worker con caché `myotragus-v1.1.6`. Si cambias archivos estáticos, incrementa la constante `CACHE_NAME` en `src/sw.js`.
+
+## Supabase (Postgres) – Migración y uso
+
+1) Crea un proyecto en Supabase y obtiene:
+- SUPABASE_URL (Project URL)
+- SUPABASE_SERVICE_ROLE_KEY (service_role)
+
+2) Crea las tablas (ejecuta en SQL Editor):
+
+```
+create table if not exists public.posts (
+	id bigint generated always as identity primary key,
+	name text not null default 'Anónimo',
+	category text not null default 'general',
+	message text not null,
+	created_at timestamptz not null default now()
+);
+
+create table if not exists public.registrations (
+	id bigint generated always as identity primary key,
+	child_name text not null,
+	section text not null,
+	created_at timestamptz not null default now()
+);
+```
+
+3) Variables locales (.env):
+
+```
+MONGODB_URI=...
+SUPABASE_URL=...
+SUPABASE_SERVICE_ROLE_KEY=...
+```
+
+4) Migrar datos desde MongoDB (opcional):
+
+```zsh
+# zsh
+export MONGODB_URI='mongodb+srv://...'
+export SUPABASE_URL='https://YOUR-PROJECT.supabase.co'
+export SUPABASE_SERVICE_ROLE_KEY='service_role_key'
+node scripts/migrateToSupabase.js
+```
+
+5) Despliegue (Vercel): configura los Secrets `supabase-url` y `supabase-service-role-key` (y opcionalmente `mongodb-uri`).
+
+Seguridad: usa SERVICE_ROLE_KEY solo del lado servidor. Si en el futuro expones lecturas directas desde el cliente, habilita RLS y define policies de solo lectura pública en esas tablas.
 
 ## Siguientes pasos sugeridos
 
