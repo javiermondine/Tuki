@@ -1,62 +1,176 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Foro — Myotragus</title>
-<link rel="icon" type="image/jpeg" href="assets/mytogagus.jpg?v=1760644697">
-<link rel="icon" type="image/png" href="assets/favicon-1760644697.png?v=1760644697">
-<link rel="stylesheet" href="styles/main.css">
-<link rel="stylesheet" href="styles/forum.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Foro — Grupo Scout Myotragus 684</title>
+  <meta name="description" content="Comparte avisos, dudas y propuestas con la comunidad del Grupo Scout Myotragus 684.">
+  <meta name="theme-color" content="#5f3dc4">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Foro — Grupo Scout Myotragus 684">
+  <meta property="og:description" content="Comparte avisos, dudas y propuestas con la comunidad del Grupo Scout Myotragus 684.">
+  <meta property="og:image" content="https://myotragus-scout.es/assets/mytogagus.jpg">
+  <meta property="og:url" content="https://myotragus-scout.es/forum.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://myotragus-scout.es/forum.html">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/forum.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
 <header class="site-header" role="banner">
   <div class="container header-inner">
-    <a href="index.html"><img src="assets/mytogagus.jpg?v=1760644697" alt="Myotragus — Grupo Scout" class="logo" width="200"></a>
+    <a href="index.html" class="logo-link" aria-label="Ir a inicio">
+      <img src="assets/mytogagus.jpg?v=1760644697" alt="Grupo Scout Myotragus" class="logo" width="160" height="80" fetchpriority="high">
+    </a>
     <nav id="mainNav" class="main-nav" role="navigation" aria-label="Menú principal">
       <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="activities.html">Actividades</a></li>
-        <li><a href="teachings.html">Enseñanzas</a></li>
-        <li><a href="forum.html" class="active">Foro</a></li>
-        <li><a href="#contact">Contacto</a></li>
+        <li><a href="activities.html" data-i18n="nav.activities">Actividades</a></li>
+        <li><a href="teachings.html" data-i18n="nav.methodology">Metodología</a></li>
+        <li><a href="forum.html" data-i18n="nav.forum" aria-current="page">Foro</a></li>
+        <li><a href="signup.html" data-i18n="nav.signup">Inscripciones</a></li>
+        <li><a href="index.html#contacto" data-i18n="nav.contact">Contacto</a></li>
       </ul>
     </nav>
+    <div class="language-selector">
+      <button class="lang-btn active" data-lang="es">ES</button>
+      <button class="lang-btn" data-lang="ca">CA</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+    <button id="menuToggle" class="menu-toggle" aria-controls="mainNav" aria-expanded="false" aria-label="Abrir menú">
+      <span class="sr-only" data-i18n="nav.menu">Menú</span>
+      <span class="menu-icon"></span>
+    </button>
   </div>
 </header>
 
-<main class="container" id="main" tabindex="-1">
-  <h1>Foro del grupo</h1>
-  <p class="note">Espacio para que los chavales compartan dudas, ideas o anuncios. Respeta a los demás.</p>
-
-  <section id="forum" class="card">
-    <form id="postForm" aria-label="Formulario para nuevo mensaje">
-      <div class="form-row">
-        <label for="name">Nombre</label>
-        <input id="name" name="name" type="text" maxlength="60" placeholder="Tu nombre (o alias)">
+<main id="main" tabindex="-1">
+  <section class="page-hero page-hero--forum">
+    <div class="container hero-content">
+      <span class="headline-kicker" data-i18n="forumUi.heroKicker">Comunidad Myotragus</span>
+      <h1 data-i18n="forumUi.heroTitle">Foro del grupo</h1>
+      <p class="hero-subtitle" data-i18n="forumUi.heroSubtitle">Un espacio seguro para compartir avisos, resolver dudas y proponer nuevas aventuras.</p>
+      <div class="hero-actions">
+        <a href="#foro" class="btn primary" data-i18n="forumUi.heroPrimary">Abrir tablón</a>
+        <a href="mailto:myotragus684@gmail.com" class="btn outline" data-i18n="forumUi.heroSecondary">Contactar con el equipo</a>
       </div>
-      <div class="form-row">
-        <label for="message">Mensaje</label>
-        <textarea id="message" name="message" rows="4" maxlength="1000" placeholder="Escribe aquí tu mensaje..."></textarea>
-      </div>
-      <div class="form-actions">
-        <button type="submit" class="btn primary">Publicar</button>
-        <button type="button" id="clearAll" class="btn outline">Borrar todo (solo local)</button>
-      </div>
-    </form>
-
-    <div id="posts" aria-live="polite" class="posts-list"></div>
+    </div>
   </section>
+
+  <section class="container forum-wrapper" id="foro" aria-labelledby="forum-title">
+    <div class="section-header">
+  <span class="section-badge" data-i18n="forumUi.boardBadge">Comunidad</span>
+  <h2 id="forum-title" data-i18n="forumUi.boardTitle">Tablón de mensajes</h2>
+  <p class="section-description" data-i18n="forumUi.boardDesc">Los mensajes se guardan para que toda la comunidad pueda leerte. Respeta la Ley Scout y evita datos personales.</p>
+    </div>
+
+  <p class="note" data-i18n="forum.notePublic">Recomendación: identifica siempre la sección o actividad sobre la que escribes. Los mensajes se publican de forma visible para toda la comunidad.</p>
+
+    <section id="forum">
+      <div class="forum-controls">
+        <button id="newPostBtn" class="btn primary" data-i18n="forumUi.newPost">Crear nuevo mensaje</button>
+        <div class="search-box">
+          <input type="search" id="searchPosts" data-i18n-placeholder="forumUi.searchPlaceholder" placeholder="Buscar en mensajes..." aria-label="Buscar mensajes">
+        </div>
+        <div class="sort-options">
+          <label for="sortBy" data-i18n="forumUi.sortLabel">Ordenar por:</label>
+          <select id="sortBy" aria-label="Ordenar mensajes por">
+            <option value="newest" data-i18n="forumUi.sortNewest">Más recientes</option>
+            <option value="oldest" data-i18n="forumUi.sortOldest">Más antiguos</option>
+          </select>
+        </div>
+      </div>
+
+      <form id="postForm" aria-label="Formulario para nuevo mensaje" class="hidden">
+        <div class="form-row">
+          <label for="name"><span data-i18n="forumUi.name">Nombre</span> <span class="required" aria-hidden="true">*</span></label>
+          <input id="name" name="name" type="text" maxlength="60" placeholder="Tu nombre (o alias)" required aria-required="true">
+        </div>
+        <div class="form-row">
+          <label for="category" data-i18n="forumUi.category">Categoría</label>
+          <select id="category" name="category">
+            <option value="general" data-i18n="forumUi.categories.general">General</option>
+            <option value="actividades" data-i18n="forumUi.categories.actividades">Actividades</option>
+            <option value="ayuda" data-i18n="forumUi.categories.ayuda">Ayuda</option>
+            <option value="anuncios" data-i18n="forumUi.categories.anuncios">Anuncios</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="message"><span data-i18n="forumUi.message">Mensaje</span> <span class="required" aria-hidden="true">*</span></label>
+          <textarea id="message" name="message" rows="4" maxlength="1000" placeholder="Escribe aquí tu mensaje..." required aria-required="true"></textarea>
+          <div class="char-count"><span id="charCount">0</span>/1000</div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn primary" data-i18n="forumUi.publish">Publicar</button>
+          <button type="button" id="cancelPost" class="btn outline" data-i18n="forumUi.cancel">Cancelar</button>
+        </div>
+      </form>
+
+      <div id="posts" aria-live="polite" class="posts-list" data-empty-message="" data-i18n-empty="forumUi.empty"></div>
+
+      <div class="forum-admin-controls">
+        <button type="button" id="clearAll" class="btn outline danger" data-i18n="forumUi.clearAll">Borrar todo (solo en este dispositivo)</button>
+      </div>
+    </section>
+  </section>
+
+  <div id="confirmModal" class="modal" role="dialog" aria-labelledby="confirmTitle" aria-hidden="true">
+    <div class="modal-content">
+      <h2 id="confirmTitle" data-i18n="forumUi.confirmTitle">Confirmar acción</h2>
+      <p id="confirmMessage" data-i18n="forumUi.confirmText">¿Estás seguro que deseas continuar?</p>
+      <div class="modal-actions">
+        <button id="confirmYes" class="btn primary" data-i18n="forumUi.yes">Sí</button>
+        <button id="confirmNo" class="btn outline" data-i18n="forumUi.no">No</button>
+      </div>
+    </div>
+  </div>
 </main>
 
 <footer class="site-footer" role="contentinfo">
-  <div class="container footer-inner">
-    <div>&copy; <span id="year"></span> Grupo Scout Myotragus</div>
-    <div class="credits"><small>Hecho por Tero</small></div>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <img src="assets/mytogagus.jpg" alt="Myotragus" class="footer-logo" width="120">
+        <p>Grupo Scout Myotragus 684</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/gruposcoutmyotragus/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/gruposcoutmyotragus684" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-contact">
+        <h3 data-i18n="footer.contact">Contacto</h3>
+        <p><strong data-i18n="footer.email">Email:</strong> <a href="mailto:myotragus684@gmail.com">myotragus684@gmail.com</a></p>
+        <p><strong data-i18n="footer.phone">Teléfono:</strong> <a href="tel:+34666000000">666 000 000</a></p>
+        <p><strong data-i18n="footer.location">Local:</strong> Palma de Mallorca</p>
+        <p><strong data-i18n="footer.meetings">Reuniones:</strong> Sábados de 17:00 a 19:30 h</p>
+      </div>
+      <div class="footer-links">
+        <h3 data-i18n="footer.links">Enlaces</h3>
+        <ul>
+          <li><a href="https://scout.es/" target="_blank" rel="noopener">ASDE-Scouts de España</a></li>
+          <li><a href="https://baleares.scout.es/" target="_blank" rel="noopener">ASDE Baleares</a></li>
+          <li><a href="https://www.scout.org/" target="_blank" rel="noopener">WOSM</a></li>
+          <li><a href="forum.html" data-i18n="nav.forum">Foro del grupo</a></li>
+          <li><a href="index.html#quienes-somos" data-i18n="nav.about">Quiénes somos</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="currentYear">2023</span> Grupo Scout Myotragus 684 - ASDE Baleares</p>
+    </div>
   </div>
 </footer>
 
 <script src="scripts/main.js" defer></script>
+<script src="scripts/i18n.js" defer></script>
+<script src="scripts/security.js" defer></script>
 <script src="scripts/forum.js" defer></script>
 </body>
 </html>

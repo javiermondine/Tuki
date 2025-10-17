@@ -1,184 +1,249 @@
 <!doctype html>
 <html lang="es" dir="ltr">
 <head>
-    <!-- Metadatos básicos -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Actividades — Grupo Scout Myotragus</title>
-    
-    <!-- Performance -->
-    <link rel="preconnect" href="https://analytics.example.com">
-    <link rel="dns-prefetch" href="https://analytics.example.com">
-    
-    <!-- SEO Mejorado -->
-    <meta name="description" content="Descubre todas las actividades, excursiones y eventos del Grupo Scout Myotragus. Campamentos, talleres y actividades semanales para todas las edades.">
-    <meta name="keywords" content="actividades scout, excursiones, talleres, Balears, Myotragus, campamentos, aire libre">
+    <meta name="description" content="Consulta el calendario anual, experiencias destacadas y proyectos del Grupo Scout Myotragus 684.">
     <link rel="canonical" href="https://myotragus-scout.es/activities.html">
-    
-    <!-- Open Graph y Twitter Cards -->
+    <meta name="theme-color" content="#5f3dc4">
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Actividades - Grupo Scout Myotragus">
-    <meta property="og:description" content="Descubre nuestras actividades scouts">
-    <meta property="og:image" content="https://myotragus-scout.es/assets/activities-hero.jpg">
+    <meta property="og:title" content="Actividades — Grupo Scout Myotragus">
+    <meta property="og:description" content="Excursiones, proyectos de servicio y aventuras al aire libre durante todo el curso scout.">
+    <meta property="og:image" content="https://myotragus-scout.es/assets/mytogagus.jpg">
     <meta property="og:url" content="https://myotragus-scout.es/activities.html">
     <meta name="twitter:card" content="summary_large_image">
-    
-    <!-- Seguridad -->
-    <meta http-equiv="Content-Security-Policy" 
-          content="default-src 'self'; 
-                   img-src 'self' https://secure.analytics.example.com; 
-                   script-src 'self' 'unsafe-inline' https://secure.analytics.example.com;">
-    
-    <!-- PWA Support -->
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#4CAF50">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    
-    <!-- Preload recursos críticos -->
-    <link rel="preload" href="assets/fonts/scout-font.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="assets/mytogagus.jpg" as="image">
-    <link rel="preload" href="styles/main.css" as="style">
-    <link rel="preload" href="scripts/main.js" as="script">
-    
-    <!-- Estilos -->
+
+    <!-- CSS -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/activities.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Saltar al contenido</a>
+
 <header class="site-header" role="banner">
-  <div class="container header-inner">
-    <a href="index.html" class="logo-link">
-      <img src="assets/mytogagus.jpg?v=1760644697" 
-           alt="Grupo Scout Myotragus" 
-           class="logo" 
-           width="160" 
-           height="80"
-           fetchpriority="high">
-    </a>
-    
-    <nav id="mainNav" class="main-nav" aria-label="Navegación principal">
-      <ul role="menubar">
-        <li role="none"><a href="index.html" role="menuitem">Inicio</a></li>
-        <li role="none"><a href="activities.html" role="menuitem" aria-current="page">Actividades</a></li>
-        <li role="none"><a href="teachings.html" role="menuitem">Enseñanzas</a></li>
-        <li role="none"><a href="forum.html" role="menuitem">Foro</a></li>
-      </ul>
-    </nav>
-    
-    <button id="navToggle" 
-            class="nav-toggle" 
-            aria-controls="mainNav" 
-            aria-expanded="false" 
-            aria-label="Abrir menú">
-      <span class="sr-only">Menú</span>
-      <span class="hamburger"></span>
-    </button>
-  </div>
+    <div class="container header-inner">
+        <a href="index.html" class="logo-link" aria-label="Ir a inicio">
+            <img src="assets/mytogagus.jpg?v=1760644697" alt="Grupo Scout Myotragus" class="logo" width="160" height="80" fetchpriority="high">
+        </a>
+        <nav id="mainNav" class="main-nav" role="navigation" aria-label="Menú principal">
+            <ul>
+                <li><a href="activities.html" data-i18n="nav.activities" aria-current="page">Actividades</a></li>
+                <li><a href="teachings.html" data-i18n="nav.methodology">Metodología</a></li>
+                <li><a href="forum.html" data-i18n="nav.forum">Foro</a></li>
+                <li><a href="signup.html" data-i18n="nav.signup">Inscripciones</a></li>
+                <li><a href="index.html#contacto" data-i18n="nav.contact">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="language-selector">
+            <button class="lang-btn active" data-lang="es">ES</button>
+            <button class="lang-btn" data-lang="ca">CA</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <button id="menuToggle" class="menu-toggle" aria-controls="mainNav" aria-expanded="false" aria-label="Abrir menú">
+            <span class="sr-only" data-i18n="nav.menu">Menú</span>
+            <span class="menu-icon"></span>
+        </button>
+    </div>
 </header>
 
-<main id="main" class="container activities-page">
-    <h1>Actividades Scout</h1>
-    
-    <!-- Hero Section -->
-    <section class="hero-activities">
-        <img src="assets/activities-hero.webp" alt="Scouts en actividad" width="1200" height="600" loading="eager">
-        <div class="hero-overlay">
-            <p class="lead">Descubre nuestras aventuras y únete a la experiencia scout</p>
-        </div>
-    </section>
-
-    <!-- Calendario -->
-    <section class="calendar-section" aria-labelledby="calendar-title">
-        <h2 id="calendar-title">Próximas Actividades</h2>
-        <div id="calendar" class="calendar-widget"></div>
-        <div class="calendar-controls">
-            <button class="btn primary" 
-                    id="addToCalendar" 
-                    aria-label="Añadir eventos al calendario">
-                <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#calendar-plus"></use>
-                </svg>
-                Añadir a mi calendario
-            </button>
-            <div class="subscription-options">
-                <a href="webcal://myotragus-scout.es/calendar.ics" 
-                   class="btn outline"
-                   aria-label="Suscribirse al calendario">
-                    <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#bell"></use>
-                    </svg>
-                    Suscribirse a eventos
-                </a>
+<main id="main" tabindex="-1">
+    <section class="page-hero page-hero--activities">
+        <div class="container hero-content">
+            <span class="headline-kicker">Agenda 2024 · 2025</span>
+            <h1>Actividades Scout</h1>
+            <p class="hero-subtitle">Una aventura educativa continua: naturaleza, servicio y vida en grupo en cada trimestre.</p>
+            <div class="hero-actions">
+                <a href="#agenda" class="btn primary" data-i18n="activitiesPage.hero.btnCalendar">Ver calendario</a>
+                <a href="signup.html" class="btn outline" data-i18n="activitiesPage.hero.btnSignup">Quiero inscribirme</a>
             </div>
         </div>
     </section>
 
-    <!-- Grid de Actividades -->
-    <section class="activities-grid" aria-labelledby="activities-title">
-        <h2 id="activities-title">Nuestras Actividades</h2>
-        <div class="grid">
-            <article class="card" data-aos="fade-up">
-                <img src="assets/photo-1.webp" 
-                     alt="Reuniones semanales" 
-                     class="card-photo"
-                     width="400"
-                     height="300"
-                     loading="lazy">
-                <div class="card-content">
-                    <h3>Reuniones Semanales</h3>
-                    <p>Dinámicas, juegos y talleres adaptados a cada sección.</p>
-                    <a href="#details" class="btn text">Ver detalles →</a>
+    <section class="activities-overview">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Lo que vivimos</span>
+                <h2>Momentos clave del curso scout</h2>
+                <p>Combinamos salidas, talleres y proyectos de servicio para que cada sección crezca a su ritmo con experiencias memorables.</p>
+            </div>
+            <div class="activities-highlight-grid">
+                <article class="highlight-card">
+                    <div class="highlight-icon">🏕️</div>
+                    <h3>Salidas y campamentos</h3>
+                    <p>Exploramos la Serra de Tramuntana, playas y espacios naturales de la isla en distintos niveles de dificultad.</p>
+                    <ul>
+                        <li>Acampadas trimestrales por secciones</li>
+                        <li>Campamento de verano de 15 días</li>
+                        <li>Raids y travesías para escultas y rovers</li>
+                    </ul>
+                </article>
+                <article class="highlight-card">
+                        <h3 data-i18n="activitiesPage.overview.cards.camp.title">Salidas y campamentos</h3>
+                        <p data-i18n="activitiesPage.overview.cards.camp.desc">Exploramos la Serra de Tramuntana, playas y espacios naturales de la isla en distintos niveles de dificultad.</p>
+                    <p>Desarrollamos proyectos solidarios y medioambientales para dejar huella positiva en nuestro entorno.</p>
+                            <li data-i18n="activitiesPage.overview.cards.camp.li1">Acampadas trimestrales por secciones</li>
+                            <li data-i18n="activitiesPage.overview.cards.camp.li2">Campamento de verano de 15 días</li>
+                            <li data-i18n="activitiesPage.overview.cards.camp.li3">Raids y travesías para escultas y rovers</li>
+                        <li>Proyectos de empresa scout diseñados por el propio grupo</li>
+                    </ul>
+                </article>
+                <article class="highlight-card">
+                        <h3 data-i18n="activitiesPage.overview.cards.service.title">Servicio a la comunidad</h3>
+                        <p data-i18n="activitiesPage.overview.cards.service.desc">Desarrollamos proyectos solidarios y medioambientales para dejar huella positiva en nuestro entorno.</p>
+                    <p>La metodología scout nos permite avanzar por etapas con objetivos adaptados a cada edad.</p>
+                            <li data-i18n="activitiesPage.overview.cards.service.li1">Recogidas de alimentos y campañas solidarias</li>
+                            <li data-i18n="activitiesPage.overview.cards.service.li2">Acciones de limpieza de litoral y bosques</li>
+                            <li data-i18n="activitiesPage.overview.cards.service.li3">Proyectos de empresa scout diseñados por el propio grupo</li>
+                        <li>Rutas urbanas y actividades de ciudad</li>
+                    </ul>
+                </article>
+            </div>
+                        <h3 data-i18n="activitiesPage.overview.cards.skills.title">Habilidades y progresión</h3>
+                        <p data-i18n="activitiesPage.overview.cards.skills.desc">La metodología scout nos permite avanzar por etapas con objetivos adaptados a cada edad.</p>
+
+                            <li data-i18n="activitiesPage.overview.cards.skills.li1">Competencias al aire libre y vida en patrulla</li>
+                            <li data-i18n="activitiesPage.overview.cards.skills.li2">Talleres creativos, STEM y primeros auxilios</li>
+                            <li data-i18n="activitiesPage.overview.cards.skills.li3">Rutas urbanas y actividades de ciudad</li>
+                <h2>Calendario 2024 · 2025</h2>
+                <p class="calendar-intro">Nuestras reuniones regulares son los sábados de 17:00 a 19:30 h en Palma. Además, programamos salidas trimestrales y proyectos especiales para cada sección. Este calendario se actualiza con las novedades mensuales.</p>
+                <div class="calendar-actions">
+                    <a href="webcal://myotragus-scout.es/calendar.ics" class="btn primary">Añadir a mi calendario</a>
+                    <a href="https://www.instagram.com/gruposcoutmyotragus/" class="btn secondary" target="_blank" rel="noopener">Seguimiento en redes</a>
                 </div>
-            </article>
-            <!-- Más cards... -->
+                <div class="calendar-grid">
+                    <div class="calendar-column">
+                        <span class="calendar-badge">Primer trimestre</span>
+                    <h2 data-i18n="activitiesPage.calendar.title">Calendario 2024 · 2025</h2>
+                    <p class="calendar-intro" data-i18n="activitiesPage.calendar.intro">Nuestras reuniones regulares son los sábados de 17:00 a 19:30 h en Palma. Además, programamos salidas trimestrales y proyectos especiales para cada sección. Este calendario se actualiza con las novedades mensuales.</p>
+                            <span class="calendar-desc">Inicio de curso, presentación de scouters y juegos de bienvenida.</span>
+                        <a href="webcal://myotragus-scout.es/calendar.ics" class="btn primary" data-i18n="activitiesPage.calendar.add">Añadir a mi calendario</a>
+                        <a href="https://www.instagram.com/gruposcoutmyotragus/" class="btn secondary" target="_blank" rel="noopener" data-i18n="activitiesPage.calendar.follow">Seguimiento en redes</a>
+                            <span class="calendar-time">Octubre</span>
+                            <span class="calendar-desc">Salida de convivencia por secciones y talleres de habilidades básicas.</span>
+                        </div>
+                            <span class="calendar-badge" data-i18n="activitiesPage.calendar.first">Primer trimestre</span>
+                            <span class="calendar-time">Noviembre</span>
+                                <span class="calendar-time" data-i18n="activitiesPage.calendar.sep.m">Septiembre</span>
+                                <span class="calendar-desc" data-i18n="activitiesPage.calendar.sep.d">Inicio de curso, presentación de scouters y juegos de bienvenida.</span>
+                    </div>
+                    <div class="calendar-column">
+                                <span class="calendar-time" data-i18n="activitiesPage.calendar.oct.m">Octubre</span>
+                                <span class="calendar-desc" data-i18n="activitiesPage.calendar.oct.d">Salida de convivencia por secciones y talleres de habilidades básicas.</span>
+                            <span class="calendar-time">Diciembre</span>
+                            <span class="calendar-desc">Acampada de invierno y convivencia con familias.</span>
+                                <span class="calendar-time" data-i18n="activitiesPage.calendar.nov.m">Noviembre</span>
+                                <span class="calendar-desc" data-i18n="activitiesPage.calendar.nov.d">Acción solidaria con entidades locales y hike de patrullas.</span>
+                            <span class="calendar-time">Enero</span>
+                            <span class="calendar-desc">Proyecto de servicio comunitario y formación para scouters jóvenes.</span>
+                        </div>
+                            <span class="calendar-badge" data-i18n="activitiesPage.calendar.second">Segundo trimestre</span>
+                            <span class="calendar-time">Febrero</span>
+                                <span class="calendar-time" data-i18n="activitiesPage.calendar.dec.m">Diciembre</span>
+                                <span class="calendar-desc" data-i18n="activitiesPage.calendar.dec.d">Acampada de invierno y convivencia con familias.</span>
+                    </div>
+                    <div class="calendar-column">
+                                <span class="calendar-time" data-i18n="activitiesPage.calendar.jan.m">Enero</span>
+                                <span class="calendar-desc" data-i18n="activitiesPage.calendar.jan.d">Proyecto de servicio comunitario y formación para scouters jóvenes.</span>
+                            <span class="calendar-time">Marzo</span>
+                            <span class="calendar-desc">Raid de escultas y travesía costera para rovers.</span>
+                                <span class="calendar-time" data-i18n="activitiesPage.calendar.feb.m">Febrero</span>
+                                <span class="calendar-desc" data-i18n="activitiesPage.calendar.feb.d">Semana del Pensamiento Scout con actividades intersección.</span>
+                            <span class="calendar-time">Abril</span>
+                            <span class="calendar-desc">Salida de naturaleza y participación en encuentros ASDE.</span>
+                        </div>
+                            <span class="calendar-badge" data-i18n="activitiesPage.calendar.third">Tercer trimestre</span>
+                            <span class="calendar-time">Junio</span>
+                                <span class="calendar-time" data-i18n="activitiesPage.calendar.mar.m">Marzo</span>
+                                <span class="calendar-desc" data-i18n="activitiesPage.calendar.mar.d">Raid de escultas y travesía costera para rovers.</span>
+                    </div>
+                </div>
+                                <span class="calendar-time" data-i18n="activitiesPage.calendar.apr.m">Abril</span>
+                                <span class="calendar-desc" data-i18n="activitiesPage.calendar.apr.d">Salida de naturaleza y participación en encuentros ASDE.</span>
         </div>
     </section>
+                                <span class="calendar-time" data-i18n="activitiesPage.calendar.jun.m">Junio</span>
+                                <span class="calendar-desc" data-i18n="activitiesPage.calendar.jun.d">Fiesta de fin de curso y preparación del campamento de verano.</span>
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Metodología</span>
+                    <p class="calendar-note" data-i18n="activitiesPage.calendar.note">* Las excursiones y proyectos pueden variar según disponibilidad de espacios y condiciones meteorológicas. Comunicamos cualquier cambio mediante email y grupos oficiales.</p>
+                <p>Castores, lobatos, scouts, escultas y rovers siguen itinerarios específicos donde el protagonismo y la responsabilidad aumentan progresivamente.</p>
+            </div>
+            <div class="sampler-grid">
+                <article class="sampler-card">
+                    <div class="sampler-icon">🧭</div>
+                    <h3>Exploración y juego</h3>
+                    <p>Para castores y lobatos el objetivo es descubrir el entorno mediante dinámicas cooperativas, cuentos y pequeñas aventuras.</p>
+                </article>
+                <article class="sampler-card">
+                    <div class="sampler-icon">🔥</div>
+                    <h3>Vida en patrulla</h3>
+                    <p>En la tropa y la unidad escultas fomentamos la autonomía y liderazgo a través de patrullas y equipos de proyecto.</p>
+                </article>
+                <article class="sampler-card">
+                        <h3 data-i18n="activitiesPage.sampler.explore.title">Exploración y juego</h3>
+                        <p data-i18n="activitiesPage.sampler.explore.desc">Para castores y lobatos el objetivo es descubrir el entorno mediante dinámicas cooperativas, cuentos y pequeñas aventuras.</p>
+                    <p>Los rovers diseñan proyectos sociales de impacto y realizan rutas de larga duración como preparación para la vida adulta.</p>
+                </article>
+            </div>
+                        <h3 data-i18n="activitiesPage.sampler.patrol.title">Vida en patrulla</h3>
+                        <p data-i18n="activitiesPage.sampler.patrol.desc">En la tropa y la unidad escultas fomentamos la autonomía y liderazgo a través de patrullas y equipos de proyecto.</p>
 
-    <!-- Formulario de Inscripción -->
-    <section class="signup-section" aria-labelledby="signup-title">
-        <h2 id="signup-title">¿Quieres participar?</h2>
-        <form id="signupForm" 
-          class="signup-form" 
-          action="/api/register" 
-          method="POST"
-          data-netlify="true"
-          autocomplete="on">
-            <div class="form-group">
-                <label for="name">Nombre completo</label>
-                <input type="text" 
-                   id="name" 
-                   name="name" 
-                   required 
-                   minlength="2"
-                   maxlength="100"
-                   pattern="[A-Za-zÀ-ÿ\s]+"
-                   autocomplete="name">
-                <span class="form-error" aria-live="polite"></span>
+    <section class="activities-cta">
+        <div class="container">
+                        <h3 data-i18n="activitiesPage.sampler.commit.title">Compromiso y servicio</h3>
+                        <p data-i18n="activitiesPage.sampler.commit.desc">Los rovers diseñan proyectos sociales de impacto y realizan rutas de larga duración como preparación para la vida adulta.</p>
+            <div class="cta-actions">
+                <a href="signup.html" class="btn primary">Ir a inscripciones</a>
+                <a href="mailto:myotragus684@gmail.com" class="btn outline">Contactar con el equipo</a>
             </div>
-            <div class="form-group">
-                <label for="age">Edad</label>
-                <input type="number" 
-                   id="age" 
-                   name="age" 
-                   min="6" 
-                   max="21" 
-                   required
-                   inputmode="numeric">
-                <span class="form-error" aria-live="polite"></span>
+        </div>
+    </section>
+</main>
+                <h2 data-i18n="activitiesPage.cta.title">¿Te gustaría vivir estas experiencias?</h2>
+                <p data-i18n="activitiesPage.cta.desc">Estamos abiertos a nuevas incorporaciones a lo largo del año. Escríbenos y te orientamos según la sección y disponibilidad de plazas.</p>
+    <div class="container">
+                    <a href="signup.html" class="btn primary" data-i18n="activitiesPage.cta.primary">Ir a inscripciones</a>
+            <div class="footer-about">
+                <img src="assets/mytogagus.jpg" alt="Myotragus" class="footer-logo" width="120">
+                <p>Grupo Scout Myotragus 684</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/gruposcoutmyotragus/" target="_blank" rel="noopener" aria-label="Instagram">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="https://www.facebook.com/gruposcoutmyotragus684" target="_blank" rel="noopener" aria-label="Facebook">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="email">Email de contacto</label>
-                <input type="email" 
-                   id="email" 
-                   name="email" 
-                   required
-                   autocomplete="email">
+            <div class="footer-contact">
+                <h3 data-i18n="footer.contact">Contacto</h3>
+                <p><strong data-i18n="footer.email">Email:</strong> <a href="mailto:myotragus684@gmail.com">myotragus684@gmail.com</a></p>
+                <p><strong data-i18n="footer.phone">Teléfono:</strong> <a href="tel:+34666000000">666 000 000</a></p>
+                <p><strong data-i18n="footer.location">Local:</strong> Palma de Mallorca</p>
+                <p><strong data-i18n="footer.meetings">Reuniones:</strong> Sábados de 17:00 a 19:30 h</p>
             </div>
-            <div class="form-group">
-                <label for="section">Sección</label>
-                <select id="section" name="section" required>
-                    <option value="">Selecciona una sección</option>
-                    <option value="manada">Manada (6-8 años)</option>
-                    <option value="tropa">Tropa (8-11 años)</option>
+            <div class="footer-links">
+                <h3 data-i18n="footer.links">Enlaces</h3>
+                <ul>
+                    <li><a href="https://scout.es/" target="_blank" rel="noopener">ASDE-Scouts de España</a></li>
+                    <li><a href="https://baleares.scout.es/" target="_blank" rel="noopener">ASDE Baleares</a></li>
+                    <li><a href="https://www.scout.org/" target="_blank" rel="noopener">WOSM</a></li>
+                    <li><a href="forum.html" data-i18n="nav.forum">Foro del grupo</a></li>
+                    <li><a href="index.html#quienes-somos" data-i18n="nav.about">Quiénes somos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="currentYear">2023</span> Grupo Scout Myotragus 684 - ASDE Baleares</p>
+        </div>
+    </div>
+</footer>
+
+<script src="scripts/main.js" defer></script>
+<script src="scripts/i18n.js" defer></script>
+</body>
+</html>

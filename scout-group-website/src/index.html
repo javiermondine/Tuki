@@ -1,194 +1,322 @@
-<!doctype html>
-<html lang="es" dir="ltr">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="Grupo Scout Myotragus - Actividades y formación scout en Balears">
-    <title>Grupo Scout Myotragus — ASDE Balears</title>
-    
-    <!-- Performance -->
-    <link rel="preconnect" href="https://analytics.example.com">
-    <link rel="dns-prefetch" href="https://analytics.example.com">
-    
-    <!-- SEO -->
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://myotragus-scout.es/">
-    <meta name="author" content="Grupo Scout Myotragus">
-    <meta name="keywords" content="scout, ASDE, Balears, actividades, aire libre, myotragus, educación">
-    
-    <!-- Security -->
-    <meta http-equiv="Content-Security-Policy" 
-          content="default-src 'self'; 
-                   img-src 'self' https://secure.analytics.example.com; 
-                   script-src 'self' 'unsafe-inline' https://secure.analytics.example.com;">
-    
-    <!-- PWA -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo Scout Myotragus 684 — Educación en valores</title>
+    <meta name="description" content="Grupo Scout Myotragus 684. Programas educativos basados en el escultismo, naturaleza y servicio en Palma de Mallorca.">
+  <link rel="stylesheet" href="styles/main.css">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#4CAF50">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    
-    <!-- Preload -->
-    <link rel="preload" href="assets/fonts/scout-font.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="assets/images/hero.webp" as="image">
-    
-    <link rel="stylesheet" href="styles/main.css">
+  <link rel="canonical" href="https://myotragus-scout.es/">
+  <meta name="theme-color" content="#5f3dc4">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Grupo Scout Myotragus 684 — Educación en valores">
+  <meta property="og:description" content="Escultismo en Palma de Mallorca. Actividades, voluntariado y metodología scout.">
+  <meta property="og:image" content="https://myotragus-scout.es/assets/mytogagus.jpg">
+  <meta property="og:url" content="https://myotragus-scout.es/">
+  <meta name="twitter:card" content="summary_large_image">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<a class="skip-link" href="#main">Saltar al contenido</a>
-<header class="site-header" role="banner">
+    <header class="site-header" role="banner">
   <div class="container header-inner">
-    <img src="assets/mytogagus.jpg?v=1760644697" alt="Myotragus — Grupo Scout" class="logo" width="200">
-    <img src="assets/stripe.svg" alt="" class="header-stripe" aria-hidden="true" width="200">
+    <a href="index.html" class="logo-link">
+      <img src="assets/mytogagus.jpg" alt="Grupo Scout Myotragus 684" class="logo" width="200">
+    </a>
     <nav id="mainNav" class="main-nav" role="navigation" aria-label="Menú principal">
       <ul>
-        <li><a href="index.html" class="active">Inicio</a></li>
-        <li><a href="activities.html">Actividades</a></li>
-        <li><a href="teachings.html">Enseñanzas</a></li>
-        <li><a href="#about">Sobre</a></li>
-        <li><a href="#contact">Contacto</a></li>
-  <li><a href="forum.html">Foro</a></li>
+        <li><a href="#quienes-somos" data-i18n="nav.about">Quiénes Somos</a></li>
+        <li><a href="#secciones" data-i18n="nav.sections">Secciones</a></li>
+        <li><a href="activities.html" data-i18n="nav.activities">Actividades</a></li>
+        <li><a href="teachings.html" data-i18n="nav.methodology">Metodología</a></li>
+        <li><a href="forum.html" data-i18n="nav.forum">Foro</a></li>
+        <li><a href="signup.html" data-i18n="nav.signup">Inscripciones</a></li>
+        <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
       </ul>
     </nav>
-    <button id="navToggle" class="nav-toggle" aria-controls="mainNav" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    <div class="language-selector">
+      <button class="lang-btn active" data-lang="es">ES</button>
+      <button class="lang-btn" data-lang="ca">CA</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+    <button id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="mainNav">
+      <span class="sr-only" data-i18n="nav.menu">Menú</span>
+      <span class="menu-icon"></span>
+    </button>
   </div>
 </header>
 
 <main id="main" tabindex="-1">
-  <section class="hero" aria-labelledby="hero-title">
-    <img src="assets/hero-photo.svg" alt="" class="hero-illustration" aria-hidden="true">
-    <div class="container hero-inner">
-      <div class="hero-content">
-        <h1 id="hero-title">Explora, aprende y sirve</h1>
-        <p>Grupo Scout Myotragus (ASDE Balears): aventuras al aire libre, formación en valores y servicio a la comunidad.</p>
-        <div class="hero-cta">
-          <a class="btn primary" href="activities.html">Ver actividades</a>
-          <a class="btn outline" href="teachings.html">Qué enseñamos</a>
+  <!-- Hero Section -->
+  <section id="inicio" class="hero hero--gradient">
+    <div class="hero-content">
+        <span class="headline-kicker" data-i18n="hero.kicker">Grupo Scout Myotragus 684</span>
+        <h1 data-i18n="hero.title">Aventuras que educan y transforman</h1>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">Escultismo en Palma con espíritu ASDE</p>
+        <p class="hero-description" data-i18n="hero.description">Desde 1984 acompañamos a niños y jóvenes con actividades al aire libre, servicio y liderazgo para construir una sociedad más justa.</p>
+    <div class="hero-actions">
+      <a href="signup.html" class="btn primary large" data-i18n="hero.join">Comenzar inscripción</a>
+      <a href="#secciones" class="btn outline large" data-i18n="hero.learn">Ver secciones</a>
+    </div>
+    </div>
+    <div class="hero-stats">
+        
+        <div class="stat">
+            <span class="stat-number">150+</span>
+            <span class="stat-label" data-i18n="hero.stats.scouts">Jóvenes activos</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">5</span>
+            <span class="stat-label" data-i18n="hero.stats.sections">Secciones progresivas</span>
+        </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="quienes-somos" class="about-section">
+    <div class="container">
+      <h2 data-i18n="about.title">Quiénes Somos</h2>
+      <div class="about-grid">
+        <div class="about-content">
+          <p class="lead" data-i18n="about.lead">El Grupo Scout Myotragus 684 nació en 1984 en Palma de Mallorca con la misión de educar a niños y jóvenes en valores fundamentales a través del escultismo.</p>
+          
+          <p data-i18n="about.description">Somos un grupo aconfesional y laico, perteneciente a <strong>ASDE-Scouts de España</strong> y <strong>ASDE Baleares</strong>, comprometidos con la educación no formal basada en la metodología scout creada por Baden-Powell.</p>
+          
+          <div class="values-grid">
+            <div class="value-card">
+              <div class="value-icon">🌱</div>
+              <h3 data-i18n="about.values.education.title">Educación en Valores</h3>
+              <p data-i18n="about.values.education.desc">Promovemos la responsabilidad, solidaridad, respeto y compromiso social</p>
+            </div>
+            <div class="value-card">
+              <div class="value-icon">🤝</div>
+              <h3 data-i18n="about.values.inclusion.title">Inclusión</h3>
+              <p data-i18n="about.values.inclusion.desc">Aceptamos a todas las personas sin discriminación por origen, religión o condición</p>
+            </div>
+            <div class="value-card">
+              <div class="value-icon">🌍</div>
+              <h3 data-i18n="about.values.commitment.title">Compromiso Social</h3>
+              <p data-i18n="about.values.commitment.desc">Trabajamos por un mundo más justo, participativo y sostenible</p>
+            </div>
+            <div class="value-card">
+              <div class="value-icon">🏕️</div>
+              <h3 data-i18n="about.values.learning.title">Aprender Haciendo</h3>
+              <p data-i18n="about.values.learning.desc">Metodología activa basada en la experiencia y el contacto con la naturaleza</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="about-image">
+          <img src="assets/grupo-myotragus.jpg" alt="Grupo Scout Myotragus" loading="lazy">
         </div>
       </div>
-      <!-- pañoleta eliminada intencionalmente -->
     </div>
   </section>
 
-  <section id="about" class="container about" aria-labelledby="about-title">
-    <h2 id="about-title">Sobre el grupo y ASDE</h2>
-    <div class="card">
-      <h3>Sobre Grupo Scout Myotragus</h3>
-      <p>Grupo local afiliado a ASDE Balears. Trabajamos con niñas, niños y jóvenes mediante el método scout: actividades prácticas, proyectos y servicio comunitario.</p>
+  <!-- Sections (Age Groups) -->
+  <section id="secciones" class="sections-section">
+    <div class="container">
+      <h2 data-i18n="sections.title">Nuestras Secciones Educativas</h2>
+      <p class="section-intro" data-i18n="sections.intro">Organizamos nuestras actividades por franjas de edad, adaptando la metodología scout a cada etapa del desarrollo</p>
+      
+      <div class="sections-grid">
+        <div class="section-card castores">
+          <div class="section-header">
+            <span class="section-icon">🦫</span>
+            <h3 data-i18n="sections.beavers.title">Castores</h3>
+            <span class="age-badge" data-i18n="sections.beavers.age">6-8 años</span>
+          </div>
+          <p data-i18n="sections.beavers.desc">Primeros pasos en el escultismo. Aprenden jugando, desarrollando habilidades sociales y descubriendo el mundo que les rodea.</p>
+          <ul class="section-features">
+            <li data-i18n="sections.beavers.feature1">Juegos cooperativos</li>
+            <li data-i18n="sections.beavers.feature2">Primeras salidas a la naturaleza</li>
+            <li data-i18n="sections.beavers.feature3">Desarrollo de la creatividad</li>
+          </ul>
+          <a class="btn primary section-inscription" href="signup.html#formulario" data-section="castores" data-i18n="sections.register">Inscribe a tu hijo/a</a>
+        </div>
+
+        <div class="section-card lobatos">
+          <div class="section-header">
+            <span class="section-icon">🐺</span>
+            <h3 data-i18n="sections.cubs.title">Lobatos</h3>
+            <span class="age-badge" data-i18n="sections.cubs.age">8-11 años</span>
+          </div>
+          <p data-i18n="sections.cubs.desc">Basado en "El Libro de la Selva". Desarrollo de la personalidad a través del juego y el aprendizaje en grupo.</p>
+          <ul class="section-features">
+            <li data-i18n="sections.cubs.feature1">Manada como "familia feliz"</li>
+            <li data-i18n="sections.cubs.feature2">Juegos de pistas y aventuras</li>
+            <li data-i18n="sections.cubs.feature3">Primeras acampadas</li>
+          </ul>
+          <a class="btn primary section-inscription" href="signup.html#formulario" data-section="lobatos" data-i18n="sections.register">Inscribe a tu hijo/a</a>
+        </div>
+
+        <div class="section-card scouts">
+          <div class="section-header">
+            <span class="section-icon">⚜️</span>
+            <h3 data-i18n="sections.scouts.title">Scouts</h3>
+            <span class="age-badge" data-i18n="sections.scouts.age">11-14 años</span>
+          </div>
+          <p data-i18n="sections.scouts.desc">Vida en patrullas, aventura y técnicas scout. Desarrollo de la autonomía y trabajo en equipo.</p>
+          <ul class="section-features">
+            <li data-i18n="sections.scouts.feature1">Sistema de patrullas</li>
+            <li data-i18n="sections.scouts.feature2">Campamentos y raids</li>
+            <li data-i18n="sections.scouts.feature3">Técnicas de orientación y pionerismo</li>
+          </ul>
+          <a class="btn primary section-inscription" href="signup.html#formulario" data-section="scouts" data-i18n="sections.register">Inscribe a tu hijo/a</a>
+        </div>
+
+        <div class="section-card escultas">
+          <div class="section-header">
+            <span class="section-icon">🏔️</span>
+            <h3 data-i18n="sections.explorers.title">Escultas</h3>
+            <span class="age-badge" data-i18n="sections.explorers.age">14-17 años</span>
+          </div>
+          <p data-i18n="sections.explorers.desc">Proyectos de servicio comunitario. Desarrollo del espíritu crítico y compromiso social.</p>
+          <ul class="section-features">
+            <li data-i18n="sections.explorers.feature1">Empresas y proyectos</li>
+            <li data-i18n="sections.explorers.feature2">Servicio a la comunidad</li>
+            <li data-i18n="sections.explorers.feature3">Grandes rutas y expediciones</li>
+          </ul>
+          <a class="btn primary section-inscription" href="signup.html#formulario" data-section="escultas" data-i18n="sections.register">Inscribe a tu hijo/a</a>
+        </div>
+
+        <div class="section-card rovers">
+          <div class="section-header">
+            <span class="section-icon">🎒</span>
+            <h3 data-i18n="sections.rovers.title">Rovers</h3>
+            <span class="age-badge" data-i18n="sections.rovers.age">17-21 años</span>
+          </div>
+          <p data-i18n="sections.rovers.desc">Compromiso personal y social. Preparación para la vida adulta con responsabilidad y servicio.</p>
+          <ul class="section-features">
+            <li data-i18n="sections.rovers.feature1">Proyectos de servicio</li>
+            <li data-i18n="sections.rovers.feature2">Rutas internacionales</li>
+            <li data-i18n="sections.rovers.feature3">Formación de monitores</li>
+          </ul>
+          <a class="btn primary section-inscription" href="signup.html#formulario" data-section="rovers" data-i18n="sections.register">Inscribe a tu hijo/a</a>
+        </div>
+      </div>
     </div>
-    <div class="card">
-      <h3>Sobre ASDE / ASDE Balears</h3>
-      <p>ASDE promueve educación no formal y proyectos con impacto social y ambiental en las Illes Balears.</p>
-      <div class="asde-likes">
-        <img src="assets/badge.svg" alt="" width="48" height="48" aria-hidden="true">
-        <small class="note">Elementos visuales inspirados en recursos públicos de ASDE.</small>
+  </section>
+  
+  <!-- Activities Preview -->
+  <section class="activities-preview">
+    <div class="container">
+      <div class="section-header">
+        <h2 data-i18n="homeActivities.title">Nuestras Actividades</h2>
+        <div class="section-divider"><span></span></div>
+      </div>
+      <div class="activities-grid">
+        <div class="activity-card">
+          <div class="activity-image">
+            <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Acampadas" loading="lazy">
+          </div>
+          <div class="activity-content">
+            <h3 data-i18n="homeActivities.card1Title">Acampadas</h3>
+            <p data-i18n="homeActivities.card1Desc">Cada trimestre realizamos acampadas donde ponemos en práctica técnicas scout y convivimos en la naturaleza.</p>
+          </div>
+        </div>
+        <div class="activity-card">
+          <div class="activity-image">
+            <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Campamentos de verano" loading="lazy">
+          </div>
+          <div class="activity-content">
+            <h3 data-i18n="homeActivities.card2Title">Campamentos de Verano</h3>
+            <p data-i18n="homeActivities.card2Desc">15 días de aventura, aprendizaje y diversión en entornos naturales privilegiados.</p>
+          </div>
+        </div>
+        <div class="activity-card">
+          <div class="activity-image">
+            <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Servicio comunitario" loading="lazy">
+          </div>
+          <div class="activity-content">
+            <h3 data-i18n="homeActivities.card3Title">Servicio Comunitario</h3>
+            <p data-i18n="homeActivities.card3Desc">Proyectos solidarios y actividades de voluntariado para mejorar nuestra comunidad.</p>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="activities.html" class="btn primary" data-i18n="homeActivities.cta">Ver Todas las Actividades</a>
       </div>
     </div>
   </section>
 
-  <section class="container highlights" aria-labelledby="highlights-title">
-    <h2 id="highlights-title">Actividades destacadas</h2>
-    <div class="grid">
-      <article class="card">
-        <img src="assets/photo-1.svg" alt="Campamento" class="card-photo">
-        <h4>Campamentos y convivencia</h4>
-        <p>Acampadas y campamentos de verano para convivencia y aprendizaje en la naturaleza.</p>
-      </article>
-      <article class="card">
-        <img src="assets/photo-2.svg" alt="Senderismo" class="card-photo">
-        <h4>Senderismo y orientación</h4>
-        <p>Rutas adaptadas por edad, técnicas de orientación y observación natural.</p>
-      </article>
+  <!-- Volunteer Section -->
+  <section id="voluntariado" class="volunteer-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 data-i18n="volunteer.title">Voluntariado</h2>
+        <div class="section-divider"><span></span></div>
+        <p class="section-intro" data-i18n="volunteer.subtitle">¿Te gustaría ser scouter o colaborar con el grupo? Súmate como persona voluntaria y ayuda a educar en valores.</p>
+      </div>
+      <div class="cta-buttons">
+        <a href="mailto:myotragus684@gmail.com?subject=Voluntariado%20Myotragus" class="btn primary" data-i18n="volunteer.cta">Quiero ser voluntario/a</a>
+      </div>
     </div>
   </section>
 
-  <section class="container teachings-preview" aria-labelledby="teachings-title">
-    <h2 id="teachings-title">Qué enseñamos</h2>
-    <p>Formación progresiva y holística: competencias prácticas, habilidades sociales y ciudadanía activa.</p>
-    <p><a class="btn primary" href="teachings.html">Más sobre enseñanzas</a></p>
-  </section>
+  <!-- Partnerships -->
+  
 
-  <section id="contact" class="container contact" aria-labelledby="contact-title">
-    <h2 id="contact-title">Contacto</h2>
-    <form id="contactForm" class="contact-form" action="/submit" method="POST">
-        <div class="form-group">
-            <label for="name">Nombre:</label>
-            <input type="text" id="name" name="name" required>
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2 data-i18n="homeCta.title">¿Quieres Formar Parte?</h2>
+        <p data-i18n="homeCta.desc">Únete a nuestra gran familia scout y vive una experiencia educativa única</p>
+        <div class="cta-actions">
+          <a href="signup.html" class="btn primary large" data-i18n="homeCta.primary">Ir a inscripciones</a>
+          <a href="https://www.instagram.com/gruposcoutmyotragus/" target="_blank" rel="noopener" class="btn outline large" data-i18n="homeCta.secondary">Síguenos en Instagram</a>
         </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="message">Mensaje:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-        </div>
-        <button type="submit" class="btn primary">Enviar mensaje</button>
-    </form>
-    
-    <!-- Información de contacto existente -->
-    <ul class="contact-list">
-      <li>Email: <a href="mailto:info@myotragus-scout.es">info@myotragus-scout.es</a></li>
-      <li>Teléfono: <a href="tel:+34600000000">+34 600 000 000</a></li>
-      <li>Redes: <a href="#" aria-label="Perfil de redes sociales">@MyotragusScout</a></li>
-  <li><a href="forum.html">Foro</a></li>
-    </ul>
+      </div>
+    </div>
   </section>
 </main>
 
 <footer class="site-footer" role="contentinfo">
-    <div class="container footer-inner">
-        <div class="footer-grid">
-            <div class="footer-section">
-                <h4>Enlaces rápidos</h4>
-                <ul>
-                    <li><a href="privacy.html">Política de privacidad</a></li>
-                    <li><a href="sitemap.html">Mapa del sitio</a></li>
-                    <li><a href="cookie-policy.html">Política de cookies</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Redes sociales</h4>
-                <div class="social-links">
-                    <a href="#" aria-label="Facebook">FB</a>
-                    <a href="#" aria-label="Instagram">IG</a>
-                    <a href="#" aria-label="Twitter">TW</a>
-                </div>
-            </div>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <img src="assets/mytogagus.jpg" alt="Myotragus" class="footer-logo" width="120">
+        <p>Grupo Scout Myotragus 684</p>
+        <p>Educando en valores desde 1984</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/gruposcoutmyotragus/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/gruposcoutmyotragus684" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; <span id="currentYear"></span> Grupo Scout Myotragus — ASDE Balears.</p>
-            <small>Colaborador de ASDE España</small>
-        </div>
+      </div>
+      
+      <div id="contacto" class="footer-contact">
+        <h3>Contacto</h3>
+        <p><strong>Email:</strong> <a href="mailto:myotragus684@gmail.com">myotragus684@gmail.com</a></p>
+        <p><strong>Teléfono:</strong> <a href="tel:+34666000000">666 000 000</a></p>
+        <p><strong>Local:</strong> Palma de Mallorca</p>
+        <p><strong>Reuniones:</strong> Sábados de 17:00 a 19:30h</p>
+      </div>
+      
+      <div class="footer-links">
+        <h3>Enlaces</h3>
+        <ul>
+          <li><a href="https://scout.es/" target="_blank" rel="noopener">ASDE-Scouts de España</a></li>
+          <li><a href="https://baleares.scout.es/" target="_blank" rel="noopener">ASDE Baleares</a></li>
+          <li><a href="https://www.scout.org/" target="_blank" rel="noopener">WOSM</a></li>
+          <li><a href="forum.html">Foro del Grupo</a></li>
+          <li><a href="#quienes-somos">Sobre Nosotros</a></li>
+        </ul>
+      </div>
     </div>
-</footer>
-
-<!-- Modal (visible al cargar) -->
-<div id="welcomeModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle" aria-describedby="welcomeDesc">
-  <div class="modal-dialog" role="document">
-    <h3 id="welcomeTitle">Bienvenido/a</h3>
-    <p id="welcomeDesc">¿Eres ya scout o quieres conocernos?</p>
-    <div class="modal-actions">
-      <button id="btnScout" class="btn primary">Lo soy!</button>
-      <button id="btnMeet" class="btn outline">¡Conócenos!</button>
+    
+    <div class="footer-bottom">
+      <p>&copy; <span id="currentYear">2023</span> Grupo Scout Myotragus 684 - ASDE Baleares</p>
     </div>
   </div>
-</div>
+</footer>
 
 <script src="scripts/main.js" defer></script>
-<script>
-  // Service Worker registration
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js')
-        .then(registration => {
-          console.log('Service Worker registrado con éxito:', registration);
-        })
-        .catch(error => {
-          console.log('Error al registrar el Service Worker:', error);
-        });
-    });
-  }
-</script>
+<script src="scripts/i18n.js" defer></script>
 </body>
 </html>

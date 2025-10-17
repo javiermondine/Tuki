@@ -1,20 +1,33 @@
 {
-    "name": "Grupo Scout Myotragus",
-    "short_name": "Myotragus",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#4CAF50",
-    "icons": [
-        {
-            "src": "assets/icon-192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "assets/icon-512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ]
+  "name": "Grupo Scout Myotragus",
+  "short_name": "Myotragus",
+  "description": "Sitio web oficial del Grupo Scout Myotragus 684 de Palma de Mallorca",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#f6f2ff",
+  "theme_color": "#5f3dc4",
+  "icons": [
+    {
+      "src": "/assets/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "prefer_related_applications": false,
+  "lang": "es",
+  "dir": "ltr",
+  "orientation": "portrait-primary",
+  "categories": ["education", "social", "lifestyle"],
+  "screenshots": [
+    {
+      "src": "/assets/screenshot1.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg"
+    }
+  ]
 }

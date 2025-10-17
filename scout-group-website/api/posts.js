@@ -39,9 +39,18 @@ export default async function handler(req, res) {
             const client = await connectToDatabase();
             const db = client.db(MONGODB_DB);
             
+            const body = req.body || {};
+            const name = (body.name || 'Anónimo').toString().slice(0, 60);
+            const category = (body.category || 'general').toString().slice(0, 40);
+            const message = (body.message || '').toString().slice(0, 1000);
+            if (!message.trim()) {
+                return res.status(400).json({ error: 'Mensaje requerido' });
+            }
+
             const post = {
-                name: req.body.name,
-                message: req.body.message,
+                name,
+                category,
+                message,
                 createdAt: new Date(),
             };
             
