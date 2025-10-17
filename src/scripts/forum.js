@@ -18,6 +18,7 @@
     messageInput: document.getElementById('message'),
     charCount: document.getElementById('charCount'),
     searchInput: document.getElementById('searchPosts'),
+    categoryFilter: document.getElementById('categoryFilter'),
     sortSelect: document.getElementById('sortBy'),
     modal: document.getElementById('confirmModal'),
     confirmMessage: document.getElementById('confirmMessage'),
@@ -50,6 +51,7 @@
   let posts = loadPosts();
   const state = {
     search: '',
+    categoryFilter: 'all',
     sort: (dom.sortSelect && dom.sortSelect.value) || 'newest'
   };
 
@@ -120,10 +122,18 @@
   // Render
   function getFilteredPosts() {
     const q = state.search.trim().toLowerCase();
+    const category = state.categoryFilter || 'all';
+    
     const filtered = posts.filter((p) => {
-      if (!q) return true;
-      return `${p.name} ${p.message} ${p.category}`.toLowerCase().includes(q);
+      // Filtro por búsqueda
+      const matchesSearch = !q || `${p.name} ${p.message} ${p.category}`.toLowerCase().includes(q);
+      
+      // Filtro por categoría
+      const matchesCategory = category === 'all' || p.category.toLowerCase() === category.toLowerCase();
+      
+      return matchesSearch && matchesCategory;
     });
+    
     const sorted = filtered.sort((a, b) => {
       const da = new Date(a.createdAt).getTime();
       const db = new Date(b.createdAt).getTime();
@@ -225,9 +235,27 @@
     }
   }
 
-  function removePost(id) {
-    savePosts(posts.filter((p) => p.id !== id));
-    renderPosts();
+  async function removePost(id) {
+    try {
+      const res = await fetch(`/api/delete-post?id=${encodeURIComponent(id)}`, {
+        method: 'DELETE'
+      });
+      if (!res.ok) throw new Error('Network');
+      const result = await res.json();
+      console.log('Post eliminado:', result);
+      
+      // Eliminar del almacenamiento local
+      savePosts(posts.filter((p) => p.id !== id));
+      renderPosts();
+      
+      // Refrescar la lista del servidor
+      fetchServerPosts();
+    } catch (error) {
+      console.error('Error al eliminar post:', error);
+      // Fallback: eliminar solo localmente
+      savePosts(posts.filter((p) => p.id !== id));
+      renderPosts();
+    }
   }
 
   function clearAllPosts() {
@@ -315,6 +343,7 @@
 
     // Filtros/sort
     dom.searchInput && dom.searchInput.addEventListener('input', (ev) => { state.search = ev.target.value; renderPosts(); });
+    dom.categoryFilter && dom.categoryFilter.addEventListener('change', (ev) => { state.categoryFilter = ev.target.value; renderPosts(); });
     dom.sortSelect && dom.sortSelect.addEventListener('change', (ev) => { state.sort = ev.target.value; renderPosts(); });
 
     // Acciones

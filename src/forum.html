@@ -74,6 +74,17 @@
           <input type="search" id="searchPosts" data-i18n-placeholder="forumUi.searchPlaceholder" placeholder="Buscar en mensajes..." aria-label="Buscar mensajes">
         </div>
         <div class="sort-options">
+          <label for="categoryFilter" data-i18n="forumUi.filterLabel">Categoría:</label>
+          <select id="categoryFilter" aria-label="Filtrar por categoría">
+            <option value="all" data-i18n="forumUi.filterAll">Todas</option>
+            <option value="general" data-i18n="forumUi.filterGeneral">General</option>
+            <option value="actividades" data-i18n="forumUi.filterActivities">Actividades</option>
+            <option value="avisos" data-i18n="forumUi.filterAnnouncements">Avisos</option>
+            <option value="consultas" data-i18n="forumUi.filterQuestions">Consultas</option>
+            <option value="propuestas" data-i18n="forumUi.filterProposals">Propuestas</option>
+          </select>
+        </div>
+        <div class="sort-options">
           <label for="sortBy" data-i18n="forumUi.sortLabel">Ordenar por:</label>
           <select id="sortBy" aria-label="Ordenar mensajes por">
             <option value="newest" data-i18n="forumUi.sortNewest">Más recientes</option>

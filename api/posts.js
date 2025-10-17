@@ -33,6 +33,7 @@ export default async function handler(req, res) {
                         .limit(100);
                     if (error) throw error;
                     posts = (data || []).map(p => ({
+                        id: p.id,
                         name: p.name,
                         category: p.category,
                         message: p.message,
@@ -47,12 +48,19 @@ export default async function handler(req, res) {
             if (!posts || posts.length === 0) {
                 const client = await connectToDatabase();
                 const db = client.db(MONGODB_DB);
-                posts = await db
+                const mongoPosts = await db
                     .collection('posts')
                     .find({})
                     .sort({ createdAt: -1 })
                     .limit(100)
                     .toArray();
+                posts = mongoPosts.map(p => ({
+                    id: p._id.toString(),
+                    name: p.name,
+                    category: p.category,
+                    message: p.message,
+                    createdAt: p.createdAt,
+                }));
             }
 
             return res.status(200).json(posts);
@@ -84,6 +92,7 @@ export default async function handler(req, res) {
                         .single();
                     if (error) throw error;
                     const post = {
+                        id: data.id,
                         name: data.name,
                         category: data.category,
                         message: data.message,
@@ -99,8 +108,14 @@ export default async function handler(req, res) {
             const client = await connectToDatabase();
             const db = client.db(MONGODB_DB);
             const post = { name, category, message, createdAt: new Date() };
-            await db.collection('posts').insertOne(post);
-            return res.status(201).json(post);
+            const result = await db.collection('posts').insertOne(post);
+            return res.status(201).json({
+                id: result.insertedId.toString(),
+                name,
+                category,
+                message,
+                createdAt: post.createdAt,
+            });
         } catch (error) {
             console.error('Error POST /api/posts:', error);
             return res.status(500).json({ error: 'Error al crear post' });
