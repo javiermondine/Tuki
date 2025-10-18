@@ -1,0 +1,366 @@
+/* ============================================
+   ESTILOS GENERALES - Aventura Scout
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 50%, #6b9c3f 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #2d3e1f;
+    padding: 20px;
+}
+
+/* ============================================
+   CONTENEDOR PRINCIPAL
+   ============================================ */
+
+#game-container {
+    background: linear-gradient(to bottom, #e8f4dc, #d4e8c8);
+    border-radius: 20px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.4);
+    padding: 30px;
+    max-width: 900px;
+    width: 100%;
+    position: relative;
+}
+
+h1 {
+    text-align: center;
+    color: #2d5016;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* ============================================
+   PANEL DE INFORMACIÓN
+   ============================================ */
+
+#game-info {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-item {
+    text-align: center;
+    padding: 10px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.info-item:hover {
+    transform: translateY(-2px);
+}
+
+.info-label {
+    display: block;
+    font-weight: bold;
+    color: #4a7c2c;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+#energy-display,
+#points-display,
+#badges-display,
+#mission-display {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2d5016;
+}
+
+/* ============================================
+   CANVAS DEL JUEGO
+   ============================================ */
+
+#gameCanvas {
+    display: block;
+    margin: 0 auto;
+    background: linear-gradient(to bottom, #87ceeb 0%, #90ee90 100%);
+    border: 5px solid #4a7c2c;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    cursor: crosshair;
+}
+
+/* ============================================
+   PANEL DE INSIGNIAS
+   ============================================ */
+
+#badges-panel {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+#badges-panel h3 {
+    color: #2d5016;
+    margin-bottom: 12px;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+#badges-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.badge {
+    padding: 12px;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 0.85em;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.badge.locked {
+    background: #cccccc;
+    color: #666666;
+    opacity: 0.6;
+}
+
+.badge.unlocked {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #2d5016;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
+    animation: badgeUnlock 0.5s ease;
+}
+
+@keyframes badgeUnlock {
+    0% {
+        transform: scale(0.5) rotate(-180deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2) rotate(10deg);
+    }
+    100% {
+        transform: scale(1.05) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   PANTALLAS (INICIO, VICTORIA, PAUSA)
+   ============================================ */
+
+.screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.98);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    min-width: 400px;
+    max-width: 600px;
+    display: none;
+    z-index: 1000;
+}
+
+.screen.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.screen h2 {
+    color: #2d5016;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.screen p {
+    color: #4a7c2c;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.instructions {
+    background: #f0f8e8;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.instructions h3 {
+    color: #2d5016;
+    margin-bottom: 10px;
+}
+
+.instructions ul {
+    list-style: none;
+    padding: 0;
+}
+
+.instructions li {
+    padding: 8px 0;
+    color: #4a7c2c;
+    font-size: 1em;
+    border-bottom: 1px dashed #c8e6b0;
+}
+
+.instructions li:last-child {
+    border-bottom: none;
+}
+
+/* ============================================
+   BOTONES
+   ============================================ */
+
+.game-button {
+    background: linear-gradient(135deg, #4a7c2c, #6b9c3f);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.game-button:hover {
+    background: linear-gradient(135deg, #6b9c3f, #4a7c2c);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.game-button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   CONTROLES DE AUDIO Y GUARDADO
+   ============================================ */
+
+#audio-controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.control-button {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #4a7c2c;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.control-button:hover {
+    background: white;
+    transform: scale(1.1);
+}
+
+.control-button:active {
+    transform: scale(0.95);
+}
+
+/* ============================================
+   ESTADÍSTICAS FINALES
+   ============================================ */
+
+#final-stats {
+    background: #f0f8e8;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    font-size: 1.1em;
+}
+
+#final-stats p {
+    margin: 10px 0;
+    color: #2d5016;
+    font-weight: bold;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 850px) {
+    #gameCanvas {
+        width: 100%;
+        height: auto;
+    }
+
+    #game-info {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #badges-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .screen {
+        min-width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+}
+
+@media (max-width: 500px) {
+    #badges-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .game-button {
+        padding: 12px 30px;
+        font-size: 1em;
+    }
+}
