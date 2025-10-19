@@ -134,6 +134,13 @@
             border-radius: 20px;
             font-weight: 600;
             margin: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .platform-badge:hover {
+            background: #d4e7c5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(45, 80, 22, 0.2);
         }
 
         .video-container {
@@ -213,6 +220,17 @@
         <h1>📱 Instala Nuestra App</h1>
         <p>Disfruta de la experiencia completa del Grupo Scout Myotragus 684 en tu móvil</p>
         
+        <div style="margin-top: 2rem;">
+            <button class="platform-badge" onclick="installPWA()" style="cursor: pointer; border: none; font-family: inherit;">
+                <i class="fab fa-android"></i> Instalar en Android
+            </button>
+            <button class="platform-badge" onclick="installPWA()" style="cursor: pointer; border: none; font-family: inherit;">
+                <i class="fab fa-apple"></i> Instalar en iOS
+            </button>
+            <button class="platform-badge" onclick="installPWA()" style="cursor: pointer; border: none; font-family: inherit;">
+                <i class="fas fa-desktop"></i> Instalar en Escritorio
+            </button>
+        </div>
 
     </div>
 
@@ -342,6 +360,23 @@
             </div>
         </div>
 
+        <!-- Descarga APK -->
+        <div class="install-section">
+            <h2><i class="fas fa-download"></i> Descarga como APK (Android)</h2>
+            <p style="margin-bottom: 1.5rem;">Si prefieres descargar un archivo APK tradicional para instalarlo manualmente:</p>
+            
+            <div class="button-container">
+                <button onclick="generateAPK()" class="install-button">
+                    <i class="fas fa-file-download"></i>
+                    Generar APK
+                </button>
+            </div>
+
+            <p style="color: #5b4c71; margin-top: 1rem; text-align: center; font-size: 0.9rem;">
+                <strong>Nota:</strong> Esto te llevará a PWA Builder, una herramienta gratuita de Microsoft para convertir PWAs en APKs.
+            </p>
+        </div>
+
         <!-- Solución de problemas -->
         <div class="install-section">
             <h2><i class="fas fa-question-circle"></i> Solución de Problemas</h2>
@@ -385,6 +420,67 @@
         </div>
     </footer>
 
+    <script>
+        // Función para instalar la PWA
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        async function installPWA() {
+            if (deferredPrompt) {
+                // Mostrar el prompt nativo
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                
+                if (outcome === 'accepted') {
+                    console.log('PWA instalada exitosamente');
+                } else {
+                    console.log('Usuario rechazó la instalación');
+                }
+                
+                deferredPrompt = null;
+            } else {
+                // Mostrar instrucciones según el dispositivo/navegador
+                const userAgent = navigator.userAgent.toLowerCase();
+                let message = '';
+                
+                if (/iphone|ipad|ipod/.test(userAgent)) {
+                    message = '📱 Para instalar en iOS:\n\n' +
+                             '1. Toca el botón "Compartir" (cuadrado con flecha)\n' +
+                             '2. Desplázate y selecciona "Añadir a pantalla de inicio"\n' +
+                             '3. Confirma tocando "Añadir"';
+                } else if (/android/.test(userAgent)) {
+                    message = '📱 Para instalar en Android:\n\n' +
+                             '1. Toca el menú (⋮) en la esquina superior derecha\n' +
+                             '2. Selecciona "Instalar aplicación" o "Añadir a pantalla de inicio"\n' +
+                             '3. Confirma la instalación';
+                } else {
+                    message = '💻 Para instalar en tu computadora:\n\n' +
+                             '1. Busca el icono de instalación (+) en la barra de direcciones\n' +
+                             '2. Haz clic en "Instalar"\n' +
+                             '3. La app se añadirá a tu sistema';
+                }
+                
+                alert(message);
+                
+                // Scroll suave a las instrucciones detalladas
+                document.querySelector('.install-container').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Función para generar APK
+        function generateAPK() {
+            // Redirigir a PWA Builder con la URL de la app
+            const appUrl = encodeURIComponent(window.location.origin);
+            window.open(`https://www.pwabuilder.com/?site=${appUrl}`, '_blank');
+        }
+    </script>
     <script src="scripts/pwa-installer.js" defer></script>
 </body>
 </html>
