@@ -2,7 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Aventura Scout - Juego Educativo | Grupo Scout Myotragus 684</title>
     <meta name="description" content="Juega a Aventura Scout, un juego educativo sobre escultismo y naturaleza del Grupo Scout Myotragus 684.">
     <link rel="stylesheet" href="styles/main.css">
@@ -16,6 +19,7 @@
         body {
             background: linear-gradient(135deg, #5f3dc4 0%, #7c5cff 100%);
             min-height: 100vh;
+            overflow-x: hidden;
         }
         
         .game-wrapper {
@@ -49,6 +53,41 @@
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             padding: 2rem;
+            position: relative;
+        }
+
+        /* Mejorar visualización del canvas */
+        #gameCanvas {
+            display: block;
+            margin: 0 auto;
+            touch-action: none;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 850px) {
+            .game-wrapper {
+                padding: 1rem;
+            }
+
+            #game-container {
+                padding: 1rem;
+            }
+
+            .back-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .game-wrapper {
+                padding: 0.5rem;
+            }
+
+            #game-container {
+                padding: 0.75rem;
+                border-radius: 15px;
+            }
         }
     </style>
 </head>
@@ -148,6 +187,21 @@
             <button id="save-button" class="control-button" title="Guardar partida">💾</button>
             <button id="load-button" class="control-button" title="Cargar partida">📂</button>
         </div>
+
+        <!-- Controles móviles táctiles -->
+        <div id="mobile-controls">
+            <div class="joystick-container">
+                <div class="joystick-base">
+                    <div class="joystick-stick" id="joystick"></div>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button class="action-button" data-action="space" title="Acampar/Interactuar">⛺</button>
+                <button class="action-button" data-action="e" title="Explorar">🔍</button>
+                <button class="action-button" data-action="r" title="Recolectar">🌿</button>
+                <button class="action-button" data-action="t" title="Hablar">💬</button>
+            </div>
+        </div>
     </div>
 
     <!-- Scripts del juego (en orden de dependencias) -->
@@ -157,5 +211,6 @@
     <script src="game/audio.js"></script>
     <script src="game/save.js"></script>
     <script src="game/game.js"></script>
+    <script src="game/mobile-controls.js"></script>
 </body>
 </html>
