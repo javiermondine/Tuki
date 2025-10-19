@@ -14,6 +14,8 @@ const ctx = canvas.getContext('2d');
 let gameState = 'menu'; // Estados: 'menu', 'playing', 'paused', 'victory', 'dialog'
 let animationId = null;
 let soundEnabled = true;
+let missionsVisible = true; // Variable para mostrar/ocultar panel de misiones
+let currentZone = 'forest'; // Zona actual del juego
 
 // ============================================
 // SISTEMAS DEL JUEGO
@@ -66,7 +68,23 @@ class Scout {
         const newX = this.x + dx * this.speed;
         const newY = this.y + dy * this.speed;
 
-        // Verificar límites del canvas
+        // Verificar transición de zona en los bordes de la calle
+        const roadCenter = canvas.width / 2;
+        const roadWidth = 120;
+        const isOnRoad = Math.abs(this.x - roadCenter) < roadWidth / 2;
+
+        // Transición arriba (borde superior en la calle)
+        if (newY < 0 && isOnRoad) {
+            changeZone('north');
+            return;
+        }
+        // Transición abajo (borde inferior en la calle)
+        if (newY > canvas.height - this.height && isOnRoad) {
+            changeZone('south');
+            return;
+        }
+
+        // Verificar límites del canvas normalmente
         if (newX >= 0 && newX <= canvas.width - this.width) {
             this.x = newX;
         }
@@ -682,6 +700,10 @@ document.addEventListener('keydown', (e) => {
         if (e.key === 'i' || e.key === 'I') {
             inventory.toggle();
         }
+        if (e.key === 'm' || e.key === 'M') {
+            missionsVisible = !missionsVisible;
+            showMessage(missionsVisible ? '📋 Panel de misiones visible' : '📋 Panel de misiones oculto');
+        }
         if (e.key === 't' || e.key === 'T') {
             // Interactuar con NPCs
             npcs.forEach(npc => {
@@ -765,11 +787,33 @@ function gameLoop() {
         // Dibujar reloj
         dayNightCycle.drawClock(ctx, 10, 10);
 
+        // Dibujar nombre de zona actual
+        ctx.save();
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.strokeStyle = '#2d5016';
+        ctx.lineWidth = 3;
+        ctx.font = 'bold 20px Arial';
+        const zoneIcons = {
+            'bosque': '🌲',
+            'montañas': '⛰️',
+            'pueblo': '🏘️',
+            'lago': '🏞️',
+            'pradera': '🌾',
+            'forest': '🌲'
+        };
+        const zoneIcon = zoneIcons[currentZone] || '🌲';
+        const zoneText = `${zoneIcon} ${currentZone.charAt(0).toUpperCase() + currentZone.slice(1)}`;
+        ctx.strokeText(zoneText, canvas.width / 2 - 60, 30);
+        ctx.fillText(zoneText, canvas.width / 2 - 60, 30);
+        ctx.restore();
+
         // Dibujar barra de XP
         levelSystem.draw(ctx, 10, 60, 250);
 
-        // Dibujar panel de misiones
-        missionSystem.draw(ctx, canvas.width - 300, 10);
+        // Dibujar panel de misiones (solo si está visible)
+        if (missionsVisible) {
+            missionSystem.draw(ctx, canvas.width - 300, 10);
+        }
 
         // Dibujar inventario (barra rápida)
         inventory.draw(ctx, canvas.width, canvas.height);
@@ -803,6 +847,47 @@ function gameLoop() {
     }
 
     animationId = requestAnimationFrame(gameLoop);
+}
+
+// ============================================
+// FUNCIÓN DE CAMBIO DE ZONA
+// ============================================
+function changeZone(direction) {
+    // Nombres de zonas según dirección
+    const zones = {
+        'north': ['Montañas', '⛰️'],
+        'south': ['Pueblo', '🏘️'],
+        'east': ['Lago', '🏞️'],
+        'west': ['Pradera', '🌾']
+    };
+
+    const [zoneName, zoneIcon] = zones[direction] || ['Bosque', '🌲'];
+    currentZone = zoneName.toLowerCase();
+
+    // Mostrar mensaje de transición
+    showMessage(`${zoneIcon} Entrando a: ${zoneName}`);
+    playSound('explore');
+
+    // Reposicionar el scout en el lado opuesto
+    if (direction === 'north') {
+        scout.y = canvas.height - scout.height - 10;
+    } else if (direction === 'south') {
+        scout.y = 10;
+    } else if (direction === 'east') {
+        scout.x = 10;
+    } else if (direction === 'west') {
+        scout.x = canvas.width - scout.width - 10;
+    }
+
+    // Regenerar contenido del mundo
+    generateItems();
+    
+    // Añadir XP por explorar nueva zona
+    levelSystem.addXP(50);
+    scout.points += 25;
+    
+    // Actualizar misiones
+    missionSystem.updateProgress('explore', 1);
 }
 
 // ============================================
