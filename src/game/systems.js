@@ -326,7 +326,7 @@ class LevelSystem {
 class DayNightCycle {
     constructor() {
         this.timeOfDay = 360; // 0-720 (0=medianoche, 360=mediodía, 720=medianoche)
-        this.speed = 0.5; // Velocidad del ciclo
+        this.speed = 0.00667; // Velocidad del ciclo (~30 minutos para ciclo completo)
         this.paused = false;
     }
 

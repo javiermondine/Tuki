@@ -61,17 +61,26 @@ class DialogSystem {
         ctx.save();
 
         // Fondo oscuro
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
         ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-        // Ventana de diálogo
-        const boxWidth = canvasWidth - 100;
+        // Ventana de diálogo - centrada y responsive
+        const boxWidth = Math.min(canvasWidth - 80, 650);
         const boxHeight = this.choices.length > 0 ? 250 : 150;
-        const boxX = 50;
-        const boxY = canvasHeight - boxHeight - 20;
+        const boxX = (canvasWidth - boxWidth) / 2; // Centrado
+        const boxY = canvasHeight - boxHeight - 30;
 
+        // Fondo de la ventana con sombra
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+        ctx.shadowBlur = 15;
+        ctx.shadowOffsetY = 5;
+        
         ctx.fillStyle = 'rgba(255, 255, 255, 0.98)';
         ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
+        
+        ctx.shadowBlur = 0;
+        ctx.shadowOffsetY = 0;
+        
         ctx.strokeStyle = '#4a7c2c';
         ctx.lineWidth = 4;
         ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
@@ -79,41 +88,54 @@ class DialogSystem {
         // Nombre del personaje
         ctx.fillStyle = '#2d5016';
         ctx.font = 'bold 20px Arial';
-        ctx.fillText(dialog.speaker, boxX + 20, boxY + 30);
+        ctx.fillText(dialog.speaker, boxX + 80, boxY + 30);
 
         // Avatar
         ctx.font = '40px Arial';
-        ctx.fillText(dialog.avatar || '👤', boxX + 20, boxY + 80);
+        ctx.textAlign = 'center';
+        ctx.fillText(dialog.avatar || '👤', boxX + 40, boxY + 70);
+        ctx.textAlign = 'left'; // Resetear alineación
 
         // Texto del diálogo
         ctx.fillStyle = '#333';
         ctx.font = '16px Arial';
-        this.wrapText(ctx, line, boxX + 90, boxY + 60, boxWidth - 110, 22);
+        const textX = boxX + 80;
+        const textY = boxY + 60;
+        const textWidth = boxWidth - 100;
+        this.wrapText(ctx, line, textX, textY, textWidth, 22);
 
         // Indicador de continuar o mostrar opciones
         if (this.choices.length === 0) {
             ctx.fillStyle = '#4a7c2c';
             ctx.font = 'bold 14px Arial';
-            ctx.fillText('Presiona ESPACIO para continuar...', boxX + 20, boxY + boxHeight - 20);
+            const continueText = 'Presiona ESPACIO para continuar...';
+            const textMetrics = ctx.measureText(continueText);
+            const continueX = boxX + (boxWidth - textMetrics.width) / 2; // Centrado
+            ctx.fillText(continueText, continueX, boxY + boxHeight - 20);
         } else {
             // Dibujar opciones
             this.choices.forEach((choice, index) => {
                 const choiceY = boxY + 110 + index * 40;
+                const choiceX = boxX + 80;
+                const choiceWidth = boxWidth - 100;
                 
                 ctx.fillStyle = 'rgba(74, 124, 44, 0.1)';
-                ctx.fillRect(boxX + 90, choiceY - 25, boxWidth - 110, 35);
+                ctx.fillRect(choiceX, choiceY - 25, choiceWidth, 35);
                 ctx.strokeStyle = '#4a7c2c';
                 ctx.lineWidth = 2;
-                ctx.strokeRect(boxX + 90, choiceY - 25, boxWidth - 110, 35);
+                ctx.strokeRect(choiceX, choiceY - 25, choiceWidth, 35);
 
                 ctx.fillStyle = '#2d5016';
                 ctx.font = 'bold 14px Arial';
-                ctx.fillText(`${index + 1}. ${choice.text}`, boxX + 100, choiceY - 5);
+                ctx.fillText(`${index + 1}. ${choice.text}`, choiceX + 10, choiceY - 5);
             });
 
             ctx.fillStyle = '#666';
             ctx.font = '12px Arial';
-            ctx.fillText('Presiona 1, 2 o 3 para elegir', boxX + 20, boxY + boxHeight - 20);
+            const instructionText = 'Presiona 1, 2 o 3 para elegir';
+            const instrMetrics = ctx.measureText(instructionText);
+            const instrX = boxX + (boxWidth - instrMetrics.width) / 2; // Centrado
+            ctx.fillText(instructionText, instrX, boxY + boxHeight - 20);
         }
 
         ctx.restore();

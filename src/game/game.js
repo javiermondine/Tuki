@@ -338,6 +338,15 @@ let scout = new Scout(canvas.width / 2 - 20, canvas.height - 100);
 window.scout = scout; // Referencia global
 let items = [];
 let npcs = [];
+
+// Posiciones fijas de árboles (para evitar que se muevan)
+const treePositions = [];
+for (let i = 0; i < 8; i++) {
+    treePositions.push({
+        x: i * 110 + 50,
+        y: 100 + (i % 3) * 20 // Patrón fijo en lugar de random
+    });
+}
 let keys = {};
 let messageQueue = [];
 let messageTimer = 0;
@@ -452,10 +461,9 @@ function drawBackground() {
     }
 
     // Árboles de fondo
-    for (let i = 0; i < 8; i++) {
-        const x = i * 110 + 50;
-        const y = 100 + Math.random() * 50;
-        drawTree(x, y, 0.8);
+    for (let i = 0; i < treePositions.length; i++) {
+        const tree = treePositions[i];
+        drawTree(tree.x, tree.y, 0.8);
     }
 
     // Pasto

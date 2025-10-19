@@ -1433,20 +1433,40 @@ footer {
     
     .hero {
         min-height: 70vh;
+        padding: 4rem 1.5rem;
+    }
+    
+    .hero-content {
+        padding: 0 1rem;
+    }
+    
+    .hero h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+        line-height: 1.2;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
     }
     
     .hero-actions {
         flex-direction: column;
         align-items: center;
+        gap: 1rem;
     }
     
     .hero-actions .btn {
         width: 100%;
         max-width: 300px;
-    }
-    
-    .hero-stats {
-        gap: 0.5rem;
+        padding: 1rem 1.5rem;
     }
     
     .sections-grid,
