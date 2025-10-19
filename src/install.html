@@ -29,68 +29,33 @@
         }
 
         .install-container {
-            max-width: 1000px;
+            max-width: 600px;
             margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-
-        .install-section {
-            background: white;
-            border-radius: 20px;
             padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .install-section h2 {
+        .platform-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
             color: #5f3dc4;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(95, 61, 196, 0.2);
         }
 
-        .install-section h2 i {
-            font-size: 2rem;
+        .platform-badge:hover {
+            background: #f0ecff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(95, 61, 196, 0.3);
         }
 
-        .install-steps {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .install-step {
-            display: flex;
-            gap: 1.5rem;
-            align-items: flex-start;
-            padding: 1.5rem;
-            background: #f6f2ff;
-            border-radius: 12px;
-            border-left: 4px solid #5f3dc4;
-        }
-
-        .step-number {
-            background: #5f3dc4;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .step-content h3 {
-            color: #2d5016;
-            margin-bottom: 0.5rem;
-        }
-
-        .step-content p {
-            color: #5b4c71;
-            line-height: 1.6;
+        .platform-badge:active {
+            transform: translateY(-1px);
         }
 
         .install-button {
@@ -124,82 +89,18 @@
             margin: 2rem 0;
         }
 
-        .platform-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: #e8f4dc;
-            color: #2d5016;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 600;
-            margin: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .platform-badge:hover {
-            background: #d4e7c5;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(45, 80, 22, 0.2);
-        }
-
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 12px;
-            margin: 1.5rem 0;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .benefit-card {
-            text-align: center;
-            padding: 1.5rem;
-            background: #fbf8ff;
-            border-radius: 12px;
-        }
-
-        .benefit-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .benefit-card h3 {
-            color: #5f3dc4;
-            margin-bottom: 0.5rem;
-        }
-
-        .benefit-card p {
-            color: #5b4c71;
-            font-size: 0.95rem;
-        }
-
         @media (max-width: 768px) {
             .install-hero h1 {
                 font-size: 2rem;
             }
 
             .install-container {
-                padding: 2rem 1rem;
+                padding: 1.5rem 1rem;
             }
 
-            .install-step {
-                flex-direction: column;
+            .platform-badge {
+                font-size: 0.95rem;
+                padding: 0.6rem 1.2rem;
             }
         }
     </style>
@@ -218,195 +119,28 @@
 
     <div class="install-hero">
         <h1>📱 Instala Nuestra App</h1>
-        <p>Disfruta de la experiencia completa del Grupo Scout Myotragus 684 en tu móvil</p>
+        <p>Haz clic en el botón de tu dispositivo para instalar</p>
         
-        <div style="margin-top: 2rem;">
-            <button class="platform-badge" onclick="installPWA()" style="cursor: pointer; border: none; font-family: inherit;">
+        <div style="margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: center;">
+            <button class="platform-badge" onclick="installPWA()" style="cursor: pointer; border: none; font-family: inherit; font-size: 1.1rem; padding: 0.75rem 1.5rem;">
                 <i class="fab fa-android"></i> Instalar en Android
             </button>
-            <button class="platform-badge" onclick="installPWA()" style="cursor: pointer; border: none; font-family: inherit;">
+            <button class="platform-badge" onclick="installPWA()" style="cursor: pointer; border: none; font-family: inherit; font-size: 1.1rem; padding: 0.75rem 1.5rem;">
                 <i class="fab fa-apple"></i> Instalar en iOS
             </button>
-            <button class="platform-badge" onclick="installPWA()" style="cursor: pointer; border: none; font-family: inherit;">
+            <button class="platform-badge" onclick="installPWA()" style="cursor: pointer; border: none; font-family: inherit; font-size: 1.1rem; padding: 0.75rem 1.5rem;">
                 <i class="fas fa-desktop"></i> Instalar en Escritorio
             </button>
         </div>
 
+        <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
+            La instalación es instantánea y no requiere descargas adicionales
+        </p>
     </div>
 
     <div class="install-container">
-        <!-- Beneficios -->
-        <div class="install-section">
-            <h2><i class="fas fa-star"></i> ¿Por qué instalar la app?</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">⚡</div>
-                    <h3>Acceso Rápido</h3>
-                    <p>Icono en tu pantalla de inicio para abrir con un toque</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">📴</div>
-                    <h3>Funciona Offline</h3>
-                    <p>Juega y consulta información sin conexión a internet</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">🔔</div>
-                    <h3>Notificaciones</h3>
-                    <p>Recibe avisos de nuevas actividades y eventos</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">🎮</div>
-                    <h3>Juego Incluido</h3>
-                    <p>Aventura Scout completamente funcional offline</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Instalación Android -->
-        <div class="install-section">
-            <h2><i class="fab fa-android"></i> Instalación en Android</h2>
-            <div class="install-steps">
-                <div class="install-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Abre en Chrome</h3>
-                        <p>Visita esta página usando el navegador Chrome en tu dispositivo Android.</p>
-                    </div>
-                </div>
-                <div class="install-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Busca el botón "Instalar"</h3>
-                        <p>En la barra de direcciones aparecerá un icono de instalación, o usa el menú (⋮) y selecciona "Instalar aplicación".</p>
-                    </div>
-                </div>
-                <div class="install-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Confirma la instalación</h3>
-                        <p>Toca "Instalar" en el diálogo que aparece. La app se añadirá a tu pantalla de inicio.</p>
-                    </div>
-                </div>
-                <div class="install-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>¡Listo para usar!</h3>
-                        <p>Abre la app desde tu pantalla de inicio como cualquier otra aplicación.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Instalación iOS -->
-        <div class="install-section">
-            <h2><i class="fab fa-apple"></i> Instalación en iPhone/iPad</h2>
-            <div class="install-steps">
-                <div class="install-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Abre en Safari</h3>
-                        <p>Esta funcionalidad solo está disponible en Safari (no funciona en Chrome para iOS).</p>
-                    </div>
-                </div>
-                <div class="install-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Toca el botón Compartir</h3>
-                        <p>Busca el icono de compartir (cuadrado con flecha hacia arriba) en la barra inferior.</p>
-                    </div>
-                </div>
-                <div class="install-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Selecciona "Añadir a pantalla de inicio"</h3>
-                        <p>Desplázate hacia abajo en el menú y toca esta opción.</p>
-                    </div>
-                </div>
-                <div class="install-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>Confirma y disfruta</h3>
-                        <p>Personaliza el nombre si quieres y toca "Añadir". ¡Ya está instalada!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Instalación Desktop -->
-        <div class="install-section">
-            <h2><i class="fas fa-desktop"></i> Instalación en Computadora</h2>
-            <div class="install-steps">
-                <div class="install-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Abre en Chrome, Edge o Opera</h3>
-                        <p>Visita la página usando uno de estos navegadores compatibles.</p>
-                    </div>
-                </div>
-                <div class="install-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Busca el icono de instalación</h3>
-                        <p>En la barra de direcciones (derecha) aparecerá un icono de instalación (+) o computadora.</p>
-                    </div>
-                </div>
-                <div class="install-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Haz clic en "Instalar"</h3>
-                        <p>La app se instalará como una aplicación independiente en tu sistema.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Descarga APK -->
-        <div class="install-section">
-            <h2><i class="fas fa-download"></i> Descarga como APK (Android)</h2>
-            <p style="margin-bottom: 1.5rem;">Si prefieres descargar un archivo APK tradicional para instalarlo manualmente:</p>
-            
-            <div class="button-container">
-                <button onclick="generateAPK()" class="install-button">
-                    <i class="fas fa-file-download"></i>
-                    Generar APK
-                </button>
-            </div>
-
-            <p style="color: #5b4c71; margin-top: 1rem; text-align: center; font-size: 0.9rem;">
-                <strong>Nota:</strong> Esto te llevará a PWA Builder, una herramienta gratuita de Microsoft para convertir PWAs en APKs.
-            </p>
-        </div>
-
-        <!-- Solución de problemas -->
-        <div class="install-section">
-            <h2><i class="fas fa-question-circle"></i> Solución de Problemas</h2>
-            <div class="install-steps">
-                <div class="install-step">
-                    <div class="step-number">?</div>
-                    <div class="step-content">
-                        <h3>No veo el botón de instalación</h3>
-                        <p>Asegúrate de estar usando HTTPS (conexión segura) y un navegador compatible. Intenta recargar la página.</p>
-                    </div>
-                </div>
-                <div class="install-step">
-                    <div class="step-number">?</div>
-                    <div class="step-content">
-                        <h3>La app no funciona offline</h3>
-                        <p>Abre la app con internet al menos una vez para que descargue todos los archivos necesarios.</p>
-                    </div>
-                </div>
-                <div class="install-step">
-                    <div class="step-number">?</div>
-                    <div class="step-content">
-                        <h3>¿Necesito Google Play Store?</h3>
-                        <p>No, esta es una PWA que se instala directamente desde el navegador sin necesidad de tiendas de aplicaciones.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Botón de regreso -->
-        <div class="button-container" style="margin-top: 3rem;">
+        <div class="button-container" style="margin-top: 1rem;">
             <a href="index.html" class="install-button">
                 <i class="fas fa-home"></i>
                 Volver al Inicio
@@ -436,9 +170,10 @@
                 const { outcome } = await deferredPrompt.userChoice;
                 
                 if (outcome === 'accepted') {
-                    console.log('PWA instalada exitosamente');
+                    alert('✅ ¡App instalada exitosamente! Búscala en tu pantalla de inicio.');
+                    setTimeout(() => window.location.href = 'index.html', 2000);
                 } else {
-                    console.log('Usuario rechazó la instalación');
+                    alert('❌ Instalación cancelada. Puedes intentarlo de nuevo cuando quieras.');
                 }
                 
                 deferredPrompt = null;
@@ -449,36 +184,25 @@
                 
                 if (/iphone|ipad|ipod/.test(userAgent)) {
                     message = '📱 Para instalar en iOS:\n\n' +
-                             '1. Toca el botón "Compartir" (cuadrado con flecha)\n' +
-                             '2. Desplázate y selecciona "Añadir a pantalla de inicio"\n' +
-                             '3. Confirma tocando "Añadir"';
+                             '1. Toca el botón "Compartir" (cuadrado con flecha hacia arriba) ⎙\n' +
+                             '2. Desplázate hacia abajo y selecciona "Añadir a pantalla de inicio" ➕\n' +
+                             '3. Toca "Añadir" para confirmar\n\n' +
+                             '¡Luego encontrarás el icono en tu pantalla de inicio!';
                 } else if (/android/.test(userAgent)) {
                     message = '📱 Para instalar en Android:\n\n' +
                              '1. Toca el menú (⋮) en la esquina superior derecha\n' +
                              '2. Selecciona "Instalar aplicación" o "Añadir a pantalla de inicio"\n' +
-                             '3. Confirma la instalación';
+                             '3. Confirma la instalación\n\n' +
+                             'O busca el icono de instalación en la barra de direcciones.';
                 } else {
                     message = '💻 Para instalar en tu computadora:\n\n' +
-                             '1. Busca el icono de instalación (+) en la barra de direcciones\n' +
+                             '1. Busca el icono de instalación (➕ o 💻) en la barra de direcciones\n' +
                              '2. Haz clic en "Instalar"\n' +
-                             '3. La app se añadirá a tu sistema';
+                             '3. La app se añadirá a tu sistema como aplicación independiente';
                 }
                 
                 alert(message);
-                
-                // Scroll suave a las instrucciones detalladas
-                document.querySelector('.install-container').scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
             }
-        }
-
-        // Función para generar APK
-        function generateAPK() {
-            // Redirigir a PWA Builder con la URL de la app
-            const appUrl = encodeURIComponent(window.location.origin);
-            window.open(`https://www.pwabuilder.com/?site=${appUrl}`, '_blank');
         }
     </script>
     <script src="scripts/pwa-installer.js" defer></script>
