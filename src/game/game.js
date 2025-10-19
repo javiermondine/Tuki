@@ -16,6 +16,7 @@ let animationId = null;
 let soundEnabled = true;
 let missionsVisible = true; // Variable para mostrar/ocultar panel de misiones
 let currentZone = 'forest'; // Zona actual del juego
+let currentZoneObject = null; // Objeto de zona actual
 
 // ============================================
 // SISTEMAS DEL JUEGO
@@ -459,6 +460,48 @@ function initializeInventory() {
 // DIBUJAR ESCENARIO (BOSQUE Y CAMPAMENTO)
 // ============================================
 function drawBackground() {
+    // Usar el sistema de zonas si está disponible
+    if (currentZoneObject) {
+        currentZoneObject.drawBackground(ctx, canvas, dayNightCycle);
+        
+        // Sol o Luna
+        dayNightCycle.drawCelestialBody(ctx, 700, 80);
+
+        // Nubes
+        if (!dayNightCycle.isNight()) {
+            drawCloud(150, 60);
+            drawCloud(450, 100);
+            drawCloud(650, 50);
+        }
+
+        // Árboles de fondo con color de la zona
+        ctx.fillStyle = currentZoneObject.treeColor;
+        for (let i = 0; i < treePositions.length; i++) {
+            const tree = treePositions[i];
+            drawTree(tree.x, tree.y, 0.8, currentZoneObject.treeColor);
+        }
+
+        // Campamento base (tienda)
+        drawTent(canvas.width - 150, canvas.height - 150);
+
+        // Fogata (con partículas si es de noche)
+        drawCampfire(120, canvas.height - 120);
+        
+        // Aplicar oscuridad según hora del día
+        dayNightCycle.applyDarknessOverlay(ctx, canvas.width, canvas.height);
+        
+        // Efecto de linterna si está encendida de noche
+        if (window.flashlightOn && dayNightCycle.isNight()) {
+            drawFlashlight(scout.x + 20, scout.y + 25);
+        }
+    } else {
+        // Fallback al dibujo original
+        drawBackgroundLegacy();
+    }
+}
+
+// Función legacy de fondo (por compatibilidad)
+function drawBackgroundLegacy() {
     // Cielo con gradiente (cambia según hora del día)
     const skyColors = dayNightCycle.getSkyColor();
     const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
@@ -518,13 +561,13 @@ function drawBackground() {
 }
 
 // Dibujar árbol
-function drawTree(x, y, scale = 1) {
+function drawTree(x, y, scale = 1, treeColor = '#2d5016') {
     // Tronco
     ctx.fillStyle = '#8b4513';
     ctx.fillRect(x - 10 * scale, y, 20 * scale, 60 * scale);
 
     // Copa
-    ctx.fillStyle = '#2d5016';
+    ctx.fillStyle = treeColor;
     ctx.beginPath();
     ctx.arc(x, y, 40 * scale, 0, Math.PI * 2);
     ctx.fill();
@@ -788,24 +831,19 @@ function gameLoop() {
         dayNightCycle.drawClock(ctx, 10, 10);
 
         // Dibujar nombre de zona actual
-        ctx.save();
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-        ctx.strokeStyle = '#2d5016';
-        ctx.lineWidth = 3;
-        ctx.font = 'bold 20px Arial';
-        const zoneIcons = {
-            'bosque': '🌲',
-            'montañas': '⛰️',
-            'pueblo': '🏘️',
-            'lago': '🏞️',
-            'pradera': '🌾',
-            'forest': '🌲'
-        };
-        const zoneIcon = zoneIcons[currentZone] || '🌲';
-        const zoneText = `${zoneIcon} ${currentZone.charAt(0).toUpperCase() + currentZone.slice(1)}`;
-        ctx.strokeText(zoneText, canvas.width / 2 - 60, 30);
-        ctx.fillText(zoneText, canvas.width / 2 - 60, 30);
-        ctx.restore();
+        if (currentZoneObject) {
+            ctx.save();
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+            ctx.strokeStyle = '#2d5016';
+            ctx.lineWidth = 4;
+            ctx.font = 'bold 22px Arial';
+            const zoneText = `${currentZoneObject.icon} ${currentZoneObject.displayName}`;
+            const textWidth = ctx.measureText(zoneText).width;
+            const x = canvas.width / 2 - textWidth / 2;
+            ctx.strokeText(zoneText, x, 35);
+            ctx.fillText(zoneText, x, 35);
+            ctx.restore();
+        }
 
         // Dibujar barra de XP
         levelSystem.draw(ctx, 10, 60, 250);
@@ -853,19 +891,20 @@ function gameLoop() {
 // FUNCIÓN DE CAMBIO DE ZONA
 // ============================================
 function changeZone(direction) {
-    // Nombres de zonas según dirección
-    const zones = {
-        'north': ['Montañas', '⛰️'],
-        'south': ['Pueblo', '🏘️'],
-        'east': ['Lago', '🏞️'],
-        'west': ['Pradera', '🌾']
+    // Mapeo de direcciones a zonas
+    const zoneMap = {
+        'north': 'mountains',
+        'south': 'village',
+        'east': 'lake',
+        'west': 'meadow'
     };
 
-    const [zoneName, zoneIcon] = zones[direction] || ['Bosque', '🌲'];
-    currentZone = zoneName.toLowerCase();
+    const newZoneName = zoneMap[direction] || 'forest';
+    currentZone = newZoneName;
+    currentZoneObject = getZone(newZoneName);
 
     // Mostrar mensaje de transición
-    showMessage(`${zoneIcon} Entrando a: ${zoneName}`);
+    showMessage(`${currentZoneObject.icon} Entrando a: ${currentZoneObject.displayName}`);
     playSound('explore');
 
     // Reposicionar el scout en el lado opuesto
@@ -879,15 +918,23 @@ function changeZone(direction) {
         scout.x = canvas.width - scout.width - 10;
     }
 
-    // Regenerar contenido del mundo
-    generateItems();
+    // Regenerar contenido del mundo con items específicos de la zona
+    items = currentZoneObject.generateItems(15);
     
+    // Regenerar NPCs específicos de la zona
+    npcs = currentZoneObject.generateNPCs(3);
+
     // Añadir XP por explorar nueva zona
     levelSystem.addXP(50);
     scout.points += 25;
     
     // Actualizar misiones
     missionSystem.updateProgress('explore', 1);
+    
+    // Cambiar sonido ambiente si está disponible
+    if (audioSystem && currentZoneObject.ambientSound) {
+        audioSystem.playAmbientSound(currentZoneObject.ambientSound);
+    }
 }
 
 // ============================================
@@ -901,9 +948,18 @@ function startGame() {
     scout = new Scout(canvas.width / 2 - 20, canvas.height - 100);
     window.scout = scout;
     
-    // Generar contenido del mundo
-    generateItems();
-    generateNPCs();
+    // Inicializar zona
+    currentZone = 'forest';
+    currentZoneObject = getZone('forest');
+    
+    // Generar contenido del mundo usando el sistema de zonas
+    if (currentZoneObject) {
+        items = currentZoneObject.generateItems(15);
+        npcs = currentZoneObject.generateNPCs(3);
+    } else {
+        generateItems();
+        generateNPCs();
+    }
     initializeInventory();
     
     // Generar misiones aleatorias

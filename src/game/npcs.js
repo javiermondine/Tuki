@@ -186,21 +186,32 @@ class DialogSystem {
 // ============================================
 
 class NPC {
-    constructor(x, y, type, name) {
+    constructor(x, y, name, icon = '🧑', dialogs = [], color = '#4a7c2c') {
         this.x = x;
         this.y = y;
         this.width = 40;
         this.height = 50;
-        this.type = type; // 'scout', 'elder', 'animal'
+        this.icon = icon;
         this.name = name;
-        this.dialogs = this.getDialogsByType(type);
+        this.color = color;
+        this.dialogs = dialogs.length > 0 ? dialogs : this.getDefaultDialogs();
         this.currentDialogIndex = 0;
         this.hasQuest = true;
         this.questCompleted = false;
         this.animationFrame = 0;
     }
 
-    // Obtener diálogos según tipo
+    // Obtener diálogos por defecto
+    getDefaultDialogs() {
+        return [
+            {
+                text: `¡Hola! Soy ${this.name}. ¿En qué puedo ayudarte?`,
+                next: null
+            }
+        ];
+    }
+
+    // Mantener compatibilidad con sistema anterior
     getDialogsByType(type) {
         const dialogDatabase = {
             scout: [
