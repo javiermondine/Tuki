@@ -19,8 +19,13 @@ class PWAInstaller {
             return;
         }
 
-        // Crear botón de instalación
+        // Crear botón de instalación SIEMPRE (incluso sin beforeinstallprompt)
         this.createInstallButton();
+        
+        // Mostrar el botón inmediatamente
+        setTimeout(() => {
+            this.showInstallButton();
+        }, 2000);
 
         // Escuchar evento de instalación disponible
         window.addEventListener('beforeinstallprompt', (e) => {
@@ -139,12 +144,6 @@ class PWAInstaller {
     showInstallButton() {
         if (!this.installButton) return;
 
-        // No mostrar si fue rechazado recientemente (últimas 24 horas)
-        const dismissed = localStorage.getItem('pwa-install-dismissed');
-        if (dismissed && (Date.now() - parseInt(dismissed)) < 24 * 60 * 60 * 1000) {
-            return;
-        }
-
         this.installButton.style.display = 'flex';
         this.installButton.style.animation = 'slideInUp 0.5s ease';
 
@@ -198,7 +197,9 @@ class PWAInstaller {
 
     async installApp() {
         if (!this.deferredPrompt) {
-            console.log('❌ No hay prompt de instalación disponible');
+            console.log('ℹ️ Mostrando página de instalación manual');
+            // Redirigir a página de instalación con instrucciones
+            window.location.href = 'install.html';
             return;
         }
 
