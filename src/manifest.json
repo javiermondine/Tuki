@@ -1,33 +1,77 @@
 {
-  "name": "Grupo Scout Myotragus",
+  "name": "Grupo Scout Myotragus 684 - Escultismo en Palma",
   "short_name": "Myotragus",
-  "description": "Sitio web oficial del Grupo Scout Myotragus 684 de Palma de Mallorca",
+  "description": "Aplicación oficial del Grupo Scout Myotragus 684 de Palma de Mallorca. Actividades, inscripciones, juego educativo y recursos scout.",
   "start_url": "/index.html",
+  "scope": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "background_color": "#f6f2ff",
   "theme_color": "#5f3dc4",
+  "orientation": "any",
   "icons": [
     {
       "src": "/assets/icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/assets/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/mytogagus.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
     }
   ],
+  "shortcuts": [
+    {
+      "name": "Juego Scout",
+      "short_name": "Juego",
+      "description": "Jugar Aventura Scout",
+      "url": "/game.html"
+    },
+    {
+      "name": "Inscripciones",
+      "short_name": "Inscribirse",
+      "description": "Inscribir a tu hijo/a",
+      "url": "/signup.html"
+    },
+    {
+      "name": "Actividades",
+      "short_name": "Actividades",
+      "description": "Ver actividades scout",
+      "url": "/activities.html"
+    },
+    {
+      "name": "Foro",
+      "short_name": "Foro",
+      "description": "Acceder al foro",
+      "url": "/forum.html"
+    }
+  ],
+  "categories": ["education", "social", "lifestyle", "kids", "games"],
   "prefer_related_applications": false,
+  "related_applications": [],
   "lang": "es",
   "dir": "ltr",
-  "orientation": "portrait-primary",
-  "categories": ["education", "social", "lifestyle"],
-  "screenshots": [
-    {
-      "src": "/assets/screenshot1.jpg",
-      "sizes": "1280x720",
-      "type": "image/jpeg"
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
+  "share_target": {
+    "action": "/forum.html",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
     }
-  ]
+  },
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  }
 }
