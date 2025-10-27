@@ -1,5 +1,5 @@
 // Service Worker para Myotragus - Capacidades offline
-const CACHE_NAME = 'myotragus-v2.0.0';
+const CACHE_NAME = 'myotragus-v3.0.0';
 
 const CACHE_ASSETS = [
   '/',
@@ -10,22 +10,12 @@ const CACHE_ASSETS = [
   '/signup.html',
   '/game.html',
   '/offline.html',
-  '/styles/main.css',
-  '/styles/activities.css',
-  '/styles/forum.css',
-  '/scripts/main.js',
-  '/scripts/i18n.js',
-  '/scripts/security.js',
-  '/scripts/forum.js',
-  '/scripts/activities.js',
-  '/game/game.js',
-  '/game/systems.js',
-  '/game/npcs.js',
-  '/game/inventory.js',
-  '/game/audio.js',
-  '/game/save.js',
-  '/game/mobile-controls.js',
-  '/game/game-style.css',
+  '/dist/styles/main.css',
+  '/dist/styles/activities.css',
+  '/dist/styles/forum.css',
+  '/dist/styles/game-style.css',
+  '/dist/scripts/bundle.js',
+  '/dist/game/bundle.js',
   '/assets/mytogagus.jpg',
   '/assets/hero-photo.svg',
   '/assets/favicon.svg',
