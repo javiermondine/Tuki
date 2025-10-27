@@ -1,8 +1,6 @@
 {
-  "buildCommand": "echo 'No build needed'",
-  "outputDirectory": "src",
   "rewrites": [
-    { "source": "/api/:path*", "destination": "/api/:path*" },
+    { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/(.*)", "destination": "/src/$1" }
   ]
 }
