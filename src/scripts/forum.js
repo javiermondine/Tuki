@@ -181,25 +181,16 @@
   function renderPosts() {
     if (!dom.postsList) return;
     dom.postsList.innerHTML = '';
-    // i18n empty message support
-    const emptyI18nKey = dom.postsList.getAttribute('data-i18n-empty');
-    if (emptyI18nKey) {
-      const lang = document.body.getAttribute('data-lang') || 'es';
-      // getTranslation is global from i18n.js
-      try {
-        const text = window.getTranslation ? window.getTranslation(lang, emptyI18nKey) : null;
-        if (text) dom.postsList.dataset.emptyMessage = text;
-      } catch(_) {}
-    }
+    
     const list = getFilteredPosts();
     if (!list.length) {
       const empty = document.createElement('p');
       empty.className = 'forum-empty';
-      empty.textContent = dom.postsList.dataset.emptyMessage || 'Todavía no hay mensajes. ¡Sé la primera persona en escribir!';
+      empty.textContent = 'Cargando mensajes...';
       dom.postsList.appendChild(empty);
       return;
     }
-    list.forEach((p) => dom.postsList.appendChild(createPostElement(p)));
+    list.forEach(post => dom.postsList.appendChild(createPostElement(post)));
   }
 
   // Mutadores
