@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Aventura Scout - Juego Educativo | Grupo Scout Myotragus 684</title>
+    <meta name="description" content="Juega a Aventura Scout, un juego educativo sobre escultismo y naturaleza del Grupo Scout Myotragus 684.">
+    <link rel="stylesheet" href="dist/styles/main.css">
+    <link rel="stylesheet" href="dist/styles/game-style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#5f3dc4">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos adicionales para integrar el juego */
+        body {
+            background: linear-gradient(135deg, #5f3dc4 0%, #7c5cff 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .game-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+        
+        #game-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Mejorar visualización del canvas */
+        #gameCanvas {
+            display: block;
+            margin: 0 auto;
+            touch-action: none;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 850px) {
+            .game-wrapper {
+                padding: 1rem;
+            }
+
+            #game-container {
+                padding: 1rem;
+            }
+
+            .back-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .game-wrapper {
+                padding: 0.5rem;
+            }
+
+            #game-container {
+                padding: 0.75rem;
+                border-radius: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-wrapper">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Volver al inicio
+        </a>
+        
+        <!-- Contenedor principal del juego -->
+        <div id="game-container">
+            <h1>🏕️ Aventura Scout</h1>
+            
+            <!-- Panel de información del juego -->
+            <div id="game-info">
+                <div class="info-item">
+                    <span class="info-label">⚡ Energía:</span>
+                    <span id="energy-display">100</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">⭐ Puntos:</span>
+                    <span id="points-display">0</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🏅 Insignias:</span>
+                    <span id="badges-display">0/5</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📋 Misión:</span>
+                    <span id="mission-display">Explora el bosque</span>
+                </div>
+            </div>
+
+            <!-- Canvas del juego -->
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+            <!-- Panel de insignias obtenidas -->
+            <div id="badges-panel">
+                <h3>Insignias Obtenidas:</h3>
+                <div id="badges-container">
+                    <div class="badge locked" id="badge-explorer">🧭 Explorador</div>
+                    <div class="badge locked" id="badge-camper">⛺ Campista</div>
+                    <div class="badge locked" id="badge-collector">🌿 Recolector</div>
+                    <div class="badge locked" id="badge-helper">🤝 Servicial</div>
+                    <div class="badge locked" id="badge-leader">👑 Líder</div>
+                </div>
+            </div>
+
+            <!-- Pantalla de inicio -->
+            <div id="start-screen" class="screen active">
+                <h2>¡Bienvenido, Scout!</h2>
+                <p>Tu misión es completar tareas de exploración, acampada y servicio para ganar 5 insignias.</p>
+                <div class="instructions">
+                    <h3>Controles:</h3>
+                    <ul>
+                        <li>⬆️ ⬇️ ⬅️ ➡️ - Mover al scout</li>
+                        <li>ESPACIO - Interactuar / Acampar</li>
+                        <li>E - Explorar área</li>
+                        <li>R - Recolectar objetos</li>
+                        <li>H - Ayudar a otros</li>
+                        <li>T - Hablar con NPCs</li>
+                        <li>I - Abrir inventario</li>
+                        <li>M - Mostrar/Ocultar misiones</li>
+                        <li>P - Pausar juego</li>
+                        <li>1-6 - Usar item rápido</li>
+                    </ul>
+                    <h3>Nuevas características:</h3>
+                    <ul>
+                        <li>🌙 Ciclo día/noche dinámico</li>
+                        <li>📋 Misiones aleatorias</li>
+                        <li>💬 NPCs con diálogos</li>
+                        <li>🎒 Sistema de inventario</li>
+                        <li>⭐ Sistema de niveles y XP</li>
+                        <li>🗺️ Múltiples zonas explorables</li>
+                    </ul>
+                </div>
+                <button id="start-button" class="game-button">🚀 Iniciar Aventura</button>
+            </div>
+
+            <!-- Pantalla de victoria -->
+            <div id="victory-screen" class="screen">
+                <h2>🎉 ¡Felicidades, Scout!</h2>
+                <p>Has completado todas las misiones y obtenido las 5 insignias.</p>
+                <div id="final-stats"></div>
+                <button id="restart-button" class="game-button">🔄 Jugar de nuevo</button>
+            </div>
+
+            <!-- Pantalla de pausa -->
+            <div id="pause-screen" class="screen">
+                <h2>⏸️ Juego en Pausa</h2>
+                <p>Presiona P para continuar</p>
+            </div>
+        </div>
+
+        <!-- Controles de audio -->
+        <div id="audio-controls">
+            <button id="mute-button" class="control-button">🔊</button>
+            <button id="save-button" class="control-button" title="Guardar partida">💾</button>
+            <button id="load-button" class="control-button" title="Cargar partida">📂</button>
+        </div>
+
+        <!-- Controles móviles táctiles -->
+        <div id="mobile-controls">
+            <div class="joystick-container">
+                <div class="joystick-base">
+                    <div class="joystick-stick" id="joystick"></div>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button class="action-button" data-action="space" title="Acampar/Interactuar (ESPACIO)">
+                    <span class="action-icon">⛺</span>
+                    <span class="action-label">Acampar</span>
+                </button>
+                <button class="action-button" data-action="e" title="Explorar área (E)">
+                    <span class="action-icon">🔍</span>
+                    <span class="action-label">Explorar</span>
+                </button>
+                <button class="action-button" data-action="r" title="Recolectar objetos (R)">
+                    <span class="action-icon">🌿</span>
+                    <span class="action-label">Recolectar</span>
+                </button>
+                <button class="action-button" data-action="t" title="Hablar con NPCs (T)">
+                    <span class="action-icon">💬</span>
+                    <span class="action-label">Hablar</span>
+                </button>
+                <button class="action-button" data-action="h" title="Ayudar a otros (H)">
+                    <span class="action-icon">🤝</span>
+                    <span class="action-label">Ayudar</span>
+                </button>
+                <button class="action-button" data-action="i" title="Abrir inventario (I)">
+                    <span class="action-icon">🎒</span>
+                    <span class="action-label">Inventario</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts del juego (en orden de dependencias) -->
+    <script src="game/zones.js"></script>
+    <script src="game/systems.js"></script>
+    <script src="game/npcs.js"></script>
+    <script src="game/inventory.js"></script>
+    <script src="game/audio.js"></script>
+    <script src="game/save.js"></script>
+    <script src="game/game.js"></script>
+    <script src="game/mobile-controls.js"></script>
+<script src="dist/game/bundle.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inscripciones — Grupo Scout Myotragus 684</title>
+  <meta name="description" content="Solicita una plaza en el Grupo Scout Myotragus 684. Información clave, requisitos y formulario de inscripción para todas las secciones." />
+  <link rel="canonical" href="https://myotragus-scout.es/signup.html">
+  <link rel="stylesheet" href="dist/styles/main.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#5f3dc4">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Inscripciones — Grupo Scout Myotragus 684">
+  <meta property="og:description" content="Solicita una plaza en el Grupo Scout Myotragus 684. Información clave, requisitos y formulario.">
+  <meta property="og:image" content="https://myotragus-scout.es/assets/mytogagus.jpg">
+  <meta property="og:url" content="https://myotragus-scout.es/signup.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="site-header" role="banner">
+  <div class="container header-inner">
+    <a href="index.html" class="logo-link" aria-label="Ir a inicio">
+      <img src="assets/mytogagus.jpg?v=1760644697" alt="Grupo Scout Myotragus" class="logo" width="160" height="80" fetchpriority="high">
+    </a>
+    <nav id="mainNav" class="main-nav" aria-label="Menú principal">
+      <ul>
+        <li><a href="activities.html" data-i18n="nav.activities">Actividades</a></li>
+        <li><a href="teachings.html" data-i18n="nav.methodology">Metodología</a></li>
+        <li><a href="forum.html" data-i18n="nav.forum">Foro</a></li>
+        <li><a href="signup.html" data-i18n="nav.signup" aria-current="page">Inscripciones</a></li>
+        <li><a href="index.html#contacto" data-i18n="nav.contact">Contacto</a></li>
+      </ul>
+    </nav>
+    <div class="language-selector">
+      <button class="lang-btn active" data-lang="es">ES</button>
+      <button class="lang-btn" data-lang="ca">CA</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+    <button id="menuToggle" class="menu-toggle" aria-controls="mainNav" aria-expanded="false" aria-label="Abrir menú">
+      <span class="sr-only" data-i18n="nav.menu">Menú</span>
+      <span class="menu-icon"></span>
+    </button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+  <section class="page-hero page-hero--signup">
+    <div class="container hero-content">
+      <span class="headline-kicker">Curso 2025 · Plazas limitadas</span>
+      <h1>Inscripción al Grupo Scout Myotragus 684</h1>
+      <p class="hero-subtitle">Acompañamos a niños y jóvenes de 6 a 21 años con juegos, naturaleza y servicio a la comunidad.</p>
+      <div class="hero-actions">
+        <a href="#formulario" class="btn primary">Rellenar solicitud</a>
+        <a href="index.html#secciones" class="btn outline">Conocer secciones</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="signup-highlights">
+    <div class="container">
+      <div class="signup-grid">
+        <article class="signup-card">
+          <h3>Fechas importantes</h3>
+          <ul>
+            <li>Mayo: entrevistas iniciales con familias</li>
+            <li>Junio: confirmación de plazas disponibles</li>
+            <li>Septiembre: inicio de actividades</li>
+          </ul>
+        </article>
+        <article class="signup-card">
+          <h3>Documentación</h3>
+          <ul>
+            <li>Formulario de inscripción completo</li>
+            <li>Fotocopia de la tarjeta sanitaria</li>
+            <li>Autorizaciones médicas y de imagen</li>
+          </ul>
+        </article>
+        <article class="signup-card">
+          <h3>Qué incluye</h3>
+          <ul>
+            <li>Programa educativo por secciones</li>
+            <li>Actividades semanales y salidas trimestrales</li>
+            <li>Acompañamiento de scouters titulados</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="formulario" class="signup-section">
+    <div class="container signup-layout">
+      <aside class="signup-aside">
+        <h2>Antes de empezar</h2>
+        <p>Revisa las plazas disponibles en cada sección y prepara la documentación. El equipo de scouters se pondrá en contacto contigo para confirmar la plaza y concertar una entrevista.</p>
+        <div class="info-block">
+          <h3>Plazas estimadas 2025</h3>
+          <ul>
+            <li><strong>Castores</strong> · 4 plazas</li>
+            <li><strong>Lobatos</strong> · 6 plazas</li>
+            <li><strong>Scouts</strong> · Lista de espera</li>
+            <li><strong>Escultas</strong> · 3 plazas</li>
+            <li><strong>Rovers</strong> · 5 plazas</li>
+          </ul>
+        </div>
+        <div class="contact-reminder">
+          <p>¿Tienes dudas? Escríbenos a <a href="mailto:myotragus684@gmail.com">myotragus684@gmail.com</a> o llámanos al <a href="tel:+34666000000">666 000 000</a>.</p>
+        </div>
+      </aside>
+
+      <div class="signup-form-wrapper">
+        <h2 data-i18n="registration.title">Inscripción en <span>el Grupo Scout</span></h2>
+  <form id="groupSignupForm" class="signup-form" action="/api/register" method="POST" autocomplete="on">
+          <fieldset class="form-section">
+            <legend data-i18n="registration.child.title">Datos del niño/a o joven</legend>
+            <div class="form-grid">
+              <label class="form-group">
+                <span data-i18n="registration.child.name">Nombre</span>
+                <input type="text" name="childName" required minlength="2" maxlength="120" autocomplete="given-name">
+              </label>
+              <label class="form-group">
+                <span data-i18n="registration.child.surname">Apellidos</span>
+                <input type="text" name="childSurname" required minlength="2" maxlength="160" autocomplete="family-name">
+              </label>
+              <label class="form-group">
+                <span data-i18n="registration.child.birthdate">Fecha de nacimiento</span>
+                <input type="date" name="childBirthdate" required>
+              </label>
+              <label class="form-group">
+                <span data-i18n="registration.child.gender">Género</span>
+                <select name="childGender" data-i18n-placeholder="registration.child.genderOptions.notSay">
+                  <option value="" data-i18n="registration.child.genderOptions.notSay">Prefiero no decirlo</option>
+                  <option value="male" data-i18n="registration.child.genderOptions.male">Masculino</option>
+                  <option value="female" data-i18n="registration.child.genderOptions.female">Femenino</option>
+                  <option value="other" data-i18n="registration.child.genderOptions.other">Otro</option>
+                </select>
+              </label>
+              <label class="form-group">
+                <span>Sección solicitada</span>
+                <select name="section" required>
+                  <option value="" selected disabled>Selecciona una opción</option>
+                  <option value="castores">Castores (6-8 años)</option>
+                  <option value="lobatos">Lobatos (8-11 años)</option>
+                  <option value="scouts">Scouts (11-14 años)</option>
+                  <option value="escultas">Escultas (14-17 años)</option>
+                  <option value="rovers">Rovers (17-21 años)</option>
+                </select>
+              </label>
+            </div>
+            <label class="form-group">
+              <span data-i18n="registration.child.health">Información médica relevante (alergias, medicación, etc.)</span>
+              <textarea name="healthInfo" rows="3"></textarea>
+            </label>
+          </fieldset>
+
+          <fieldset class="form-section">
+            <legend data-i18n="registration.contact.title">Datos de contacto</legend>
+            <div class="form-grid">
+              <label class="form-group">
+                <span data-i18n="registration.contact.name">Nombre del tutor/a</span>
+                <input type="text" name="guardianName" required autocomplete="name">
+              </label>
+              <label class="form-group">
+                <span data-i18n="registration.contact.relation">Relación</span>
+                <select name="guardianRelation" required>
+                  <option value="mother" data-i18n="registration.contact.relationOptions.mother">Madre</option>
+                  <option value="father" data-i18n="registration.contact.relationOptions.father">Padre</option>
+                  <option value="legal" data-i18n="registration.contact.relationOptions.legal">Tutor/a legal</option>
+                  <option value="other" data-i18n="registration.contact.relationOptions.other">Otro</option>
+                </select>
+              </label>
+              <label class="form-group">
+                <span data-i18n="registration.contact.email">Email</span>
+                <input type="email" name="guardianEmail" required autocomplete="email">
+              </label>
+              <label class="form-group">
+                <span data-i18n="registration.contact.phone">Teléfono</span>
+                <input type="tel" name="guardianPhone" required autocomplete="tel">
+              </label>
+            </div>
+            <label class="form-group">
+              <span data-i18n="registration.contact.address">Dirección</span>
+              <input type="text" name="guardianAddress" autocomplete="street-address">
+            </label>
+          </fieldset>
+
+          <fieldset class="form-section">
+            <legend data-i18n="registration.additional.title">Información adicional</legend>
+            <label class="form-group">
+              <span data-i18n="registration.additional.comments">Comentarios o información adicional</span>
+              <textarea name="additionalInfo" rows="4"></textarea>
+            </label>
+            <label class="checkbox-group">
+              <input type="checkbox" name="privacyPolicy" required>
+              <span data-i18n="registration.additional.privacy">He leído y acepto la política de privacidad</span>
+            </label>
+            <label class="checkbox-group">
+              <input type="checkbox" name="imageConsent">
+              <span data-i18n="registration.additional.image">Autorizo la toma y publicación de imágenes de mi hijo/a en las actividades del grupo</span>
+            </label>
+          </fieldset>
+
+          <div class="form-actions">
+            <button type="submit" class="btn primary" data-i18n="registration.submit">Enviar inscripción</button>
+            <p class="form-note">Tras enviar el formulario recibirás un email de confirmación automática.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="signup-highlights">
+    <div class="container">
+      <div class="section-header">
+        <h2 data-i18n="recentRegs.title">Inscripciones recientes</h2>
+        <div class="section-divider"><span></span></div>
+      </div>
+      <div id="recentRegistrations" class="signup-card" aria-live="polite"></div>
+    </div>
+  </section>
+</main>
+
+<!-- Modal de éxito de inscripción -->
+<div id="signupModal" class="modal" role="dialog" aria-labelledby="signupModalTitle" aria-modal="true" aria-hidden="true">
+  <div class="modal-content" role="document">
+    <h2 id="signupModalTitle" data-i18n="registration.success.title">¡Inscripción enviada con éxito!</h2>
+    <p data-i18n="registration.success.message">Gracias por tu interés en el Grupo Scout Myotragus. Nos pondremos en contacto contigo en breve para completar el proceso de inscripción.</p>
+    <div class="modal-actions">
+      <button id="signupModalClose" type="button" class="btn primary" data-i18n="registration.success.button">Aceptar</button>
+    </div>
+  </div>
+  
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container footer-inner">
+    <div class="footer-about">
+      <img src="assets/mytogagus.jpg" alt="Myotragus" class="footer-logo" width="120">
+      <p>Grupo Scout Myotragus 684</p>
+    </div>
+    <div class="footer-contact">
+      <h3 data-i18n="footer.contact">Contacto</h3>
+      <p><strong data-i18n="footer.email">Email:</strong> <a href="mailto:myotragus684@gmail.com">myotragus684@gmail.com</a></p>
+      <p><strong data-i18n="footer.phone">Teléfono:</strong> <a href="tel:+34666000000">666 000 000</a></p>
+      <p><strong data-i18n="footer.location">Local:</strong> Palma de Mallorca</p>
+    </div>
+    <div class="footer-links">
+      <h3 data-i18n="footer.links">Enlaces</h3>
+      <ul>
+        <li><a href="activities.html" data-i18n="nav.activities">Actividades</a></li>
+        <li><a href="teachings.html" data-i18n="nav.methodology">Metodología</a></li>
+        <li><a href="forum.html" data-i18n="nav.forum">Foro</a></li>
+        <li><a href="https://www.scout.org/" target="_blank" rel="noopener">WOSM</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; <span id="currentYear">2023</span> Grupo Scout Myotragus 684 - ASDE Baleares</p>
+  </div>
+</footer>
+
+<script src="scripts/main.js" defer></script>
+<script src="scripts/i18n.js" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('groupSignupForm');
+    const modal = document.getElementById('signupModal');
+    const closeBtn = document.getElementById('signupModalClose');
+    if (!form || !modal || !closeBtn) return;
+
+    const openModal = () => {
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      // Guardar el elemento con foco para devolverlo después
+      modal.dataset.lastFocus = document.activeElement ? document.activeElement.id || '' : '';
+      // Enfocar botón de cierre
+      closeBtn.focus();
+    };
+
+    const closeModal = () => {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      form.reset();
+      // Devolver foco al formulario (primer campo)
+      const firstInput = form.querySelector('input, select, textarea, button');
+      if (firstInput) firstInput.focus();
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      const data = Object.fromEntries(new FormData(form).entries());
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) throw new Error('Network');
+        openModal();
+        // Refresh public registrations after success
+        loadRecentRegistrations();
+      } catch (e) {
+        openModal();
+      }
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+    async function loadRecentRegistrations() {
+      const box = document.getElementById('recentRegistrations');
+      if (!box) return;
+  box.innerHTML = `<p data-i18n="recentRegs.loading">Cargando...</p>`;
+      try {
+        const res = await fetch('/api/registrations');
+        if (!res.ok) throw new Error('Network');
+        const regs = await res.json();
+        if (!regs || regs.length === 0) {
+          box.textContent = document.querySelector('[data-i18n="recentRegs.empty"]') ? '' : '';
+          box.innerHTML = `<p data-i18n="recentRegs.empty">Todavía no hay inscripciones públicas.</p>`;
+          return;
+        }
+        const rows = regs.map(r => {
+          const d = new Date(r.createdAt);
+          const date = isNaN(d) ? '' : d.toLocaleDateString();
+          return `<li><strong data-i18n="recentRegs.child">Nombre</strong>: ${r.childName} · <strong data-i18n="recentRegs.section">Sección</strong>: ${r.section} · <span data-i18n="recentRegs.date">Fecha</span>: ${date}</li>`;
+        }).join('');
+        box.innerHTML = `<ul class="footer-links">${rows}</ul>`;
+      } catch (_) {
+        box.innerHTML = `<p data-i18n="recentRegs.empty">Todavía no hay inscripciones públicas.</p>`;
+      }
+    }
+
+    loadRecentRegistrations();
+  });
+</script>
+<script src="dist/scripts/bundle.js" defer></script>
+</body>
+</html>

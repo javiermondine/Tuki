@@ -1,0 +1,293 @@
+/* Estilos específicos para la página de actividades */
+
+.page-hero--activities {
+    background: linear-gradient(135deg, rgba(64, 32, 128, 0.88) 0%, rgba(95, 61, 196, 0.76) 45%, rgba(242, 76, 179, 0.64) 100%),
+                url('../assets/hero-photo.svg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+
+.page-hero--activities .hero-content {
+    max-width: 720px;
+    text-align: left;
+}
+
+.page-hero--activities .hero-subtitle {
+    color: rgba(255, 247, 255, 0.9);
+}
+
+.page-hero--activities .hero-actions {
+    justify-content: flex-start;
+}
+
+.page-hero--activities .hero-actions .btn.outline {
+    border-color: rgba(255, 255, 255, 0.7);
+    color: #ffffff;
+}
+
+.page-hero--activities .hero-actions .btn.outline:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.activities-overview {
+    background: var(--bg-soft);
+}
+
+.activities-highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.highlight-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 22px;
+    padding: clamp(1.75rem, 4vw, 2.5rem);
+    box-shadow: var(--box-shadow);
+    display: grid;
+    gap: 1rem;
+}
+
+.highlight-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    background: linear-gradient(135deg, rgba(255, 214, 240, 0.9) 0%, rgba(124, 92, 255, 0.4) 100%);
+    color: var(--primary-dark);
+}
+
+.highlight-card h3 {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    margin-bottom: 0.25rem;
+}
+
+.highlight-card p {
+    color: var(--text-light);
+}
+
+.highlight-card ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.4rem;
+    color: var(--text-light);
+}
+
+.highlight-card li::before {
+    content: '•';
+    color: var(--secondary-color);
+    margin-right: 0.5rem;
+}
+
+.activities-calendar {
+    padding: var(--spacing-xl) 0;
+}
+
+.calendar-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 28px;
+    padding: clamp(2rem, 5vw, 3rem);
+    box-shadow: var(--shadow-soft);
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+.calendar-card h2 {
+    color: var(--primary-color);
+}
+
+.calendar-intro {
+    color: var(--text-light);
+    max-width: 680px;
+}
+
+.calendar-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.calendar-actions .btn {
+    min-width: 200px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.calendar-column {
+    background: var(--bg-soft);
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 1px solid rgba(95, 61, 196, 0.1);
+    display: grid;
+    gap: 1rem;
+}
+
+.calendar-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(124, 92, 255, 0.15);
+    color: var(--primary-dark);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.calendar-item {
+    display: grid;
+    gap: 0.35rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px dashed rgba(95, 61, 196, 0.2);
+}
+
+.calendar-item:last-child {
+    border-bottom: none;
+}
+
+.calendar-time {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.calendar-desc {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.calendar-note {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    background: rgba(124, 92, 255, 0.08);
+    border-radius: 16px;
+    padding: 1rem;
+    border: 1px solid rgba(95, 61, 196, 0.2);
+}
+
+.activities-sampler {
+    background: var(--bg-soft);
+    padding: var(--spacing-xl) 0;
+}
+
+.sampler-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.sampler-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 22px;
+    padding: 2rem;
+    box-shadow: var(--box-shadow);
+    display: grid;
+    gap: 0.75rem;
+}
+
+.sampler-icon {
+    font-size: 2.25rem;
+    color: var(--secondary-dark);
+}
+
+.sampler-card h3 {
+    color: var(--primary-color);
+}
+
+.sampler-card p {
+    color: var(--text-light);
+    margin-bottom: 0;
+}
+
+.activities-cta {
+    margin: var(--spacing-xl) 0 var(--spacing-lg);
+    border-radius: 28px;
+    padding: clamp(2rem, 5vw, 3rem);
+    background: linear-gradient(135deg, rgba(95, 61, 196, 0.96) 0%, rgba(242, 76, 179, 0.75) 100%);
+    color: #ffffff;
+    box-shadow: 0 28px 60px rgba(64, 32, 128, 0.25);
+    text-align: center;
+}
+
+.activities-cta h2 {
+    margin-bottom: 1rem;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+}
+
+.activities-cta p {
+    color: rgba(255, 247, 255, 0.9);
+    margin-bottom: var(--spacing-md);
+}
+
+.activities-cta .cta-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+@media (max-width: 992px) {
+    .page-hero--activities .hero-content {
+        text-align: center;
+    }
+
+    .page-hero--activities .hero-actions {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .calendar-actions .btn {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .calendar-grid,
+    .sampler-grid,
+    .activities-highlight-grid {
+        gap: var(--spacing-md);
+    }
+
+    .highlight-card,
+    .sampler-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendar-grid,
+    .sampler-grid,
+    .activities-highlight-grid {
+        gap: 1rem;
+    }
+
+    .highlight-card,
+    .sampler-card {
+        padding: 1.25rem;
+    }
+
+    .calendar-actions {
+        gap: 0.75rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        font-size: 16px; /* Previene zoom en iOS */
+    }
+}
