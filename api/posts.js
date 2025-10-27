@@ -17,9 +17,16 @@ async function connectToDatabase() {
 }
 
 export default async function handler(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+    
     if (req.method === 'GET') {
         try {
-            // Sin caché para que siempre muestre lo más reciente
             res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
             const supabase = getSupabase();
             let posts = [];
@@ -31,42 +38,54 @@ export default async function handler(req, res) {
                         .select('*')
                         .order('created_at', { ascending: false })
                         .limit(100);
-                    if (error) throw error;
-                    posts = (data || []).map(p => ({
-                        id: p.id,
-                        name: p.name,
-                        category: p.category,
-                        message: p.message,
-                        createdAt: p.created_at,
-                    }));
+                    if (error) {
+                        console.error('[Supabase Error]:', error);
+                    } else {
+                        posts = (data || []).map(p => ({
+                            id: p.id,
+                            name: p.name,
+                            category: p.category,
+                            message: p.message,
+                            createdAt: p.created_at,
+                        }));
+                    }
                 } catch (e) {
-                    console.error('[GET /api/posts] Error en Supabase, usando MongoDB:', e);
+                    console.error('[GET /api/posts] Error en Supabase:', e.message);
                 }
             }
 
-            // Si no hay datos de Supabase, usar MongoDB
             if (!posts || posts.length === 0) {
-                const client = await connectToDatabase();
-                const db = client.db(MONGODB_DB);
-                const mongoPosts = await db
-                    .collection('posts')
-                    .find({})
-                    .sort({ createdAt: -1 })
-                    .limit(100)
-                    .toArray();
-                posts = mongoPosts.map(p => ({
-                    id: p._id.toString(),
-                    name: p.name,
-                    category: p.category,
-                    message: p.message,
-                    createdAt: p.createdAt,
-                }));
+                if (!MONGODB_URI) {
+                    console.error('[MongoDB] URI not configured');
+                    return res.status(200).json([]);
+                }
+                
+                try {
+                    const client = await connectToDatabase();
+                    const db = client.db(MONGODB_DB);
+                    const mongoPosts = await db
+                        .collection('posts')
+                        .find({})
+                        .sort({ createdAt: -1 })
+                        .limit(100)
+                        .toArray();
+                    posts = mongoPosts.map(p => ({
+                        id: p._id.toString(),
+                        name: p.name,
+                        category: p.category,
+                        message: p.message,
+                        createdAt: p.createdAt,
+                    }));
+                } catch (mongoErr) {
+                    console.error('[MongoDB Error]:', mongoErr.message);
+                    return res.status(200).json([]);
+                }
             }
 
             return res.status(200).json(posts);
         } catch (error) {
-            console.error('Error GET /api/posts:', error);
-            return res.status(500).json({ error: 'Error al obtener posts' });
+            console.error('Error GET /api/posts:', error.message, error.stack);
+            return res.status(200).json([]);
         }
     }
 
