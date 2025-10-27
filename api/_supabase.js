@@ -1,15 +1,15 @@
 import { createClient } from '@supabase/supabase-js';
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
 
 let supabase = null;
 
 export function getSupabase() {
   if (supabase) return supabase;
-  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return null;
+  if (!SUPABASE_URL || !SUPABASE_KEY) return null;
 
-  supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
     auth: { persistSession: false },
     global: { headers: { 'X-Client-Info': 'scout-group-website@server' } }
   });
