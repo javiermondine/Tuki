@@ -5,8 +5,8 @@
 // ============================================
 // CONFIGURACIÓN DEL CANVAS
 // ============================================
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
+let canvas;
+let ctx;
 
 // ============================================
 // VARIABLES GLOBALES DEL JUEGO
@@ -1096,6 +1096,10 @@ window.addEventListener('beforeunload', () => {
 // INICIALIZACIÓN
 // ============================================
 function initializeGame() {
+    // Inicializar canvas
+    canvas = document.getElementById('gameCanvas');
+    ctx = canvas.getContext('2d');
+    
     // Inicializar sistemas
     missionSystem = new MissionSystem();
     levelSystem = new LevelSystem();
