@@ -1,92 +1,488 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Aventura Scout - Juego Educativo | Grupo Scout Myotragus 684</title>
-    <meta name="description" content="Juega a Aventura Scout, un juego educativo sobre escultismo y naturaleza del Grupo Scout Myotragus 684.">
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/game-style.css">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#5f3dc4">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Estilos adicionales para integrar el juego */
-        body {
-            background: linear-gradient(135deg, #5f3dc4 0%, #7c5cff 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        
-        .game-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-        
-        .back-button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateX(-5px);
-        }
-        
-        #game-container {
-            background: white;
-            border-radius: 20px;
+<!DOCTYPE html><!DOCTYPE html>
+
+<html lang="es"><html lang="es">
+
+<head><head>
+
+    <meta charset="UTF-8">    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Aventura Scout - Juego Educativo | Grupo Scout Myotragus 684</title>    <meta name="mobile-web-app-capable" content="yes">
+
+    <meta name="description" content="Juega a Aventura Scout, un juego educativo sobre escultismo y naturaleza del Grupo Scout Myotragus 684.">    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link rel="stylesheet" href="styles/main.css">    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">    <title>Aventura Scout - Juego Educativo | Grupo Scout Myotragus 684</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    <meta name="description" content="Juega a Aventura Scout, un juego educativo sobre escultismo y naturaleza del Grupo Scout Myotragus 684.">
+
+    <style>    <link rel="stylesheet" href="styles/main.css">
+
+        body {    <link rel="stylesheet" href="styles/game-style.css">
+
+            margin: 0;    <link rel="manifest" href="manifest.json">
+
+            padding: 0;    <meta name="theme-color" content="#5f3dc4">
+
+            font-family: 'Nunito', sans-serif;    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+            background: linear-gradient(135deg, #5f3dc4 0%, #7c5cff 100%);    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+            min-height: 100vh;    <style>
+
+            overflow-x: hidden;        /* Estilos adicionales para integrar el juego */
+
+        }        body {
+
+                    background: linear-gradient(135deg, #5f3dc4 0%, #7c5cff 100%);
+
+        .game-wrapper {            min-height: 100vh;
+
+            max-width: 1200px;            overflow-x: hidden;
+
+            margin: 0 auto;        }
+
+            padding: 2rem;        
+
+        }        .game-wrapper {
+
+                    max-width: 1200px;
+
+        .back-button {            margin: 0 auto;
+
+            display: inline-flex;            padding: 2rem;
+
+            align-items: center;        }
+
+            gap: 0.5rem;        
+
+            padding: 0.75rem 1.5rem;        .back-button {
+
+            background: rgba(255, 255, 255, 0.2);            display: inline-flex;
+
+            color: white;            align-items: center;
+
+            text-decoration: none;            gap: 0.5rem;
+
+            border-radius: 12px;            padding: 0.75rem 1.5rem;
+
+            font-weight: 600;            background: rgba(255, 255, 255, 0.2);
+
+            margin-bottom: 1.5rem;            color: white;
+
+            transition: all 0.3s ease;            text-decoration: none;
+
+            backdrop-filter: blur(10px);            border-radius: 12px;
+
+        }            font-weight: 600;
+
+                    margin-bottom: 1.5rem;
+
+        .back-button:hover {            transition: all 0.3s ease;
+
+            background: rgba(255, 255, 255, 0.3);            backdrop-filter: blur(10px);
+
+            transform: translateX(-5px);        }
+
+        }        
+
+                .back-button:hover {
+
+        #game-container {            background: rgba(255, 255, 255, 0.3);
+
+            background: linear-gradient(135deg, #e8f4dc 0%, #d4e8c8 100%);            transform: translateX(-5px);
+
+            border-radius: 20px;        }
+
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);        
+
+            padding: 2rem;        #game-container {
+
+            position: relative;            background: white;
+
+        }            border-radius: 20px;
+
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 2rem;
-            position: relative;
-        }
 
-        /* Mejorar visualización del canvas */
-        #gameCanvas {
+        h1 {            padding: 2rem;
+
+            color: #2d5016;            position: relative;
+
+            text-align: center;        }
+
+            margin-bottom: 1.5rem;
+
+            font-size: 2.5em;        /* Mejorar visualización del canvas */
+
+        }        #gameCanvas {
+
             display: block;
-            margin: 0 auto;
-            touch-action: none;
-        }
 
-        /* Responsive adjustments */
-        @media (max-width: 850px) {
-            .game-wrapper {
-                padding: 1rem;
-            }
+        #game-info {            margin: 0 auto;
+
+            display: flex;            touch-action: none;
+
+            justify-content: space-around;        }
+
+            flex-wrap: wrap;
+
+            gap: 1rem;        /* Responsive adjustments */
+
+            margin-bottom: 1.5rem;        @media (max-width: 850px) {
+
+            background: rgba(255, 255, 255, 0.8);            .game-wrapper {
+
+            padding: 1rem;                padding: 1rem;
+
+            border-radius: 12px;            }
+
+        }
 
             #game-container {
-                padding: 1rem;
+
+        .info-item {                padding: 1rem;
+
+            display: flex;            }
+
+            flex-direction: column;
+
+            align-items: center;            .back-button {
+
+            gap: 0.25rem;                padding: 0.5rem 1rem;
+
+        }                font-size: 0.9em;
+
             }
 
-            .back-button {
-                padding: 0.5rem 1rem;
-                font-size: 0.9em;
-            }
-        }
+        .info-label {        }
 
-        @media (max-width: 500px) {
-            .game-wrapper {
+            font-weight: 600;
+
+            color: #2d5016;        @media (max-width: 500px) {
+
+        }            .game-wrapper {
+
                 padding: 0.5rem;
-            }
 
+        #gameCanvas {            }
+
+            display: block;
+
+            margin: 0 auto;            #game-container {
+
+            background: linear-gradient(to bottom, #87ceeb 0%, #90ee90 100%);                padding: 0.75rem;
+
+            border: 5px solid #4a7c2c;                border-radius: 15px;
+
+            border-radius: 10px;            }
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);        }
+
+            cursor: crosshair;    </style>
+
+            touch-action: none;</head>
+
+        }<body>
+
+    <div class="game-wrapper">
+
+        #badges-panel {        <a href="index.html" class="back-button">
+
+            margin-top: 20px;            <i class="fas fa-arrow-left"></i>
+
+            padding: 15px;            Volver al inicio
+
+            background: rgba(255, 255, 255, 0.8);        </a>
+
+            border-radius: 12px;        
+
+        }        <!-- Contenedor principal del juego -->
+
+        <div id="game-container">
+
+        #badges-panel h3 {            <h1>🏕️ Aventura Scout</h1>
+
+            color: #2d5016;            
+
+            margin-bottom: 12px;            <!-- Panel de información del juego -->
+
+        }            <div id="game-info">
+
+                <div class="info-item">
+
+        #badges-container {                    <span class="info-label">⚡ Energía:</span>
+
+            display: flex;                    <span id="energy-display">100</span>
+
+            gap: 10px;                </div>
+
+            flex-wrap: wrap;                <div class="info-item">
+
+        }                    <span class="info-label">⭐ Puntos:</span>
+
+                    <span id="points-display">0</span>
+
+        .badge {                </div>
+
+            padding: 8px 15px;                <div class="info-item">
+
+            border-radius: 8px;                    <span class="info-label">🏅 Insignias:</span>
+
+            background: #ddd;                    <span id="badges-display">0/5</span>
+
+            font-weight: 600;                </div>
+
+            transition: all 0.3s ease;                <div class="info-item">
+
+        }                    <span class="info-label">📋 Misión:</span>
+
+                    <span id="mission-display">Explora el bosque</span>
+
+        .badge.locked {                </div>
+
+            opacity: 0.5;            </div>
+
+            filter: grayscale(100%);
+
+        }            <!-- Canvas del juego -->
+
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+        .badge.unlocked {
+
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);            <!-- Panel de insignias obtenidas -->
+
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);            <div id="badges-panel">
+
+            transform: scale(1.05);                <h3>Insignias Obtenidas:</h3>
+
+        }                <div id="badges-container">
+
+                    <div class="badge locked" id="badge-explorer">🧭 Explorador</div>
+
+        .screen {                    <div class="badge locked" id="badge-camper">⛺ Campista</div>
+
+            position: absolute;                    <div class="badge locked" id="badge-collector">🌿 Recolector</div>
+
+            top: 50%;                    <div class="badge locked" id="badge-helper">🤝 Servicial</div>
+
+            left: 50%;                    <div class="badge locked" id="badge-leader">👑 Líder</div>
+
+            transform: translate(-50%, -50%);                </div>
+
+            background: rgba(255, 255, 255, 0.98);            </div>
+
+            padding: 40px;
+
+            border-radius: 20px;            <!-- Pantalla de inicio -->
+
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);            <div id="start-screen" class="screen active">
+
+            text-align: center;                <h2>¡Bienvenido, Scout!</h2>
+
+            min-width: 400px;                <p>Tu misión es completar tareas de exploración, acampada y servicio para ganar 5 insignias.</p>
+
+            max-width: 600px;                <div class="instructions">
+
+            display: none;                    <h3>Controles:</h3>
+
+            z-index: 1000;                    <ul>
+
+        }                        <li>⬆️ ⬇️ ⬅️ ➡️ - Mover al scout</li>
+
+                        <li>ESPACIO - Interactuar / Acampar</li>
+
+        .screen.active {                        <li>E - Explorar área</li>
+
+            display: block;                        <li>R - Recolectar objetos</li>
+
+            animation: fadeIn 0.5s ease;                        <li>H - Ayudar a otros</li>
+
+        }                        <li>T - Hablar con NPCs</li>
+
+                        <li>I - Abrir inventario</li>
+
+        @keyframes fadeIn {                        <li>M - Mostrar/Ocultar misiones</li>
+
+            from {                        <li>P - Pausar juego</li>
+
+                opacity: 0;                        <li>1-6 - Usar item rápido</li>
+
+                transform: translate(-50%, -50%) scale(0.9);                    </ul>
+
+            }                    <h3>Nuevas características:</h3>
+
+            to {                    <ul>
+
+                opacity: 1;                        <li>🌙 Ciclo día/noche dinámico</li>
+
+                transform: translate(-50%, -50%) scale(1);                        <li>📋 Misiones aleatorias</li>
+
+            }                        <li>💬 NPCs con diálogos</li>
+
+        }                        <li>🎒 Sistema de inventario</li>
+
+                        <li>⭐ Sistema de niveles y XP</li>
+
+        .screen h2 {                        <li>🗺️ Múltiples zonas explorables</li>
+
+            color: #2d5016;                    </ul>
+
+            margin-bottom: 20px;                </div>
+
+            font-size: 2em;                <button id="start-button" class="game-button">🚀 Iniciar Aventura</button>
+
+        }            </div>
+
+
+
+        .screen p {            <!-- Pantalla de victoria -->
+
+            color: #4a7c2c;            <div id="victory-screen" class="screen">
+
+            font-size: 1.1em;                <h2>🎉 ¡Felicidades, Scout!</h2>
+
+            margin-bottom: 20px;                <p>Has completado todas las misiones y obtenido las 5 insignias.</p>
+
+        }                <div id="final-stats"></div>
+
+                <button id="restart-button" class="game-button">🔄 Jugar de nuevo</button>
+
+        .instructions {            </div>
+
+            background: #f0f8e8;
+
+            padding: 20px;            <!-- Pantalla de pausa -->
+
+            border-radius: 10px;            <div id="pause-screen" class="screen">
+
+            margin: 20px 0;                <h2>⏸️ Juego en Pausa</h2>
+
+            text-align: left;                <p>Presiona P para continuar</p>
+
+        }            </div>
+
+        </div>
+
+        .instructions ul {
+
+            list-style: none;        <!-- Controles de audio -->
+
+            padding: 0;        <div id="audio-controls">
+
+        }            <button id="mute-button" class="control-button">🔊</button>
+
+            <button id="save-button" class="control-button" title="Guardar partida">💾</button>
+
+        .instructions li {            <button id="load-button" class="control-button" title="Cargar partida">📂</button>
+
+            padding: 5px 0;        </div>
+
+        }
+
+        <!-- Controles móviles táctiles -->
+
+        .game-button {        <div id="mobile-controls">
+
+            background: linear-gradient(135deg, #4a7c2c 0%, #6b9c43 100%);            <div class="joystick-container">
+
+            color: white;                <div class="joystick-base">
+
+            border: none;                    <div class="joystick-stick" id="joystick"></div>
+
+            padding: 15px 40px;                </div>
+
+            font-size: 1.2em;            </div>
+
+            font-weight: 700;            <div class="action-buttons">
+
+            border-radius: 12px;                <button class="action-button" data-action="space" title="Acampar/Interactuar (ESPACIO)">
+
+            cursor: pointer;                    <span class="action-icon">⛺</span>
+
+            transition: all 0.3s ease;                    <span class="action-label">Acampar</span>
+
+            box-shadow: 0 4px 15px rgba(74, 124, 44, 0.3);                </button>
+
+        }                <button class="action-button" data-action="e" title="Explorar área (E)">
+
+                    <span class="action-icon">🔍</span>
+
+        .game-button:hover {                    <span class="action-label">Explorar</span>
+
+            transform: translateY(-2px);                </button>
+
+            box-shadow: 0 6px 20px rgba(74, 124, 44, 0.4);                <button class="action-button" data-action="r" title="Recolectar objetos (R)">
+
+        }                    <span class="action-icon">🌿</span>
+
+                    <span class="action-label">Recolectar</span>
+
+        #audio-controls {                </button>
+
+            position: fixed;                <button class="action-button" data-action="t" title="Hablar con NPCs (T)">
+
+            bottom: 20px;                    <span class="action-icon">💬</span>
+
+            right: 20px;                    <span class="action-label">Hablar</span>
+
+            display: flex;                </button>
+
+            gap: 10px;                <button class="action-button" data-action="h" title="Ayudar a otros (H)">
+
+            z-index: 100;                    <span class="action-icon">🤝</span>
+
+        }                    <span class="action-label">Ayudar</span>
+
+                </button>
+
+        .control-button {                <button class="action-button" data-action="i" title="Abrir inventario (I)">
+
+            background: rgba(255, 255, 255, 0.9);                    <span class="action-icon">🎒</span>
+
+            border: 2px solid #4a7c2c;                    <span class="action-label">Inventario</span>
+
+            border-radius: 50%;                </button>
+
+            width: 50px;            </div>
+
+            height: 50px;        </div>
+
+            font-size: 1.5em;    </div>
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;    <!-- Cargar scripts en orden de dependencias -->
+
+        }    <script src="game/audio.js"></script>
+
+    <script src="game/inventory.js"></script>
+
+        .control-button:hover {    <script src="game/systems.js"></script>
+
+            transform: scale(1.1);    <script src="game/save.js"></script>
+
+            background: white;    <script src="game/game.js"></script>
+
+        }    <script src="game/npcs.js"></script>
+
+    <script src="game/zones.js"></script>
+
+        @media (max-width: 850px) {    <script src="game/mobile-controls.js"></script>
+
+            .game-wrapper {</body>
+
+                padding: 1rem;</html>
+
+            }
             #game-container {
-                padding: 0.75rem;
-                border-radius: 15px;
+                padding: 1rem;
+            }
+            .screen {
+                min-width: 300px;
+                padding: 20px;
             }
         }
     </style>
@@ -98,11 +494,9 @@
             Volver al inicio
         </a>
         
-        <!-- Contenedor principal del juego -->
         <div id="game-container">
             <h1>🏕️ Aventura Scout</h1>
             
-            <!-- Panel de información del juego -->
             <div id="game-info">
                 <div class="info-item">
                     <span class="info-label">⚡ Energía:</span>
@@ -116,16 +510,10 @@
                     <span class="info-label">🏅 Insignias:</span>
                     <span id="badges-display">0/5</span>
                 </div>
-                <div class="info-item">
-                    <span class="info-label">📋 Misión:</span>
-                    <span id="mission-display">Explora el bosque</span>
-                </div>
             </div>
 
-            <!-- Canvas del juego -->
             <canvas id="gameCanvas" width="800" height="600"></canvas>
 
-            <!-- Panel de insignias obtenidas -->
             <div id="badges-panel">
                 <h3>Insignias Obtenidas:</h3>
                 <div id="badges-container">
@@ -137,7 +525,6 @@
                 </div>
             </div>
 
-            <!-- Pantalla de inicio -->
             <div id="start-screen" class="screen active">
                 <h2>¡Bienvenido, Scout!</h2>
                 <p>Tu misión es completar tareas de exploración, acampada y servicio para ganar 5 insignias.</p>
@@ -145,87 +532,535 @@
                     <h3>Controles:</h3>
                     <ul>
                         <li>⬆️ ⬇️ ⬅️ ➡️ - Mover al scout</li>
-                        <li>ESPACIO - Interactuar / Acampar</li>
+                        <li>ESPACIO - Acampar y recuperar energía</li>
                         <li>E - Explorar área</li>
                         <li>R - Recolectar objetos</li>
                         <li>H - Ayudar a otros</li>
-                        <li>T - Hablar con NPCs</li>
-                        <li>I - Abrir inventario</li>
-                        <li>M - Mostrar/Ocultar misiones</li>
-                        <li>P - Pausar juego</li>
-                        <li>1-6 - Usar item rápido</li>
-                    </ul>
-                    <h3>Nuevas características:</h3>
-                    <ul>
-                        <li>🌙 Ciclo día/noche dinámico</li>
-                        <li>📋 Misiones aleatorias</li>
-                        <li>💬 NPCs con diálogos</li>
-                        <li>🎒 Sistema de inventario</li>
-                        <li>⭐ Sistema de niveles y XP</li>
-                        <li>🗺️ Múltiples zonas explorables</li>
                     </ul>
                 </div>
                 <button id="start-button" class="game-button">🚀 Iniciar Aventura</button>
             </div>
 
-            <!-- Pantalla de victoria -->
             <div id="victory-screen" class="screen">
                 <h2>🎉 ¡Felicidades, Scout!</h2>
                 <p>Has completado todas las misiones y obtenido las 5 insignias.</p>
                 <div id="final-stats"></div>
                 <button id="restart-button" class="game-button">🔄 Jugar de nuevo</button>
             </div>
-
-            <!-- Pantalla de pausa -->
-            <div id="pause-screen" class="screen">
-                <h2>⏸️ Juego en Pausa</h2>
-                <p>Presiona P para continuar</p>
-            </div>
         </div>
 
-        <!-- Controles de audio -->
         <div id="audio-controls">
-            <button id="mute-button" class="control-button">🔊</button>
-            <button id="save-button" class="control-button" title="Guardar partida">💾</button>
-            <button id="load-button" class="control-button" title="Cargar partida">📂</button>
-        </div>
-
-        <!-- Controles móviles táctiles -->
-        <div id="mobile-controls">
-            <div class="joystick-container">
-                <div class="joystick-base">
-                    <div class="joystick-stick" id="joystick"></div>
-                </div>
-            </div>
-            <div class="action-buttons">
-                <button class="action-button" data-action="space" title="Acampar/Interactuar (ESPACIO)">
-                    <span class="action-icon">⛺</span>
-                    <span class="action-label">Acampar</span>
-                </button>
-                <button class="action-button" data-action="e" title="Explorar área (E)">
-                    <span class="action-icon">🔍</span>
-                    <span class="action-label">Explorar</span>
-                </button>
-                <button class="action-button" data-action="r" title="Recolectar objetos (R)">
-                    <span class="action-icon">🌿</span>
-                    <span class="action-label">Recolectar</span>
-                </button>
-                <button class="action-button" data-action="t" title="Hablar con NPCs (T)">
-                    <span class="action-icon">💬</span>
-                    <span class="action-label">Hablar</span>
-                </button>
-                <button class="action-button" data-action="h" title="Ayudar a otros (H)">
-                    <span class="action-icon">🤝</span>
-                    <span class="action-label">Ayudar</span>
-                </button>
-                <button class="action-button" data-action="i" title="Abrir inventario (I)">
-                    <span class="action-icon">🎒</span>
-                    <span class="action-label">Inventario</span>
-                </button>
-            </div>
+            <button id="mute-button" class="control-button" title="Sonido">🔊</button>
         </div>
     </div>
 
-    <script src="dist/game/bundle.js"></script>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let gameState = 'menu';
+        let soundEnabled = true;
+
+        class Scout {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.width = 40;
+                this.height = 50;
+                this.speed = 3;
+                this.energy = 100;
+                this.maxEnergy = 100;
+                this.points = 0;
+                this.badges = [];
+                this.direction = 'down';
+                this.isMoving = false;
+                this.animationFrame = 0;
+                this.animationCounter = 0;
+            }
+
+            move(dx, dy) {
+                if (this.energy <= 0) return;
+
+                const newX = this.x + dx * this.speed;
+                const newY = this.y + dy * this.speed;
+
+                if (newX >= 0 && newX <= canvas.width - this.width) {
+                    this.x = newX;
+                }
+                if (newY >= 0 && newY <= canvas.height - this.height) {
+                    this.y = newY;
+                }
+
+                if (dx > 0) this.direction = 'right';
+                else if (dx < 0) this.direction = 'left';
+                else if (dy > 0) this.direction = 'down';
+                else if (dy < 0) this.direction = 'up';
+
+                this.isMoving = dx !== 0 || dy !== 0;
+                if (this.isMoving) {
+                    this.energy = Math.max(0, this.energy - 0.05);
+                }
+            }
+
+            explore() {
+                if (this.energy < 10) {
+                    showMessage('⚠️ Energía insuficiente para explorar');
+                    return;
+                }
+                this.points += 15;
+                this.energy = Math.max(0, this.energy - 10);
+                showMessage('🔍 ¡Explorando el área! +15 puntos');
+                playSound();
+                this.checkBadgeProgress();
+            }
+
+            camp() {
+                if (this.energy >= this.maxEnergy) {
+                    showMessage('⚠️ Ya tienes energía completa');
+                } else {
+                    this.energy = Math.min(this.maxEnergy, this.energy + 30);
+                    showMessage('⛺ ¡Acampando y descansando! +30 energía');
+                    playSound();
+                    this.checkBadgeProgress();
+                }
+            }
+
+            collect() {
+                const item = this.findNearbyItem();
+                if (item) {
+                    this.points += item.points;
+                    showMessage(`🌿 ¡Recolectaste ${item.name}! +${item.points} puntos`);
+                    playSound();
+                    items.splice(items.indexOf(item), 1);
+                    this.checkBadgeProgress();
+                } else {
+                    showMessage('⚠️ No hay objetos cerca para recolectar');
+                }
+            }
+
+            help() {
+                if (this.energy < 15) {
+                    showMessage('⚠️ Energía insuficiente para ayudar');
+                    return;
+                }
+                this.points += 25;
+                this.energy = Math.max(0, this.energy - 15);
+                showMessage('🤝 ¡Ayudando a otros! +25 puntos');
+                playSound();
+                this.checkBadgeProgress();
+            }
+
+            findNearbyItem() {
+                return items.find(item => {
+                    const dx = item.x - (this.x + this.width / 2);
+                    const dy = item.y - (this.y + this.height / 2);
+                    return Math.sqrt(dx * dx + dy * dy) < 60;
+                });
+            }
+
+            checkBadgeProgress() {
+                if (this.points >= 100 && !this.badges.includes('explorer')) {
+                    this.unlockBadge('explorer', '🧭 Explorador');
+                }
+                if (this.energy === this.maxEnergy && !this.badges.includes('camper')) {
+                    this.unlockBadge('camper', '⛺ Campista');
+                }
+                if (this.points >= 200 && !this.badges.includes('collector')) {
+                    this.unlockBadge('collector', '🌿 Recolector');
+                }
+                if (this.points >= 300 && !this.badges.includes('helper')) {
+                    this.unlockBadge('helper', '🤝 Servicial');
+                }
+                if (this.points >= 400 && !this.badges.includes('leader')) {
+                    this.unlockBadge('leader', '👑 Líder');
+                }
+            }
+
+            unlockBadge(badge, name) {
+                this.badges.push(badge);
+                const badgeEl = document.getElementById(`badge-${badge}`);
+                if (badgeEl) {
+                    badgeEl.classList.remove('locked');
+                    badgeEl.classList.add('unlocked');
+                }
+                showMessage(`🏅 ¡Insignia desbloqueada: ${name}!`);
+                playSound();
+                
+                if (this.badges.length >= 5) {
+                    setTimeout(() => endGame(), 1000);
+                }
+            }
+
+            draw() {
+                if (this.isMoving) {
+                    this.animationCounter++;
+                    if (this.animationCounter % 10 === 0) {
+                        this.animationFrame = (this.animationFrame + 1) % 4;
+                    }
+                }
+
+                ctx.fillStyle = '#d4b896';
+                ctx.fillRect(this.x + 10, this.y + 20, 20, 25);
+
+                ctx.fillStyle = '#f4c2a8';
+                ctx.beginPath();
+                ctx.arc(this.x + 20, this.y + 15, 12, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.fillStyle = '#4a7c2c';
+                ctx.beginPath();
+                ctx.moveTo(this.x + 8, this.y + 8);
+                ctx.lineTo(this.x + 32, this.y + 8);
+                ctx.lineTo(this.x + 20, this.y - 2);
+                ctx.closePath();
+                ctx.fill();
+
+                ctx.fillStyle = '#ff4444';
+                ctx.beginPath();
+                ctx.moveTo(this.x + 15, this.y + 22);
+                ctx.lineTo(this.x + 25, this.y + 22);
+                ctx.lineTo(this.x + 20, this.y + 30);
+                ctx.closePath();
+                ctx.fill();
+
+                ctx.fillStyle = '#2d5016';
+                ctx.fillRect(this.x + 12, this.y + 45, 7, 15);
+                ctx.fillRect(this.x + 21, this.y + 45, 7, 15);
+
+                const armOffset = this.isMoving ? Math.sin(this.animationFrame) * 5 : 0;
+                ctx.fillStyle = '#d4b896';
+                ctx.fillRect(this.x + 5, this.y + 25 + armOffset, 5, 15);
+                ctx.fillRect(this.x + 30, this.y + 25 - armOffset, 5, 15);
+
+                ctx.fillStyle = '#8b4513';
+                ctx.fillRect(this.x + 28, this.y + 25, 8, 12);
+            }
+
+            updateUI() {
+                document.getElementById('energy-display').textContent = Math.round(this.energy);
+                document.getElementById('points-display').textContent = this.points;
+                document.getElementById('badges-display').textContent = `${this.badges.length}/5`;
+            }
+        }
+
+        class Item {
+            constructor(x, y, type) {
+                this.x = x;
+                this.y = y;
+                this.type = type;
+                this.size = 25;
+
+                const types = {
+                    leaf: { name: 'Hoja', points: 10, color: '#90ee90', emoji: '🍃' },
+                    stone: { name: 'Piedra', points: 15, color: '#808080', emoji: '🪨' },
+                    flower: { name: 'Flor', points: 20, color: '#ffb6c1', emoji: '🌸' },
+                    mushroom: { name: 'Hongo', points: 25, color: '#ff6347', emoji: '🍄' }
+                };
+
+                Object.assign(this, types[type]);
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size / 2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = '#2d5016';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                ctx.font = '20px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(this.emoji, this.x, this.y);
+            }
+        }
+
+        let scout = new Scout(canvas.width / 2 - 20, canvas.height - 100);
+        let items = [];
+        let keys = {};
+        let messageQueue = [];
+
+        const treePositions = [];
+        for (let i = 0; i < 8; i++) {
+            treePositions.push({
+                x: i * 110 + 50,
+                y: 100 + (i % 3) * 20
+            });
+        }
+
+        function generateItems() {
+            items = [];
+            const itemTypes = ['leaf', 'stone', 'flower', 'mushroom'];
+            for (let i = 0; i < 15; i++) {
+                const x = Math.random() * (canvas.width - 50) + 25;
+                const y = Math.random() * (canvas.height - 150) + 50;
+                const type = itemTypes[Math.floor(Math.random() * itemTypes.length)];
+                items.push(new Item(x, y, type));
+            }
+        }
+
+        function drawBackground() {
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#87ceeb');
+            gradient.addColorStop(0.7, '#90ee90');
+            gradient.addColorStop(1, '#a8e6cf');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#ffff00';
+            ctx.beginPath();
+            ctx.arc(700, 80, 40, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#ffa500';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            ctx.strokeStyle = '#ffd700';
+            ctx.lineWidth = 2;
+            for (let i = 0; i < 12; i++) {
+                const angle = (i * Math.PI * 2) / 12;
+                const x1 = 700 + Math.cos(angle) * 45;
+                const y1 = 80 + Math.sin(angle) * 45;
+                const x2 = 700 + Math.cos(angle) * 60;
+                const y2 = 80 + Math.sin(angle) * 60;
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+            }
+
+            drawCloud(150, 60);
+            drawCloud(450, 100);
+            drawCloud(650, 50);
+
+            for (let tree of treePositions) {
+                drawTree(tree.x, tree.y, 0.8);
+            }
+
+            ctx.fillStyle = '#3a7f2c';
+            ctx.fillRect(0, canvas.height - 80, canvas.width, 80);
+
+            ctx.fillStyle = '#8b7355';
+            ctx.fillRect(canvas.width / 2 - 60, 0, 120, canvas.height);
+            ctx.strokeStyle = '#a0826d';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([20, 15]);
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, 0);
+            ctx.lineTo(canvas.width / 2, canvas.height);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            drawTent(canvas.width - 150, canvas.height - 150);
+            drawCampfire(120, canvas.height - 120);
+        }
+
+        function drawTree(x, y, scale = 1) {
+            ctx.fillStyle = '#8b4513';
+            ctx.fillRect(x - 10 * scale, y, 20 * scale, 60 * scale);
+
+            ctx.fillStyle = '#2d5016';
+            ctx.beginPath();
+            ctx.arc(x, y, 40 * scale, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x - 20 * scale, y + 10 * scale, 30 * scale, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x + 20 * scale, y + 10 * scale, 30 * scale, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawCloud(x, y) {
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.beginPath();
+            ctx.arc(x, y, 20, 0, Math.PI * 2);
+            ctx.arc(x + 25, y, 25, 0, Math.PI * 2);
+            ctx.arc(x + 50, y, 20, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawTent(x, y) {
+            ctx.fillStyle = '#ff6347';
+            ctx.beginPath();
+            ctx.moveTo(x, y + 80);
+            ctx.lineTo(x + 80, y + 80);
+            ctx.lineTo(x + 40, y);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.fillStyle = '#333';
+            ctx.fillRect(x + 30, y + 50, 20, 30);
+        }
+
+        function drawCampfire(x, y) {
+            ctx.fillStyle = '#696969';
+            for (let i = 0; i < 6; i++) {
+                const angle = (i * Math.PI * 2) / 6;
+                const px = x + Math.cos(angle) * 25;
+                const py = y + Math.sin(angle) * 15;
+                ctx.beginPath();
+                ctx.arc(px, py, 8, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            const flameOffset = Math.sin(Date.now() / 200) * 5;
+            ctx.fillStyle = '#ff4500';
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x - 15, y + 20);
+            ctx.lineTo(x, y - 20 + flameOffset);
+            ctx.lineTo(x + 15, y + 20);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.fillStyle = '#ffa500';
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x - 8, y + 15);
+            ctx.lineTo(x, y - 15 + flameOffset);
+            ctx.lineTo(x + 8, y + 15);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function showMessage(text) {
+            messageQueue.push({ text, alpha: 1, y: 50 });
+            if (messageQueue.length > 3) messageQueue.shift();
+        }
+
+        function drawMessages() {
+            messageQueue.forEach((msg, index) => {
+                ctx.save();
+                ctx.globalAlpha = msg.alpha;
+                ctx.fillStyle = '#2d5016';
+                ctx.font = 'bold 18px Arial';
+                ctx.textAlign = 'center';
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = 3;
+                ctx.strokeText(msg.text, canvas.width / 2, msg.y + index * 30);
+                ctx.fillText(msg.text, canvas.width / 2, msg.y + index * 30);
+                ctx.restore();
+
+                msg.alpha -= 0.01;
+                msg.y -= 0.3;
+            });
+            messageQueue = messageQueue.filter(msg => msg.alpha > 0);
+        }
+
+        function playSound() {
+            if (!soundEnabled) return;
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 440;
+            oscillator.type = 'sine';
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.2);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            keys[e.key] = true;
+
+            if (gameState === 'playing') {
+                if (e.key === ' ' || e.key === 'Spacebar') {
+                    e.preventDefault();
+                    scout.camp();
+                }
+                if (e.key === 'e' || e.key === 'E') scout.explore();
+                if (e.key === 'r' || e.key === 'R') scout.collect();
+                if (e.key === 'h' || e.key === 'H') scout.help();
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            keys[e.key] = false;
+        });
+
+        function updateMovement() {
+            let dx = 0, dy = 0;
+
+            if (keys['ArrowUp'] || keys['w'] || keys['W']) dy = -1;
+            if (keys['ArrowDown'] || keys['s'] || keys['S']) dy = 1;
+            if (keys['ArrowLeft'] || keys['a'] || keys['A']) dx = -1;
+            if (keys['ArrowRight'] || keys['d'] || keys['D']) dx = 1;
+
+            if (dx !== 0 || dy !== 0) {
+                const magnitude = Math.sqrt(dx * dx + dy * dy);
+                scout.move(dx / magnitude, dy / magnitude);
+            } else {
+                scout.isMoving = false;
+            }
+        }
+
+        function gameLoop() {
+            if (gameState === 'playing') {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                drawBackground();
+                items.forEach(item => item.draw());
+                updateMovement();
+                scout.draw();
+                scout.updateUI();
+                drawMessages();
+
+                if (scout.energy < scout.maxEnergy && !scout.isMoving) {
+                    scout.energy = Math.min(scout.maxEnergy, scout.energy + 0.02);
+                }
+            }
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        function startGame() {
+            gameState = 'playing';
+            document.getElementById('start-screen').classList.remove('active');
+            scout = new Scout(canvas.width / 2 - 20, canvas.height - 100);
+            generateItems();
+            showMessage('¡Bienvenido, Scout! Completa las misiones');
+            gameLoop();
+        }
+
+        function endGame() {
+            gameState = 'victory';
+            const victoryScreen = document.getElementById('victory-screen');
+            const finalStats = document.getElementById('final-stats');
+            
+            finalStats.innerHTML = `
+                <p>⭐ Puntos totales: ${scout.points}</p>
+                <p>🏅 Insignias obtenidas: ${scout.badges.length}/5</p>
+                <p>⚡ Energía final: ${Math.round(scout.energy)}</p>
+            `;
+            
+            victoryScreen.classList.add('active');
+            playSound();
+        }
+
+        function restartGame() {
+            document.getElementById('victory-screen').classList.remove('active');
+            document.querySelectorAll('.badge').forEach(badge => {
+                badge.classList.remove('unlocked');
+                badge.classList.add('locked');
+            });
+            startGame();
+        }
+
+        document.getElementById('start-button').addEventListener('click', startGame);
+        document.getElementById('restart-button').addEventListener('click', restartGame);
+        document.getElementById('mute-button').addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            document.getElementById('mute-button').textContent = soundEnabled ? '🔊' : '🔇';
+        });
+
+        console.log('🏕️ Aventura Scout - Juego cargado correctamente');
+    </script>
 </body>
 </html>

@@ -17,6 +17,8 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.static('src'));
+// Serve bundled assets
+app.use('/dist', express.static('dist'));
 
 // Import API handlers
 const postsHandler = (await import('./api/posts.js')).default;
