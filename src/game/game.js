@@ -21,11 +21,11 @@ let currentZoneObject = null; // Objeto de zona actual
 // ============================================
 // SISTEMAS DEL JUEGO
 // ============================================
-let missionSystem = new MissionSystem();
-let levelSystem = new LevelSystem();
-let dayNightCycle = new DayNightCycle();
-let dialogSystem = new DialogSystem();
-let inventory = new Inventory();
+let missionSystem;
+let levelSystem;
+let dayNightCycle;
+let dialogSystem;
+let inventory;
 
 // Variables globales para funcionalidades de items
 window.showCompassIndicator = false;
@@ -38,9 +38,6 @@ window.showScoutManual = false;
 
 // Referencias globales para callbacks
 window.scout = null;
-window.missionSystem = missionSystem;
-window.levelSystem = levelSystem;
-window.dayNightCycle = dayNightCycle;
 
 // ============================================
 // CLASE SCOUT (PERSONAJE PRINCIPAL)
@@ -1098,15 +1095,36 @@ window.addEventListener('beforeunload', () => {
 // ============================================
 // INICIALIZACIÓN
 // ============================================
-console.log('🏕️ Aventura Scout - Versión Mejorada cargada correctamente');
-console.log('Controles: Flechas = Mover | Espacio = Acampar | E = Explorar | R = Recolectar | H = Ayudar');
-console.log('P = Pausa | I = Inventario | T = Hablar con NPCs');
-console.log('');
-console.log('Nuevas características:');
-console.log('✅ Sistema de misiones dinámicas');
-console.log('✅ Niveles y experiencia (XP)');
-console.log('✅ Ciclo día/noche');
-console.log('✅ NPCs con diálogos');
-console.log('✅ Sistema de inventario');
-console.log('✅ Efectos de sonido y música');
-console.log('✅ Partículas y efectos visuales');
+function initializeGame() {
+    // Inicializar sistemas
+    missionSystem = new MissionSystem();
+    levelSystem = new LevelSystem();
+    dayNightCycle = new DayNightCycle();
+    dialogSystem = new DialogSystem();
+    inventory = new Inventory();
+    
+    // Referencias globales
+    window.missionSystem = missionSystem;
+    window.levelSystem = levelSystem;
+    window.dayNightCycle = dayNightCycle;
+    
+    console.log('🏕️ Aventura Scout - Versión Mejorada cargada correctamente');
+    console.log('Controles: Flechas = Mover | Espacio = Acampar | E = Explorar | R = Recolectar | H = Ayudar');
+    console.log('P = Pausa | I = Inventario | T = Hablar con NPCs');
+    console.log('');
+    console.log('Nuevas características:');
+    console.log('✅ Sistema de misiones dinámicas');
+    console.log('✅ Niveles y experiencia (XP)');
+    console.log('✅ Ciclo día/noche');
+    console.log('✅ NPCs con diálogos');
+    console.log('✅ Sistema de inventario');
+    console.log('✅ Efectos de sonido y música');
+    console.log('✅ Partículas y efectos visuales');
+}
+
+// Inicializar cuando el DOM esté listo
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeGame);
+} else {
+    initializeGame();
+}
