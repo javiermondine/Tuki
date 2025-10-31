@@ -9,11 +9,11 @@ async function testSupabase() {
     const url = process.env.SUPABASE_URL;
     const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
     
-    console.log('URL:', url ? '✅ Found' : '❌ Missing');
-    console.log('KEY:', key ? '✅ Found' : '❌ Missing');
+    console.log('URL:', url ? 'Found' : 'Missing');
+    console.log('KEY:', key ? 'Found' : 'Missing');
     
     if (!url || !key) {
-        console.error('\n❌ Missing environment variables');
+        console.error('\nFAIL Missing environment variables');
         return;
     }
     
@@ -26,11 +26,11 @@ async function testSupabase() {
         .order('created_at', { ascending: false });
     
     if (error) {
-        console.error('❌ Error:', error);
+        console.error('FAIL Error:', error);
         return;
     }
     
-    console.log(`\n✅ Found ${data.length} posts:`);
+    console.log(`\nOK Found ${data.length} posts:`);
     data.forEach((post, i) => {
         console.log(`\n${i + 1}. ${post.name} (${post.category})`);
         console.log(`   ${post.message.substring(0, 50)}...`);

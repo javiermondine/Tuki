@@ -10,9 +10,9 @@ const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 console.log('🔍 Environment variables loaded:');
-console.log('- SUPABASE_URL:', SUPABASE_URL ? '✅' : '❌');
-console.log('- SUPABASE_KEY:', SUPABASE_KEY ? '✅' : '❌');
-console.log('- MONGODB_URI:', MONGODB_URI ? '✅' : '❌');
+console.log('- SUPABASE_URL:', SUPABASE_URL ? 'OK' : 'FAIL');
+console.log('- SUPABASE_KEY:', SUPABASE_KEY ? 'OK' : 'FAIL');
+console.log('- MONGODB_URI:', MONGODB_URI ? 'OK' : 'FAIL');
 
 async function addTestPost() {
     console.log('🔵 Agregando post de prueba...');
@@ -35,14 +35,14 @@ async function addTestPost() {
                 .single();
                 
             if (error) {
-                console.error('❌ Error en Supabase:', error.message);
+                console.error('FAIL Error en Supabase:', error.message);
                 throw error;
             }
             
-            console.log('✅ Post agregado a Supabase:', data);
+            console.log('OK Post agregado a Supabase:', data);
             return data;
         } catch (e) {
-            console.error('⚠️  Supabase falló, intentando MongoDB...', e.message);
+            console.error('Warning  Supabase falló, intentando MongoDB...', e.message);
         }
     }
     
@@ -60,12 +60,12 @@ async function addTestPost() {
             };
             
             const result = await db.collection('posts').insertOne(testPost);
-            console.log('✅ Post agregado a MongoDB:', result.insertedId);
+            console.log('OK Post agregado a MongoDB:', result.insertedId);
             
             await client.close();
             return result;
         } catch (e) {
-            console.error('❌ Error en MongoDB:', e.message);
+            console.error('FAIL Error en MongoDB:', e.message);
             throw e;
         }
     }
@@ -106,14 +106,14 @@ async function addTestRegistration() {
                 .single();
                 
             if (error) {
-                console.error('❌ Error en Supabase:', error.message);
+                console.error('FAIL Error en Supabase:', error.message);
                 throw error;
             }
             
-            console.log('✅ Registro agregado a Supabase:', data);
+            console.log('OK Registro agregado a Supabase:', data);
             return data;
         } catch (e) {
-            console.error('⚠️  Supabase falló, intentando MongoDB...', e.message);
+            console.error('Warning  Supabase falló, intentando MongoDB...', e.message);
         }
     }
     
@@ -142,12 +142,12 @@ async function addTestRegistration() {
             };
             
             const result = await db.collection('registrations').insertOne(testRegistration);
-            console.log('✅ Registro agregado a MongoDB:', result.insertedId);
+            console.log('OK Registro agregado a MongoDB:', result.insertedId);
             
             await client.close();
             return result;
         } catch (e) {
-            console.error('❌ Error en MongoDB:', e.message);
+            console.error('FAIL Error en MongoDB:', e.message);
             throw e;
         }
     }
@@ -157,18 +157,18 @@ async function addTestRegistration() {
 
 async function main() {
     try {
-        console.log('🚀 Iniciando script de prueba...\n');
+        console.log(' Iniciando script de prueba...\n');
         
         await addTestPost();
         await addTestRegistration();
         
-        console.log('\n✅ ¡Script completado exitosamente!');
+        console.log('\nOK ¡Script completado exitosamente!');
         console.log('\nPuedes verificar en:');
         console.log('- Foro: https://tuki-ten.vercel.app/forum.html');
         console.log('- API: https://tuki-ten.vercel.app/api/posts');
         
     } catch (error) {
-        console.error('\n❌ Error en el script:', error);
+        console.error('\nFAIL Error en el script:', error);
         process.exit(1);
     }
 }

@@ -30,19 +30,5 @@ app.all('/api/register', registerHandler);
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`
-🚀 Servidor local iniciado
-
-📍 URLs disponibles:
-   - Página principal: http://localhost:${PORT}/
-   - Foro:             http://localhost:${PORT}/forum.html
-   - Juego:            http://localhost:${PORT}/game.html
-   - Inscripción:      http://localhost:${PORT}/signup.html
-   - API Posts:        http://localhost:${PORT}/api/posts
-
-✅ Con las variables de entorno de .env.local
-✅ Conectado a Supabase y MongoDB
-
-Presiona Ctrl+C para detener el servidor
-    `);
+    console.log(`Servidor iniciado en http://localhost:${PORT}/`);
 });

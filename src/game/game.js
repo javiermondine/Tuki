@@ -106,8 +106,8 @@ class Scout {
 
     // Método para explorar (gana puntos)
     explore() {
-        if (this.energy < 10) {
-            showMessage('⚠️ Energía insuficiente para explorar');
+        if (this.energy < 20) {
+            showMessage('Energía insuficiente para explorar');
             return;
         }
         const points = 15 * levelSystem.getDifficultyMultiplier('rewards');
@@ -125,8 +125,8 @@ class Scout {
 
     // Método para acampar (recupera energía)
     camp() {
-        if (this.energy >= this.maxEnergy) {
-            showMessage('⚠️ Ya tienes energía completa');
+        if (this.energy >= 100) {
+            showMessage('Ya tienes energía completa');
             return;
         }
         this.energy = Math.min(this.maxEnergy, this.energy + 30);
@@ -158,14 +158,14 @@ class Scout {
             
             this.checkBadgeProgress();
         } else {
-            showMessage('⚠️ No hay objetos cerca para recolectar');
+            showMessage('No hay objetos cerca para recolectar');
         }
     }
 
     // Método para ayudar (misión de servicio)
     help() {
         if (this.energy < 15) {
-            showMessage('⚠️ Energía insuficiente para ayudar');
+            showMessage('Energía insuficiente para ayudar');
             return;
         }
         const points = 25 * levelSystem.getDifficultyMultiplier('rewards');
@@ -978,11 +978,11 @@ function endGame() {
     const finalStats = document.getElementById('final-stats');
     
     finalStats.innerHTML = `
-        <p>⭐ Puntos totales: ${scout.points}</p>
-        <p>🏅 Insignias obtenidas: ${scout.badges.length}/5</p>
-        <p>⚡ Energía final: ${Math.round(scout.energy)}</p>
-        <p>🎖️ Nivel alcanzado: ${levelSystem.level}</p>
-        <p>✅ Misiones completadas: ${missionSystem.completedMissions.length}</p>
+        <p>Puntos totales: ${scout.points}</p>
+        <p>Insignias obtenidas: ${scout.badges.length}/5</p>
+        <p>Energía final: ${Math.round(scout.energy)}</p>
+        <p>Nivel alcanzado: ${levelSystem.level}</p>
+        <p>Misiones completadas: ${missionSystem.completedMissions.length}</p>
     `;
     
     victoryScreen.classList.add('active');
@@ -1059,7 +1059,7 @@ document.getElementById('save-button')?.addEventListener('click', () => {
     if (gameState === 'playing') {
         saveSystem.save();
     } else {
-        showMessage('⚠️ Solo puedes guardar durante el juego');
+        showMessage('Solo puedes guardar durante el juego');
     }
 });
 
@@ -1069,7 +1069,7 @@ document.getElementById('load-button')?.addEventListener('click', () => {
         if (savedData) {
             saveSystem.applyLoadedData(savedData);
         } else {
-            showMessage('⚠️ No hay partida guardada');
+            showMessage('No hay partida guardada');
         }
     }
 });
@@ -1111,19 +1111,6 @@ function initializeGame() {
     window.missionSystem = missionSystem;
     window.levelSystem = levelSystem;
     window.dayNightCycle = dayNightCycle;
-    
-    console.log('🏕️ Aventura Scout - Versión Mejorada cargada correctamente');
-    console.log('Controles: Flechas = Mover | Espacio = Acampar | E = Explorar | R = Recolectar | H = Ayudar');
-    console.log('P = Pausa | I = Inventario | T = Hablar con NPCs');
-    console.log('');
-    console.log('Nuevas características:');
-    console.log('✅ Sistema de misiones dinámicas');
-    console.log('✅ Niveles y experiencia (XP)');
-    console.log('✅ Ciclo día/noche');
-    console.log('✅ NPCs con diálogos');
-    console.log('✅ Sistema de inventario');
-    console.log('✅ Efectos de sonido y música');
-    console.log('✅ Partículas y efectos visuales');
 }
 
 // Inicializar cuando el DOM esté listo

@@ -15,7 +15,7 @@ class PWAInstaller {
         // Verificar si ya está instalada
         if (window.matchMedia('(display-mode: standalone)').matches) {
             this.isInstalled = true;
-            console.log('✅ La app ya está instalada');
+            console.log(' La app ya está instalada');
             return;
         }
 
@@ -37,7 +37,7 @@ class PWAInstaller {
 
         // Detectar cuando se instala
         window.addEventListener('appinstalled', () => {
-            console.log('✅ App instalada exitosamente');
+            console.log(' App instalada exitosamente');
             this.isInstalled = true;
             this.hideInstallButton();
             this.showSuccessMessage();
@@ -210,7 +210,7 @@ class PWAInstaller {
         const { outcome } = await this.deferredPrompt.userChoice;
         
         if (outcome === 'accepted') {
-            console.log('✅ Usuario aceptó la instalación');
+            console.log(' Usuario aceptó la instalación');
         } else {
             console.log('❌ Usuario rechazó la instalación');
             localStorage.setItem('pwa-install-dismissed', Date.now());
@@ -238,7 +238,7 @@ class PWAInstaller {
             font-family: 'Nunito', sans-serif;
             animation: slideInDown 0.5s ease;
         `;
-        message.innerHTML = '✅ ¡App instalada exitosamente!';
+        message.innerHTML = ' ¡App instalada exitosamente!';
 
         const styleSheet = document.createElement('style');
         styleSheet.textContent = `
