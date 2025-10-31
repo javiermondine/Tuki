@@ -179,7 +179,7 @@ const ZONES = {
         ambientSound: 'village',
         description: 'Un acogedor pueblo scout',
         itemTypes: [
-            { icon: '📦', name: 'Suministros', points: 15, type: 'resource' },
+            { icon: ''box'', name: 'Suministros', points: 15, type: 'resource' },
             { icon: '🍞', name: 'Pan', points: 10, type: 'food' },
             { icon: '🥕', name: 'Verduras', points: 12, type: 'food' },
             { icon: '📜', name: 'Mapa antiguo', points: 20, type: 'tool' },
@@ -197,7 +197,7 @@ const ZONES = {
             },
             {
                 name: 'Herrero',
-                icon: '👨‍🔧',
+                icon: ''worker'',
                 color: '#8B4513',
                 dialogs: [
                     { text: 'Puedo reparar tus herramientas. El trabajo duro siempre vale la pena.', next: null },

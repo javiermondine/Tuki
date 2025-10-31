@@ -223,7 +223,7 @@ class Scout {
             badgeElement.classList.remove('locked');
             badgeElement.classList.add('unlocked');
         }
-        showMessage(`🏅 ¡Insignia desbloqueada: ${badgeName}!`);
+        showMessage(`Insignia desbloqueada: ${badgeName}!`);
         playSound('badge');
 
         // Verificar victoria
@@ -742,7 +742,7 @@ document.addEventListener('keydown', (e) => {
         }
         if (e.key === 'm' || e.key === 'M') {
             missionsVisible = !missionsVisible;
-            showMessage(missionsVisible ? '📋 Panel de misiones visible' : '📋 Panel de misiones oculto');
+            showMessage(missionsVisible ? 'Panel de misiones visible' : 'Panel de misiones oculto');
         }
         if (e.key === 't' || e.key === 'T') {
             // Interactuar con NPCs

@@ -16,13 +16,13 @@ class Inventory {
         const existing = this.items.find(i => i.id === item.id && i.stackable);
         if (existing) {
             existing.quantity += item.quantity || 1;
-            showMessage(`🎒 ${item.name} agregado al inventario (${existing.quantity})`);
+            showMessage(`'bag' ${item.name} agregado al inventario (${existing.quantity})`);
         } else if (this.items.length < this.maxSlots) {
             this.items.push({
                 ...item,
                 quantity: item.quantity || 1
             });
-            showMessage(`🎒 ${item.name} agregado al inventario`);
+            showMessage(`'bag' ${item.name} agregado al inventario`);
         } else {
             showMessage('⚠️ Inventario lleno');
             return false;
@@ -104,7 +104,7 @@ class Inventory {
         // Título
         ctx.fillStyle = '#2d5016';
         ctx.font = 'bold 24px Arial';
-        ctx.fillText('🎒 Inventario', panelX + 20, panelY + 35);
+        ctx.fillText(''bag' Inventario', panelX + 20, panelY + 35);
 
         // Instrucciones
         ctx.font = '12px Arial';

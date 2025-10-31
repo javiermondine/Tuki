@@ -393,7 +393,7 @@ class NPC {
 
 // Funciones auxiliares para callbacks de diálogos
 function acceptQuest(questId) {
-    showMessage('📋 ¡Misión aceptada!');
+    showMessage('Misión aceptada!');
     if (window.missionSystem) {
         // Agregar misión personalizada
         window.missionSystem.currentMissions.push({
@@ -411,7 +411,7 @@ function acceptQuest(questId) {
 }
 
 function learnScoutValues() {
-    showMessage('🏕️ Has aprendido sobre los valores scout');
+    showMessage('Has aprendido sobre los valores scout');
     if (window.scout) {
         window.scout.points += 75;
         window.levelSystem?.addXP(50);
@@ -419,7 +419,7 @@ function learnScoutValues() {
 }
 
 function generateSpecialMission() {
-    showMessage('⭐ Misión especial desbloqueada');
+    showMessage(''star' Misión especial desbloqueada');
     if (window.missionSystem) {
         window.missionSystem.currentMissions.push({
             id: 'special_elder',

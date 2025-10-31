@@ -49,7 +49,7 @@ class SaveSystem {
             return true;
         } catch (e) {
             console.error('Error al guardar:', e);
-            showMessage('⚠️ Error al guardar partida');
+            showMessage('Error al guardar partida');
             return false;
         }
     }
@@ -219,7 +219,7 @@ class SaveSystem {
                 setTimeout(() => location.reload(), 1000);
             } catch (err) {
                 console.error('Error al importar:', err);
-                showMessage('⚠️ Archivo inválido');
+                showMessage('Archivo inválido');
             }
         };
         reader.readAsText(file);
@@ -263,7 +263,7 @@ class AchievementSystem {
                 id: 'social',
                 name: 'Scout Social',
                 description: 'Habla con todos los NPCs',
-                icon: '💬',
+                icon: ''dialog'',
                 unlocked: false,
                 condition: () => npcs.every(npc => npc.questCompleted)
             },
@@ -279,7 +279,7 @@ class AchievementSystem {
                 id: 'master',
                 name: 'Maestro Scout',
                 description: 'Alcanza el nivel 20',
-                icon: '🎖️',
+                icon: ''medal'',
                 unlocked: false,
                 condition: () => levelSystem.level >= 20
             },
@@ -287,7 +287,7 @@ class AchievementSystem {
                 id: 'hoarder',
                 name: 'Acumulador',
                 description: 'Llena completamente tu inventario',
-                icon: '🎒',
+                icon: ''bag'',
                 unlocked: false,
                 condition: () => inventory.items.length >= inventory.maxSlots
             },
@@ -295,7 +295,7 @@ class AchievementSystem {
                 id: 'speedrunner',
                 name: 'Velocista',
                 description: 'Completa 5 insignias en menos de 10 minutos',
-                icon: '⚡',
+                icon: ''energy'',
                 unlocked: false,
                 condition: () => false // Requiere sistema de tiempo
             }

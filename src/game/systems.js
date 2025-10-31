@@ -51,7 +51,7 @@ class MissionSystem {
                 type: 'night_explore',
                 target: 1,
                 reward: { points: 80, badge: null },
-                icon: '🌙'
+                icon: ''moon''
             },
             {
                 id: 'forest_guardian',
@@ -69,7 +69,7 @@ class MissionSystem {
                 type: 'maintain_energy',
                 target: 120, // frames
                 reward: { points: 120, badge: null },
-                icon: '⚡'
+                icon: ''energy''
             },
             {
                 id: 'treasure_hunter',
@@ -164,7 +164,7 @@ class MissionSystem {
         // Título
         ctx.fillStyle = '#2d5016';
         ctx.font = 'bold 18px Arial';
-        ctx.fillText('📋 Misiones Activas', x + 10, y + 25);
+        ctx.fillText('Misiones Activas', x + 10, y + 25);
 
         // Misiones
         activeMissions.forEach((mission, index) => {
@@ -224,7 +224,7 @@ class LevelSystem {
                 xpMultiplier: 1.5,
                 energyCost: 1.3,
                 rewards: 1.5,
-                icon: '⭐'
+                icon: ''star''
             },
             leader: {
                 name: 'Líder',
@@ -253,7 +253,7 @@ class LevelSystem {
         this.xp -= this.xpToNextLevel;
         this.xpToNextLevel = Math.floor(this.xpToNextLevel * 1.5);
         
-        showMessage(`🎉 ¡Nivel ${this.level} alcanzado!`);
+        showMessage(`Nivel ${this.level} alcanzado!`);
         playSound('level_up');
 
         // Cambiar dificultad automáticamente
@@ -458,7 +458,7 @@ class DayNightCycle {
     drawClock(ctx, x, y) {
         const phase = this.getPhase();
         const icons = {
-            night: '🌙',
+            night: ''moon'',
             dawn: '🌅',
             day: '☀️',
             dusk: '🌇'
