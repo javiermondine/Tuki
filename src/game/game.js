@@ -5,13 +5,14 @@
 // ============================================
 // CONFIGURACIÓN DEL CANVAS
 // ============================================
-let canvas;
-let ctx;
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
 
 // ============================================
 // VARIABLES GLOBALES DEL JUEGO
 // ============================================
 let gameState = 'menu'; // Estados: 'menu', 'playing', 'paused', 'victory', 'dialog'
+// ... (el resto del archivo permanece igual hasta la sección de inicialización)
 let animationId = null;
 let soundEnabled = true;
 let missionsVisible = true; // Variable para mostrar/ocultar panel de misiones
@@ -350,10 +351,10 @@ class Item {
 // ============================================
 // VARIABLES DEL JUEGO
 // ============================================
-let scout = new Scout(canvas.width / 2 - 20, canvas.height - 100);
-window.scout = scout; // Referencia global
+let scout; // Se inicializará en initializeGame
 let items = [];
 let npcs = [];
+
 
 // Posiciones fijas de árboles (para evitar que se muevan)
 const treePositions = [];
@@ -960,7 +961,7 @@ function startGame() {
     initializeInventory();
     
     // Generar misiones aleatorias
-    missionSystem.generateRandomMissions(3, levelSystem.difficulty);
+    window.missionSystem.generateRandomMissions(3, window.levelSystem.difficulty);
     
     // Iniciar música ambiental
     if (audioSystem) {
@@ -969,7 +970,9 @@ function startGame() {
     }
     
     showMessage('¡Bienvenido, Scout! Completa las misiones');
-    gameLoop();
+    if (!animationId) {
+        gameLoop();
+    }
 }
 
 function endGame() {
@@ -1015,107 +1018,103 @@ function restartGame() {
     });
     
     // Resetear sistemas
-    missionSystem = new MissionSystem();
-    levelSystem = new LevelSystem();
-    dayNightCycle = new DayNightCycle();
-    inventory = new Inventory();
+    window.missionSystem = new MissionSystem();
+    window.levelSystem = new LevelSystem();
+    window.dayNightCycle = new DayNightCycle();
+    window.inventory = new Inventory();
     particles = [];
-    
-    window.missionSystem = missionSystem;
-    window.levelSystem = levelSystem;
-    window.dayNightCycle = dayNightCycle;
     
     startGame();
 }
 
 // ============================================
-// EVENT LISTENERS DE BOTONES
+// EVENT LISTENERS DE BOTONES Y CONTROLES
 // ============================================
-document.getElementById('start-button').addEventListener('click', () => {
-    // Verificar si hay partida guardada
-    if (saveSystem.hasSave()) {
-        const load = confirm('¿Deseas continuar tu partida guardada?');
-        if (load) {
-            startGame();
-            const savedData = saveSystem.load();
-            saveSystem.applyLoadedData(savedData);
-            return;
+function setupEventListeners() {
+    document.getElementById('start-button').addEventListener('click', () => {
+        // Verificar si hay partida guardada
+        if (saveSystem.hasSave()) {
+            const load = confirm('¿Deseas continuar tu partida guardada?');
+            if (load) {
+                startGame();
+                const savedData = saveSystem.load();
+                saveSystem.applyLoadedData(savedData);
+                return;
+            }
         }
-    }
-    startGame();
-});
+        startGame();
+    });
 
-document.getElementById('restart-button').addEventListener('click', restartGame);
+    document.getElementById('restart-button').addEventListener('click', restartGame);
 
-document.getElementById('mute-button').addEventListener('click', () => {
-    if (audioSystem) {
-        const enabled = audioSystem.toggle();
-        const btn = document.getElementById('mute-button');
-        btn.textContent = enabled ? '🔊' : '🔇';
-    }
-});
+    document.getElementById('mute-button').addEventListener('click', () => {
+        if (audioSystem) {
+            const enabled = audioSystem.toggle();
+            const btn = document.getElementById('mute-button');
+            btn.textContent = enabled ? '🔊' : '🔇';
+        }
+    });
 
-document.getElementById('save-button')?.addEventListener('click', () => {
-    if (gameState === 'playing') {
-        saveSystem.save();
-    } else {
-        showMessage('Solo puedes guardar durante el juego');
-    }
-});
-
-document.getElementById('load-button')?.addEventListener('click', () => {
-    if (gameState === 'playing') {
-        const savedData = saveSystem.load();
-        if (savedData) {
-            saveSystem.applyLoadedData(savedData);
+    document.getElementById('save-button')?.addEventListener('click', () => {
+        if (gameState === 'playing') {
+            saveSystem.save();
         } else {
-            showMessage('No hay partida guardada');
+            showMessage('Solo puedes guardar durante el juego');
         }
-    }
-});
+    });
 
-// Click en canvas para inventario
-canvas.addEventListener('click', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    
-    if (inventory.visible) {
-        inventory.handleClick(mouseX, mouseY, canvas.width, canvas.height);
-    }
-});
+    document.getElementById('load-button')?.addEventListener('click', () => {
+        if (gameState === 'playing') {
+            const savedData = saveSystem.load();
+            if (savedData) {
+                saveSystem.applyLoadedData(savedData);
+            } else {
+                showMessage('No hay partida guardada');
+            }
+        }
+    });
 
-// Guardar antes de cerrar
-window.addEventListener('beforeunload', () => {
-    if (gameState === 'playing') {
-        saveSystem.save();
-    }
-});
+    // Click en canvas para inventario
+    canvas.addEventListener('click', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        
+        if (inventory.visible) {
+            inventory.handleClick(mouseX, mouseY, canvas.width, canvas.height);
+        }
+    });
+
+    // Guardar antes de cerrar
+    window.addEventListener('beforeunload', () => {
+        if (gameState === 'playing') {
+            saveSystem.save();
+        }
+    });
+}
+
 
 // ============================================
 // INICIALIZACIÓN
 // ============================================
 function initializeGame() {
-    // Inicializar canvas
-    canvas = document.getElementById('gameCanvas');
-    ctx = canvas.getContext('2d');
-    
     // Inicializar sistemas
-    missionSystem = new MissionSystem();
-    levelSystem = new LevelSystem();
-    dayNightCycle = new DayNightCycle();
-    dialogSystem = new DialogSystem();
-    inventory = new Inventory();
+    window.missionSystem = new MissionSystem();
+    window.levelSystem = new LevelSystem();
+    window.dayNightCycle = new DayNightCycle();
+    window.dialogSystem = new DialogSystem();
+    window.inventory = new Inventory();
     
-    // Referencias globales
-    window.missionSystem = missionSystem;
-    window.levelSystem = levelSystem;
-    window.dayNightCycle = dayNightCycle;
+    // Inicializar el scout ahora que el canvas existe
+    scout = new Scout(canvas.width / 2 - 20, canvas.height - 100);
+    window.scout = scout; // Asignar a la referencia global
+
+    // Configurar listeners
+    setupEventListeners();
+
+    // Mostrar la pantalla de inicio
+    document.getElementById('start-screen').classList.add('active');
 }
 
-// Inicializar cuando el DOM esté listo
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeGame);
-} else {
-    initializeGame();
-}
+// Inicializar cuando la ventana completa esté cargada
+window.onload = initializeGame;

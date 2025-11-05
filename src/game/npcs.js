@@ -419,7 +419,7 @@ function learnScoutValues() {
 }
 
 function generateSpecialMission() {
-    showMessage(''star' Misión especial desbloqueada');
+    showMessage('⭐ Misión especial desbloqueada');
     if (window.missionSystem) {
         window.missionSystem.currentMissions.push({
             id: 'special_elder',

@@ -104,7 +104,7 @@ class Inventory {
         // Título
         ctx.fillStyle = '#2d5016';
         ctx.font = 'bold 24px Arial';
-        ctx.fillText(''bag' Inventario', panelX + 20, panelY + 35);
+        ctx.fillText('🎒 Inventario', panelX + 20, panelY + 35);
 
         // Instrucciones
         ctx.font = '12px Arial';

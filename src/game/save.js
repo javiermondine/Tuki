@@ -263,7 +263,7 @@ class AchievementSystem {
                 id: 'social',
                 name: 'Scout Social',
                 description: 'Habla con todos los NPCs',
-                icon: ''dialog'',
+                icon: '💬',
                 unlocked: false,
                 condition: () => npcs.every(npc => npc.questCompleted)
             },

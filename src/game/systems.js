@@ -51,7 +51,7 @@ class MissionSystem {
                 type: 'night_explore',
                 target: 1,
                 reward: { points: 80, badge: null },
-                icon: ''moon''
+                icon: '🌙'
             },
             {
                 id: 'forest_guardian',

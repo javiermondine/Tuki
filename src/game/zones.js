@@ -179,7 +179,7 @@ const ZONES = {
         ambientSound: 'village',
         description: 'Un acogedor pueblo scout',
         itemTypes: [
-            { icon: ''box'', name: 'Suministros', points: 15, type: 'resource' },
+            { icon: '📦', name: 'Suministros', points: 15, type: 'resource' },
             { icon: '🍞', name: 'Pan', points: 10, type: 'food' },
             { icon: '🥕', name: 'Verduras', points: 12, type: 'food' },
             { icon: '📜', name: 'Mapa antiguo', points: 20, type: 'tool' },
