@@ -150,50 +150,123 @@ class MissionSystem {
         if (activeMissions.length === 0) return;
 
         ctx.save();
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
-        ctx.strokeStyle = '#4a7c2c';
-        ctx.lineWidth = 3;
         
-        const panelWidth = 280;
-        const panelHeight = 40 + activeMissions.length * 60;
+        const panelWidth = 300;
+        const headerHeight = 45;
+        const missionHeight = 70;
+        const panelHeight = headerHeight + activeMissions.length * missionHeight + 10;
         
-        // Fondo del panel
+        // Sombra del panel
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+        ctx.shadowBlur = 15;
+        ctx.shadowOffsetX = -3;
+        ctx.shadowOffsetY = 3;
+        
+        // Fondo del panel con gradiente
+        const gradient = ctx.createLinearGradient(x, y, x, y + panelHeight);
+        gradient.addColorStop(0, 'rgba(255, 255, 255, 0.98)');
+        gradient.addColorStop(1, 'rgba(245, 245, 245, 0.98)');
+        ctx.fillStyle = gradient;
         ctx.fillRect(x, y, panelWidth, panelHeight);
+        
+        // Borde del panel
+        ctx.shadowBlur = 0;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
+        ctx.strokeStyle = '#4a7c2c';
+        ctx.lineWidth = 4;
         ctx.strokeRect(x, y, panelWidth, panelHeight);
 
+        // Header con fondo de color
+        const headerGradient = ctx.createLinearGradient(x, y, x, y + headerHeight);
+        headerGradient.addColorStop(0, '#5a8f3d');
+        headerGradient.addColorStop(1, '#4a7c2c');
+        ctx.fillStyle = headerGradient;
+        ctx.fillRect(x, y, panelWidth, headerHeight);
+
         // Título
-        ctx.fillStyle = '#2d5016';
+        ctx.fillStyle = '#ffffff';
         ctx.font = 'bold 18px Arial';
-        ctx.fillText('Misiones Activas', x + 10, y + 25);
+        ctx.textAlign = 'left';
+        ctx.fillText('📋 Misiones Activas', x + 15, y + 28);
+        
+        // Botón para ocultar (tecla M)
+        ctx.font = 'bold 12px Arial';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.fillText('(M)', x + panelWidth - 40, y + 28);
 
         // Misiones
         activeMissions.forEach((mission, index) => {
-            const my = y + 50 + index * 60;
+            const my = y + headerHeight + 10 + index * missionHeight;
             
-            // Nombre
-            ctx.font = 'bold 14px Arial';
-            ctx.fillStyle = '#4a7c2c';
-            ctx.fillText(`${mission.icon} ${mission.name}`, x + 10, my);
+            // Fondo alternado para cada misión
+            if (index % 2 === 0) {
+                ctx.fillStyle = 'rgba(74, 124, 44, 0.05)';
+                ctx.fillRect(x + 5, my, panelWidth - 10, missionHeight - 5);
+            }
+            
+            // Icono y nombre
+            ctx.font = 'bold 15px Arial';
+            ctx.fillStyle = '#2d5016';
+            ctx.fillText(`${mission.icon} ${mission.name}`, x + 15, my + 20);
 
-            // Progreso
-            ctx.font = '12px Arial';
+            // Descripción
+            ctx.font = '11px Arial';
             ctx.fillStyle = '#666';
-            ctx.fillText(mission.description, x + 10, my + 18);
+            const maxWidth = panelWidth - 30;
+            const description = mission.description.length > 35 ? 
+                mission.description.substring(0, 35) + '...' : 
+                mission.description;
+            ctx.fillText(description, x + 15, my + 38);
             
-            // Barra de progreso
-            const progressBarWidth = panelWidth - 20;
-            const progressBarHeight = 8;
-            const progressPercent = mission.progress / mission.target;
+            // Barra de progreso mejorada
+            const progressBarWidth = panelWidth - 30;
+            const progressBarHeight = 10;
+            const progressPercent = Math.min(mission.progress / mission.target, 1);
+            const radius = 5;
             
-            ctx.fillStyle = '#ddd';
-            ctx.fillRect(x + 10, my + 25, progressBarWidth, progressBarHeight);
+            // Fondo de la barra (con esquinas redondeadas)
+            ctx.fillStyle = '#e0e0e0';
+            ctx.beginPath();
+            ctx.moveTo(x + 15 + radius, my + 45);
+            ctx.lineTo(x + 15 + progressBarWidth - radius, my + 45);
+            ctx.arcTo(x + 15 + progressBarWidth, my + 45, x + 15 + progressBarWidth, my + 45 + radius, radius);
+            ctx.lineTo(x + 15 + progressBarWidth, my + 45 + progressBarHeight - radius);
+            ctx.arcTo(x + 15 + progressBarWidth, my + 45 + progressBarHeight, x + 15 + progressBarWidth - radius, my + 45 + progressBarHeight, radius);
+            ctx.lineTo(x + 15 + radius, my + 45 + progressBarHeight);
+            ctx.arcTo(x + 15, my + 45 + progressBarHeight, x + 15, my + 45 + progressBarHeight - radius, radius);
+            ctx.lineTo(x + 15, my + 45 + radius);
+            ctx.arcTo(x + 15, my + 45, x + 15 + radius, my + 45, radius);
+            ctx.closePath();
+            ctx.fill();
             
-            ctx.fillStyle = '#4a7c2c';
-            ctx.fillRect(x + 10, my + 25, progressBarWidth * progressPercent, progressBarHeight);
+            // Progreso (con esquinas redondeadas)
+            if (progressPercent > 0) {
+                const progressWidth = progressBarWidth * progressPercent;
+                const progressGradient = ctx.createLinearGradient(x + 15, my + 45, x + 15 + progressWidth, my + 45);
+                progressGradient.addColorStop(0, '#6abd45');
+                progressGradient.addColorStop(1, '#4a7c2c');
+                ctx.fillStyle = progressGradient;
+                ctx.beginPath();
+                ctx.moveTo(x + 15 + radius, my + 45);
+                ctx.lineTo(x + 15 + progressWidth - radius, my + 45);
+                ctx.arcTo(x + 15 + progressWidth, my + 45, x + 15 + progressWidth, my + 45 + radius, radius);
+                ctx.lineTo(x + 15 + progressWidth, my + 45 + progressBarHeight - radius);
+                ctx.arcTo(x + 15 + progressWidth, my + 45 + progressBarHeight, x + 15 + progressWidth - radius, my + 45 + progressBarHeight, radius);
+                ctx.lineTo(x + 15 + radius, my + 45 + progressBarHeight);
+                ctx.arcTo(x + 15, my + 45 + progressBarHeight, x + 15, my + 45 + progressBarHeight - radius, radius);
+                ctx.lineTo(x + 15, my + 45 + radius);
+                ctx.arcTo(x + 15, my + 45, x + 15 + radius, my + 45, radius);
+                ctx.closePath();
+                ctx.fill();
+            }
             
-            ctx.font = 'bold 10px Arial';
+            // Texto del progreso
+            ctx.font = 'bold 11px Arial';
             ctx.fillStyle = '#333';
-            ctx.fillText(`${mission.progress}/${mission.target}`, x + progressBarWidth - 30, my + 32);
+            ctx.textAlign = 'right';
+            ctx.fillText(`${mission.progress}/${mission.target}`, x + panelWidth - 15, my + 54);
+            ctx.textAlign = 'left';
         });
 
         ctx.restore();
