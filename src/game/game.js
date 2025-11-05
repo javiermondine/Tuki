@@ -312,22 +312,33 @@ class Scout {
 // CLASE ITEM (OBJETOS RECOLECTABLES)
 // ============================================
 class Item {
-    constructor(x, y, type) {
+    constructor(x, y, typeOrIcon, name, points, type) {
         this.x = x;
         this.y = y;
-        this.type = type;
         this.size = 25;
         this.collected = false;
         
-        // Propiedades según tipo
-        const itemData = {
-            leaf: { name: 'Hoja', points: 10, color: '#90ee90', emoji: '🍃' },
-            stone: { name: 'Piedra', points: 15, color: '#808080', emoji: '🪨' },
-            flower: { name: 'Flor', points: 20, color: '#ffb6c1', emoji: '🌸' },
-            mushroom: { name: 'Hongo', points: 25, color: '#ff6347', emoji: '🍄' }
-        };
-        
-        Object.assign(this, itemData[type]);
+        // Si se pasan todos los parámetros (llamada desde zones.js)
+        if (name !== undefined && points !== undefined && type !== undefined) {
+            this.emoji = typeOrIcon; // El tercer parámetro es el emoji/icon
+            this.name = name;
+            this.points = points;
+            this.type = type;
+            this.color = '#ffa500'; // Color por defecto
+        } else {
+            // Si solo se pasa el tipo (llamada legacy)
+            this.type = typeOrIcon;
+            
+            // Propiedades según tipo
+            const itemData = {
+                leaf: { name: 'Hoja', points: 10, color: '#90ee90', emoji: '🍃' },
+                stone: { name: 'Piedra', points: 15, color: '#808080', emoji: '🪨' },
+                flower: { name: 'Flor', points: 20, color: '#ffb6c1', emoji: '🌸' },
+                mushroom: { name: 'Hongo', points: 25, color: '#ff6347', emoji: '🍄' }
+            };
+            
+            Object.assign(this, itemData[this.type]);
+        }
     }
 
     draw() {
