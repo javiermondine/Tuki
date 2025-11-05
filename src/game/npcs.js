@@ -292,7 +292,33 @@ class NPC {
     // Interactuar con el NPC
     interact(dialogSystem) {
         if (this.currentDialogIndex < this.dialogs.length) {
-            dialogSystem.start(this.dialogs[this.currentDialogIndex], () => {
+            const currentDialog = this.dialogs[this.currentDialogIndex];
+            
+            // Convertir formato simple a formato completo de DialogSystem
+            let formattedDialog;
+            
+            if (currentDialog.lines && currentDialog.speaker) {
+                // Ya está en el formato correcto
+                formattedDialog = currentDialog;
+            } else if (currentDialog.text) {
+                // Formato simple de zones.js - convertir
+                formattedDialog = {
+                    speaker: this.name,
+                    avatar: this.icon,
+                    lines: [currentDialog.text],
+                    choices: null
+                };
+            } else {
+                // Fallback
+                formattedDialog = {
+                    speaker: this.name,
+                    avatar: this.icon,
+                    lines: ['¡Hola!'],
+                    choices: null
+                };
+            }
+            
+            dialogSystem.start(formattedDialog, () => {
                 this.currentDialogIndex++;
                 if (this.currentDialogIndex >= this.dialogs.length) {
                     this.questCompleted = true;
