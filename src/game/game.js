@@ -963,7 +963,7 @@ function startGame() {
     initializeInventory();
     
     // Generar misiones aleatorias
-    window.missionSystem.generateRandomMissions(3, window.levelSystem.difficulty);
+    missionSystem.generateRandomMissions(3, levelSystem.difficulty);
     
     // Iniciar música ambiental
     if (audioSystem) {
@@ -1020,11 +1020,17 @@ function restartGame() {
     });
     
     // Resetear sistemas
-    window.missionSystem = new MissionSystem();
-    window.levelSystem = new LevelSystem();
-    window.dayNightCycle = new DayNightCycle();
-    window.inventory = new Inventory();
+    missionSystem = new MissionSystem();
+    levelSystem = new LevelSystem();
+    dayNightCycle = new DayNightCycle();
+    inventory = new Inventory();
     particles = [];
+    
+    // Actualizar referencias globales
+    window.missionSystem = missionSystem;
+    window.levelSystem = levelSystem;
+    window.dayNightCycle = dayNightCycle;
+    window.inventory = inventory;
     
     startGame();
 }
@@ -1101,11 +1107,18 @@ function setupEventListeners() {
 // ============================================
 function initializeGame() {
     // Inicializar sistemas
-    window.missionSystem = new MissionSystem();
-    window.levelSystem = new LevelSystem();
-    window.dayNightCycle = new DayNightCycle();
-    window.dialogSystem = new DialogSystem();
-    window.inventory = new Inventory();
+    missionSystem = new MissionSystem();
+    levelSystem = new LevelSystem();
+    dayNightCycle = new DayNightCycle();
+    dialogSystem = new DialogSystem();
+    inventory = new Inventory();
+    
+    // Referencias globales (para compatibilidad con otros scripts)
+    window.missionSystem = missionSystem;
+    window.levelSystem = levelSystem;
+    window.dayNightCycle = dayNightCycle;
+    window.dialogSystem = dialogSystem;
+    window.inventory = inventory;
     
     // Inicializar el scout ahora que el canvas existe
     scout = new Scout(canvas.width / 2 - 20, canvas.height - 100);
