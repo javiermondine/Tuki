@@ -449,9 +449,11 @@ function generateNPCs() {
 
 function initializeInventory() {
     // Agregar items iniciales
-    inventory.addItem(createItem('compass', 1));
-    inventory.addItem(createItem('water', 3));
-    inventory.addItem(createItem('map', 1));
+    if (window.inventory && typeof createItem === 'function') {
+        window.inventory.addItem(createItem('compass', 1));
+        window.inventory.addItem(createItem('water', 3));
+        window.inventory.addItem(createItem('map', 1));
+    }
 }
 
 // ============================================
