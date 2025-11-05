@@ -11,7 +11,7 @@ Bienvenido a la documentación completa de **Aventura Scout v2.0**. Esta página
    - Controles básicos
    - Cómo ganar
 
-2. 🚀 **[INSTALL.md](INSTALL.md)** - Guía de Instalación
+2. **[INSTALL.md](INSTALL.md)** - Guia de Instalacion
    - Requisitos del sistema
    - 4 métodos de ejecución
    - Tutorial rápido para nuevos jugadores
@@ -33,20 +33,20 @@ Bienvenido a la documentación completa de **Aventura Scout v2.0**. Esta página
    - Métricas y estadísticas
    - Roadmap futuro
 
-5. 📝 **[CHANGELOG.md](CHANGELOG.md)** - Historial de Cambios
+5. **[CHANGELOG.md](CHANGELOG.md)** - Historial de Cambios
    - Versión 2.0 completa
    - Versión 1.0 original
    - Futuras versiones planeadas
    - Notas del desarrollador
 
 ### Código Fuente
-6. 🎯 **[game.js](game.js)** - Lógica Principal
+6. **[game.js](game.js)** - Logica Principal
    - Loop del juego
    - Clase Scout
    - Rendering del mundo
    - Controles y eventos
 
-7. ⚙️ **[systems.js](systems.js)** - Sistemas del Juego
+7. **[systems.js](systems.js)** - Sistemas del Juego
    - Sistema de Misiones Dinámicas
    - Sistema de Niveles y XP
    - Ciclo Día/Noche
@@ -61,7 +61,7 @@ Bienvenido a la documentación completa de **Aventura Scout v2.0**. Esta página
    - 12 items funcionales
    - UI del inventario
 
-10. 🎵 **[audio.js](audio.js)** - Sistema de Audio
+10. **[audio.js](audio.js)** - Sistema de Audio
     - Web Audio API
     - Síntesis de sonido
     - Música ambiental
@@ -71,12 +71,12 @@ Bienvenido a la documentación completa de **Aventura Scout v2.0**. Esta página
     - LocalStorage
     - Sistema de logros
 
-12. 🌐 **[index.html](index.html)** - Estructura HTML
+12. **[index.html](index.html)** - Estructura HTML
     - Canvas del juego
     - Pantallas de UI
     - Referencias a scripts
 
-13. 🎨 **[style.css](style.css)** - Estilos
+13. **[style.css](style.css)** - Estilos
     - Tema scout
     - Animaciones CSS
     - Responsive design
@@ -168,7 +168,7 @@ Bienvenido a la documentación completa de **Aventura Scout v2.0**. Esta página
 2. Revisa [CHANGELOG.md](CHANGELOG.md) - Historial de desarrollo
 3. Explora el código con [INSTALL.md](INSTALL.md) - Sección: Desarrollo
 
-## 🎯 Búsqueda Rápida
+## Busqueda Rapida
 
 ### ¿Buscas información sobre...?
 
@@ -215,7 +215,7 @@ save.js      → LocalStorage y logros
 3. Lee [README.md](README.md) completo
 4. Reporta el bug en GitHub Issues
 
-## 🎓 Para Educadores
+## Para Educadores
 
 ### Usando el juego en clase:
 1. [README.md](README.md#-valores-scout-incluidos) - Valores educativos
@@ -232,20 +232,20 @@ save.js      → LocalStorage y logros
 
 ## 📊 Métricas del Proyecto
 
-- **📄 Archivos de código:** 8 (JS) + 1 (HTML) + 1 (CSS) = 10
+- **Archivos de codigo:** 8 (JS) + 1 (HTML) + 1 (CSS) = 10
 - **📚 Archivos de docs:** 7 (MD)
 - **💾 Tamaño total:** ~120KB (sin minificar)
-- **📝 Líneas de código:** ~2000+
+- **Lineas de codigo:** ~2000+
 - **🕐 Tiempo de carga:** <2 segundos
 - **🎮 Tiempo de juego:** 30-45 minutos (completar)
 
 ## 🏆 Estado del Proyecto
 
-- ✅ **Version:** 2.0.0
-- ✅ **Estado:** Producción
-- ✅ **Plataforma:** Web (HTML5)
-- ✅ **Licencia:** MIT
-- ✅ **Mantenimiento:** Activo
+- **Version:** 2.0.0
+- **Estado:** Produccion
+- **Plataforma:** Web (HTML5)
+- **Licencia:** MIT
+- **Mantenimiento:** Activo
 
 ---
 
@@ -257,7 +257,7 @@ save.js      → LocalStorage y logros
 
 ---
 
-## 🎉 ¡Gracias por tu interés!
+## Gracias por tu interes
 
 Este proyecto es **open source** y está hecho con ❤️ para la comunidad Scout.
 

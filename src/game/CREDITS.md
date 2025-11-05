@@ -12,7 +12,7 @@ Octubre 2025
 - Efectos visuales y audio
 - Documentación completa
 
-## 🎨 Arte y Diseño
+## Arte y Diseno
 
 ### Estilo Visual
 - **Paleta de colores:** Inspirada en la naturaleza scout
@@ -32,7 +32,7 @@ Octubre 2025
 - Animaciones suaves y naturales
 - Accesibilidad considerada
 
-## 🎵 Audio
+## Audio
 
 ### Sistema de Sonido
 - Web Audio API con síntesis procedural
@@ -74,7 +74,7 @@ Octubre 2025
 - **Web Audio API** - Síntesis de audio
 - **LocalStorage API** - Guardado persistente
 
-## 🛠️ Herramientas Utilizadas
+## Herramientas Utilizadas
 
 ### Desarrollo
 - **VS Code** - Editor de código
@@ -217,9 +217,9 @@ SOFTWARE.
 ```
 
 ### Uso Educativo
-- ✅ Libre para uso en escuelas
-- ✅ Libre para modificación
-- ✅ Libre para distribución
+- Libre para uso en escuelas
+- Libre para modificacion
+- Libre para distribucion
 - ✅ Atribución apreciada (no requerida)
 
 ## 🌍 Comunidad
@@ -270,7 +270,7 @@ Este juego está dedicado a:
 1. ⭐ Dar una estrella en GitHub
 2. 📢 Compartir con otros
 3. 🐛 Reportar bugs
-4. 💡 Sugerir mejoras
+4. Sugerir mejoras
 5. 🤝 Contribuir código
 
 ---
@@ -286,4 +286,4 @@ Gracias por jugar, aprender y formar parte de esta aventura.
 **Desarrollado con ❤️ para la comunidad Scout**  
 **Octubre 2025**
 
-¡Nos vemos en el siguiente campamento! 🔥
+Nos vemos en el siguiente campamento.

@@ -1,6 +1,6 @@
-# 🚀 Guía de Instalación y Ejecución
+# Guia de Instalacion y Ejecucion
 
-## 📦 Requisitos
+## Requisitos
 
 - Navegador web moderno (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)
 - Servidor web local (opcional pero recomendado)
@@ -47,7 +47,7 @@ http-server -p 8000
 # Abrir: http://localhost:8000
 ```
 
-## 🎯 Primera Vez Jugando
+## Primera Vez Jugando
 
 ### Tutorial Rápido
 
@@ -62,13 +62,13 @@ http-server -p 8000
 
 ### Consejos Iniciales
 
-- 💡 **Gestiona tu energía**: Acampa (Espacio) cuando bajes de 30
+- **Gestiona tu energia**: Acampa (Espacio) cuando bajes de 30
 - 🌙 **Usa la linterna de noche**: Presiona `1` si está en tu inventario
-- 🧭 **Usa la brújula**: Presiona `1` para orientarte
+- **Usa la brujula**: Presiona `1` para orientarte
 - 💬 **Habla con todos**: Los NPCs dan misiones especiales
 - 💾 **Guarda a menudo**: Usa el botón 💾 o el guardado automático
 
-## 🛠️ Solución de Problemas
+## Solucion de Problemas
 
 ### El juego no carga
 
@@ -138,9 +138,9 @@ Nuevas características:
 ✅ Partículas y efectos visuales
 ```
 
-Si ves este mensaje, ¡todo está funcionando correctamente! 🎉
+Si ves este mensaje, todo esta funcionando correctamente.
 
-## 🌐 Subir a Internet
+## Subir a Internet
 
 ### GitHub Pages (Gratis)
 
@@ -173,7 +173,7 @@ Si ves este mensaje, ¡todo está funcionando correctamente! 🎉
 4. Marca `index.html` como archivo principal
 5. Publica tu juego
 
-## 🔧 Desarrollo y Modificación
+## Desarrollo y Modificacion
 
 ### Estructura de Archivos
 

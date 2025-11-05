@@ -1,10 +1,10 @@
-# 🏕️ AVENTURA SCOUT v2.0 - Resumen Rápido
+# AVENTURA SCOUT v2.0 - Resumen Rapido
 
-## ✅ ¿Qué es esto?
+## Que es esto
 
 Un **videojuego educativo completo** sobre scouts hecho con HTML5, CSS3 y JavaScript puro. Sin frameworks, sin dependencias, 100% código abierto.
 
-## 🚀 Iniciar en 3 Pasos
+## Iniciar en 3 Pasos
 
 ```bash
 # 1. Navega a la carpeta
@@ -19,27 +19,27 @@ python3 -m http.server 8000
 
 O simplemente **abre `index.html`** en tu navegador.
 
-## 🎮 Cómo Jugar
+## Como Jugar
 
-1. **Muévete:** Flechas ⬆️⬇️⬅️➡️
+1. **Muevete:** Flechas (arriba/abajo/izquierda/derecha)
 2. **Explora:** Presiona `E`
 3. **Recolecta:** Presiona `R` cerca de objetos
 4. **Habla:** Presiona `T` cerca de NPCs
 5. **Inventario:** Presiona `I`
-6. **Objetivo:** Conseguir 5 insignias 🏅
+6. **Objetivo:** Conseguir 5 insignias
 
-## 🌟 Características Principales
+## Caracteristicas Principales
 
-### ✨ Lo Nuevo en v2.0
-- 🎯 **Misiones dinámicas** (aleatorias cada partida)
-- 📊 **Sistema de niveles y XP**
-- 🌙 **Ciclo día/noche** (4 fases)
-- 💬 **3 NPCs interactivos** con diálogos
-- 🎒 **12 items funcionales** en inventario
-- 🎵 **Audio procedural** (Web Audio API)
-- 💾 **Guardado automático** (LocalStorage)
-- 🏆 **8 logros desbloqueables**
-- ✨ **Efectos de partículas**
+### Lo Nuevo en v2.0
+- **Misiones dinamicas** (aleatorias cada partida)
+- **Sistema de niveles y XP**
+- **Ciclo dia/noche** (4 fases)
+- **3 NPCs interactivos** con dialogos
+- **12 items funcionales** en inventario
+- **Audio procedural** (Web Audio API)
+- **Guardado automatico** (LocalStorage)
+- **8 logros desbloqueables**
+- **Efectos de particulas**
 
 ## 📁 Archivos del Proyecto
 

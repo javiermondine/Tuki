@@ -13,14 +13,14 @@ Este juego educativo está integrado en la página web del Grupo Scout Myotragus
 - **[EXECUTIVE_SUMMARY.md](EXECUTIVE_SUMMARY.md)** - Resumen ejecutivo del proyecto
 - **[INDEX.md](INDEX.md)** - Índice general de la documentación
 
-## 🚀 Cómo Jugar
+## Como Jugar
 
 1. Visita la página principal de [Grupo Scout Myotragus 684](../index.html)
-2. Haz clic en el botón "🚀 ¡Jugar Ahora!" o en "🎮 Juego" en el menú de navegación
+2. Haz clic en el botón "Jugar Ahora" o en "Juego" en el menú de navegación
 3. Lee las instrucciones en la pantalla de inicio
 4. ¡Presiona "Iniciar Aventura" y disfruta!
 
-## 🎯 Objetivo del Juego
+## Objetivo del Juego
 
 Completa misiones de exploración, acampada y servicio para ganar las 5 insignias scout mientras aprendes sobre los valores del escultismo.
 
