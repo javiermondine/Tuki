@@ -16,6 +16,7 @@ let gameState = 'menu'; // Estados: 'menu', 'playing', 'paused', 'victory', 'dia
 let animationId = null;
 let soundEnabled = true;
 let missionsVisible = true; // Variable para mostrar/ocultar panel de misiones
+let controlsVisible = true; // Variable para mostrar/ocultar panel de controles
 let currentZone = 'forest'; // Zona actual del juego
 let currentZoneObject = null; // Objeto de zona actual
 
@@ -665,8 +666,92 @@ function drawFlashlight(x, y) {
 }
 
 // ============================================
+// PANEL DE CONTROLES
+// ============================================
+function drawControlsPanel(ctx, x, y) {
+    const width = 280;
+    const height = 260;
+    
+    ctx.save();
+    ctx.globalAlpha = 0.95;
+    
+    // Fondo del panel con gradiente
+    const gradient = ctx.createLinearGradient(x, y, x, y + height);
+    gradient.addColorStop(0, '#2a4a1f');
+    gradient.addColorStop(1, '#1a2f14');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(x, y, width, height);
+    
+    // Borde
+    ctx.strokeStyle = '#4a7c2c';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(x, y, width, height);
+    
+    // Cabecera
+    const headerGradient = ctx.createLinearGradient(x, y, x, y + 35);
+    headerGradient.addColorStop(0, '#5a8c3c');
+    headerGradient.addColorStop(1, '#4a7c2c');
+    ctx.fillStyle = headerGradient;
+    ctx.fillRect(x, y, width, 35);
+    
+    // Título
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 16px Arial';
+    ctx.textAlign = 'left';
+    ctx.fillText('⌨️ CONTROLES', x + 10, y + 23);
+    
+    // Instrucción de cierre
+    ctx.font = '12px Arial';
+    ctx.fillStyle = '#d0d0d0';
+    ctx.textAlign = 'right';
+    ctx.fillText('C: Ocultar', x + width - 10, y + 23);
+    
+    // Lista de controles
+    ctx.textAlign = 'left';
+    ctx.font = '13px Arial';
+    let currentY = y + 55;
+    const lineHeight = 20;
+    
+    const controls = [
+        { label: '⬆️ ⬇️ ⬅️ ➡️ / WASD', desc: 'Mover' },
+        { label: 'ESPACIO', desc: 'Acampar' },
+        { label: 'E', desc: 'Explorar' },
+        { label: 'R', desc: 'Recolectar' },
+        { label: 'T', desc: 'Hablar con NPC' },
+        { label: 'I', desc: 'Inventario' },
+        { label: '1-9', desc: 'Usar item' },
+        { label: 'M', desc: 'Misiones' },
+        { label: 'C', desc: 'Controles' },
+        { label: 'P / ESC', desc: 'Pausa' }
+    ];
+    
+    controls.forEach((control, index) => {
+        // Fondo alternado
+        if (index % 2 === 0) {
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+            ctx.fillRect(x + 5, currentY - 14, width - 10, lineHeight);
+        }
+        
+        // Tecla
+        ctx.fillStyle = '#ffd700';
+        ctx.font = 'bold 13px Arial';
+        ctx.fillText(control.label, x + 15, currentY);
+        
+        // Descripción
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '13px Arial';
+        ctx.fillText(control.desc, x + 150, currentY);
+        
+        currentY += lineHeight;
+    });
+    
+    ctx.restore();
+}
+
+// ============================================
 // SISTEMA DE MENSAJES
 // ============================================
+
 function showMessage(text) {
     messageQueue.push({ text, alpha: 1, y: 50 });
     if (messageQueue.length > 3) {
@@ -757,6 +842,10 @@ document.addEventListener('keydown', (e) => {
         if (e.key === 'm' || e.key === 'M') {
             missionsVisible = !missionsVisible;
             showMessage(missionsVisible ? 'Panel de misiones visible' : 'Panel de misiones oculto');
+        }
+        if (e.key === 'c' || e.key === 'C') {
+            controlsVisible = !controlsVisible;
+            showMessage(controlsVisible ? 'Panel de controles visible' : 'Panel de controles oculto');
         }
         if (e.key === 't' || e.key === 'T') {
             // Interactuar con NPCs
@@ -867,13 +956,35 @@ function gameLoop() {
         // Dibujar inventario (barra rápida)
         inventory.draw(ctx, canvas.width, canvas.height);
 
-        // Indicador de brújula
+        // Indicador de brújula mejorado
         if (window.showCompassIndicator) {
             ctx.save();
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-            ctx.font = 'bold 24px Arial';
-            ctx.fillText('⬆️ Norte', canvas.width / 2 - 40, 50);
+            
+            // Fondo semi-transparente
+            const compassWidth = 160;
+            const compassHeight = 50;
+            const compassX = canvas.width / 2 - compassWidth / 2;
+            const compassY = 10;
+            
+            ctx.fillStyle = 'rgba(74, 124, 44, 0.9)';
+            ctx.fillRect(compassX, compassY, compassWidth, compassHeight);
+            ctx.strokeStyle = '#2d5016';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(compassX, compassY, compassWidth, compassHeight);
+            
+            // Texto
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 20px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('🧭 Norte ⬆️', canvas.width / 2, compassY + 33);
+            ctx.textAlign = 'left';
+            
             ctx.restore();
+        }
+
+        // Panel de controles
+        if (controlsVisible) {
+            drawControlsPanel(ctx, 10, canvas.height - 280);
         }
 
         // Regenerar energía lentamente

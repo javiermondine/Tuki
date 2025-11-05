@@ -95,27 +95,41 @@ class Inventory {
         const panelX = (canvasWidth - panelWidth) / 2;
         const panelY = (canvasHeight - panelHeight) / 2;
 
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+        // Fondo con gradiente
+        const gradient = ctx.createLinearGradient(panelX, panelY, panelX, panelY + panelHeight);
+        gradient.addColorStop(0, 'rgba(255, 255, 255, 0.98)');
+        gradient.addColorStop(1, 'rgba(245, 245, 245, 0.98)');
+        ctx.fillStyle = gradient;
         ctx.fillRect(panelX, panelY, panelWidth, panelHeight);
+        
         ctx.strokeStyle = '#4a7c2c';
         ctx.lineWidth = 4;
         ctx.strokeRect(panelX, panelY, panelWidth, panelHeight);
 
-        // Título
-        ctx.fillStyle = '#2d5016';
-        ctx.font = 'bold 24px Arial';
-        ctx.fillText('🎒 Inventario', panelX + 20, panelY + 35);
+        // Header con fondo de color
+        const headerHeight = 50;
+        const headerGradient = ctx.createLinearGradient(panelX, panelY, panelX, panelY + headerHeight);
+        headerGradient.addColorStop(0, '#5a8f3d');
+        headerGradient.addColorStop(1, '#4a7c2c');
+        ctx.fillStyle = headerGradient;
+        ctx.fillRect(panelX, panelY, panelWidth, headerHeight);
 
-        // Instrucciones
-        ctx.font = '12px Arial';
-        ctx.fillStyle = '#666';
-        ctx.fillText('ESC para cerrar | 1-9 para usar item | Click para seleccionar', panelX + 20, panelY + 60);
+        // Título
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 24px Arial';
+        ctx.textAlign = 'left';
+        ctx.fillText('🎒 Inventario', panelX + 20, panelY + 33);
+
+        // Instrucciones mejoradas
+        ctx.font = 'bold 12px Arial';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.fillText('ESC: Cerrar  |  1-9: Usar  |  Click: Seleccionar', panelX + 20, panelY + headerHeight + 18);
 
         // Grid de items
         const slotSize = 70;
         const slotsPerRow = 6;
         const startX = panelX + 20;
-        const startY = panelY + 80;
+        const startY = panelY + headerHeight + 30;
 
         for (let i = 0; i < this.maxSlots; i++) {
             const row = Math.floor(i / slotsPerRow);
