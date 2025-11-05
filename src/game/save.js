@@ -279,7 +279,7 @@ class AchievementSystem {
                 id: 'master',
                 name: 'Maestro Scout',
                 description: 'Alcanza el nivel 20',
-                icon: ''medal'',
+                icon: '🏅',
                 unlocked: false,
                 condition: () => levelSystem.level >= 20
             },
@@ -287,7 +287,7 @@ class AchievementSystem {
                 id: 'hoarder',
                 name: 'Acumulador',
                 description: 'Llena completamente tu inventario',
-                icon: ''bag'',
+                icon: '🎒',
                 unlocked: false,
                 condition: () => inventory.items.length >= inventory.maxSlots
             },
@@ -295,7 +295,7 @@ class AchievementSystem {
                 id: 'speedrunner',
                 name: 'Velocista',
                 description: 'Completa 5 insignias en menos de 10 minutos',
-                icon: ''energy'',
+                icon: '⚡',
                 unlocked: false,
                 condition: () => false // Requiere sistema de tiempo
             }

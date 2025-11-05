@@ -197,7 +197,7 @@ const ZONES = {
             },
             {
                 name: 'Herrero',
-                icon: ''worker'',
+                icon: '👷',
                 color: '#8B4513',
                 dialogs: [
                     { text: 'Puedo reparar tus herramientas. El trabajo duro siempre vale la pena.', next: null },

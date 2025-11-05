@@ -69,7 +69,7 @@ class MissionSystem {
                 type: 'maintain_energy',
                 target: 120, // frames
                 reward: { points: 120, badge: null },
-                icon: ''energy''
+                icon: '⚡'
             },
             {
                 id: 'treasure_hunter',
@@ -224,7 +224,7 @@ class LevelSystem {
                 xpMultiplier: 1.5,
                 energyCost: 1.3,
                 rewards: 1.5,
-                icon: ''star''
+                icon: '⭐'
             },
             leader: {
                 name: 'Líder',
@@ -458,7 +458,7 @@ class DayNightCycle {
     drawClock(ctx, x, y) {
         const phase = this.getPhase();
         const icons = {
-            night: ''moon'',
+            night: '🌙',
             dawn: '🌅',
             day: '☀️',
             dusk: '🌇'
