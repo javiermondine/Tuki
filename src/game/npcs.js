@@ -186,13 +186,24 @@ class DialogSystem {
 // ============================================
 
 class NPC {
-    constructor(x, y, name, icon = '🧑', dialogs = [], color = '#4a7c2c') {
+    constructor(x, y, nameOrType, icon = '🧑', dialogs = [], color = '#4a7c2c') {
         this.x = x;
         this.y = y;
         this.width = 40;
         this.height = 50;
+        
+        // Compatibilidad: si nameOrType es 'scout', 'elder', o 'animal', es un tipo
+        if (['scout', 'elder', 'animal'].includes(nameOrType)) {
+            this.type = nameOrType;
+            this.name = nameOrType === 'scout' ? 'Scout Compañero' : 
+                        nameOrType === 'elder' ? 'Jefe Scout' : 'Mapache';
+        } else {
+            // Si no, es un nombre personalizado
+            this.name = nameOrType;
+            this.type = 'custom'; // Tipo genérico para NPCs personalizados
+        }
+        
         this.icon = icon;
-        this.name = name;
         this.color = color;
         this.dialogs = dialogs.length > 0 ? dialogs : this.getDefaultDialogs();
         this.currentDialogIndex = 0;
@@ -356,6 +367,11 @@ class NPC {
             ctx.font = '40px Arial';
             ctx.textAlign = 'center';
             ctx.fillText('🦝', this.x + 20, this.y + 30 + bounce);
+        } else {
+            // NPCs personalizados - usar el icono
+            ctx.font = '40px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(this.icon, this.x + 20, this.y + 30 + bounce);
         }
 
         // Nombre sobre el NPC
