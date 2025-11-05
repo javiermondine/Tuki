@@ -54,9 +54,19 @@ class Zone {
     drawBackground(ctx, canvas, dayNightCycle) {
         // Cielo con gradiente según hora del día
         const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-        const timeColor = dayNightCycle.getSkyColor();
-        gradient.addColorStop(0, timeColor);
-        gradient.addColorStop(1, this.skyColor);
+        const timeColors = dayNightCycle.getSkyColor();
+        
+        // Si getSkyColor devuelve un array, usar sus colores
+        if (Array.isArray(timeColors)) {
+            gradient.addColorStop(0, timeColors[0]);
+            gradient.addColorStop(0.7, timeColors[1]);
+            gradient.addColorStop(1, timeColors[2]);
+        } else {
+            // Fallback si es un solo color
+            gradient.addColorStop(0, timeColors);
+            gradient.addColorStop(1, this.skyColor);
+        }
+        
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
